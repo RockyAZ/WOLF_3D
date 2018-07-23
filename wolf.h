@@ -11,14 +11,41 @@
 /* ************************************************************************** */
 
 #ifndef WOLF_H
-
 # define WOLF_H
-# include <GLFW/glfw3.h>
 
-typedef struct  t_data
+# include "./libft/libft.h"
+# include <GLFW/glfw3.h>
+# include <fcntl.h>
+#include <stdio.h>
+typedef struct  s_data
 {
-    int         **map_coord;
-    int         chars;
-    int         lines;
-}               s_data;
+	char		*name;
+	int         **map;
+	int         col;
+	int         line;
+}               t_data;
+
+typedef struct	s_main
+{
+	t_data		*data;
+}				t_main;
+
+/*
+** reader.c
+*/
+void			reader(t_data *data);
+
+/*
+** error.c
+*/
+void			error(char *name);
+
+/*
+** additional.c
+*/
+void			ft_arrr_del(char **arr);
+
+//
+void	print_coord(t_data *data);
+//
 #endif

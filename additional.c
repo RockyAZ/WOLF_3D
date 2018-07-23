@@ -1,29 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   additional.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azaporoz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/23 17:30:39 by azaporoz          #+#    #+#             */
-/*   Updated: 2018/07/23 17:30:40 by azaporoz         ###   ########.fr       */
+/*   Created: 2018/07/23 19:23:00 by azaporoz          #+#    #+#             */
+/*   Updated: 2018/07/23 19:23:00 by azaporoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-int	main(int ac, char **av)
+void	ft_arrr_del(char **arr)
 {
-	GLFWwindow *window;
-	t_main *win;
+	int i;
 
-	if (!(win = (t_main*)malloc(sizeof(t_main))))
-		error("main malloc error\n");
-	win->data = (t_data*)malloc(sizeof(t_data));
-	if (ac != 2)
-		error("number of arguments error\n");
-	win->data->name = av[1];
-	reader(win->data);
-	return (0);
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
-// /usr/local/include/
+
+void	print_coord(t_data *data)
+{
+	int i = 0;
+	int j = 0;
+
+	while (i < data->line)
+	{
+		j = 0;
+		while (j < data->col)
+		{
+			printf("%d   ", data->map[i][j]);
+			j++;
+		}
+		i++;
+		printf("\n\n");
+	}
+}

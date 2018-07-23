@@ -13,16 +13,20 @@
 NAME = wolf3d
 
 SOURCE = main.c \
+			additional.c \
+			error.c \
+			reader.c \
 
 GLFW_INC = -I ./include/
 GLFW_LIB = ./GLFW/libglfw3.a
 
-LIBFT_LIB = libft/libft.a
+LIBFT_INC = -I ./libft/
+LIBFT_LIB = ./libft/libft.a
 
 FRAMEWORKS = -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 
 all:
-	@gcc  -o $(NAME) $(SOURCE) $(GLFW_INC) $(GLFW_LIB) $(LIBFT_LIB) $(FRAMEWORKS)
+	@gcc  -o $(NAME) $(SOURCE) $(GLFW_INC) $(GLFW_LIB) $(LIBFT_LIB) $(LIBFT_INC) $(FRAMEWORKS)
 
 	@printf "\033[0;31m\
 卐卐卐卐卐卐卐卐卐▄▄卐卐卐卐卐卐卐卐卐卐\n\
