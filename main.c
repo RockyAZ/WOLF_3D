@@ -17,13 +17,29 @@ int	main(int ac, char **av)
 	GLFWwindow *window;
 	t_main *win;
 
-	if (!(win = (t_main*)malloc(sizeof(t_main))))
-		error("main malloc error\n");
-	win->data = (t_data*)malloc(sizeof(t_data));
-	if (ac != 2)
-		error("number of arguments error\n");
-	win->data->name = av[1];
+	main_prepare(ac, av, &win);
 	reader(win->data);
-	return (0);
+	if (!glfwInit())
+		error("init error\n");
+	if (!(window = glfwCreateWindow(WIDTH, HEIGHT, "WOLF", NULL, NULL)))
+		error("window open error\n");
+		glfwMakeContextCurrent(window);
+	glfwSetKeyCallback(window, key_callback);
+	glfwSwapInterval(1);
+	glViewport(0, 0, WIDTH, HEIGHT);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0.0f, WIDTH, HEIGHT, 0.0f, 0.0f, 1.0f);
+	while (!glfwWindowShouldClose(window))
+	{
+		ray_casting(win);
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+system ("leaks -quiet wolf3d");
+    glfwDestroyWindow(window);
+	glfwTerminate();
+system ("leaks -quiet wolf3d");
+	exit(EXIT_SUCCESS);
 }
 // /usr/local/include/

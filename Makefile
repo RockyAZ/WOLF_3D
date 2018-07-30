@@ -16,6 +16,9 @@ SOURCE = main.c \
 			additional.c \
 			error.c \
 			reader.c \
+			prepare.c \
+			ray_casting.c \
+			keys.c \
 
 GLFW_INC = -I ./include/
 GLFW_LIB = ./GLFW/libglfw3.a
