@@ -87,6 +87,6 @@ void	reader(t_data *data)
 	data_writer(data);
 	if (data->pos[0] == -1)
 		error("error 404: 'P' not found\n");
-	print_coord(data);
+	// print_coord(data);
 	close(data->fd);
 }

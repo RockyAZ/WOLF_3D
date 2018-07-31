@@ -30,8 +30,7 @@ void	ray_player_prepare(t_main *win)
 	win->gg.posX = (win->data->pos[0] * CUBE) + (CUBE / 2);
 	win->gg.posX = (win->data->pos[1] * CUBE) + (CUBE / 2);
 	win->gg.angle = 60;
-	win->gg.angle_size = FOV / WIDTH;
+	win->gg.fov = 60;
+	win->gg.angle_size = (float)(win->gg.fov / WIDTH);
 	win->gg.to_screen = WIDTH / tan(30);
-//	win->ray.centrX = WIDTH / 2;
-//	win->ray.centrY = HEIGHT / 2;
 }

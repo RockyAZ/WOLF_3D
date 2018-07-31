@@ -17,7 +17,6 @@
 # define HEIGHT 200
 # define CENTR_W WIDTH / 2
 # define CENTR_H HEIGHT / 2
-# define FOV 60
 # define CUBE 64
 
 # include "./libft/libft.h"
@@ -43,7 +42,8 @@ typedef struct	s_player
 	float		posY;
 	float		angle;
 	float		angle_size;
-	float		to_screen;	
+	float		fov;
+	float		to_screen;
 }				t_player;
 
 typedef struct	s_ray
@@ -52,8 +52,6 @@ typedef struct	s_ray
 	t_dot		v_dot;
 	int			horiz_int;
 	int			vertic_int;
-//	float		centrX;
-//	float		centrY;
 }				t_ray;
 
 typedef struct  s_data
