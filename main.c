@@ -30,6 +30,7 @@ int	main(int ac, char **av)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0.0f, WIDTH, HEIGHT, 0.0f, 0.0f, 1.0f);
+		ray_player_prepare(win);
 	while (!glfwWindowShouldClose(window))
 	{
 		ray_casting(win);

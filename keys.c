@@ -14,6 +14,6 @@
 
 void	key_callback(GLFWwindow* window, int key, int scan, int act, int mods)
 {
-    if (key == GLFW_KEY_ESCAPE)
-        exit(EXIT_SUCCESS);
+	if (key == GLFW_KEY_ESCAPE)
+		glfwSetWindowShouldClose(window, 1);
 }

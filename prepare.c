@@ -25,14 +25,13 @@ void	main_prepare(int ac, char **av, t_main **win)
 	*win = cp_win;
 }
 
-void	ray_casting_prepare(t_main *win)
+void	ray_player_prepare(t_main *win)
 {
-	win->ray.posX = win->data->pos[0];
-	win->ray.posX = win->data->pos[1];
-	win->ray.angl = 45;
-	win->ray.to_screen = WIDTH / tan(30);
-	win->ray.centrX = WIDTH / 2;
-	win->ray.centrY = HEIGHT / 2;
-	win->ray.new_time = 0;
-	win->ray.old_time = 0;
+	win->gg.posX = (win->data->pos[0] * CUBE) + (CUBE / 2);
+	win->gg.posX = (win->data->pos[1] * CUBE) + (CUBE / 2);
+	win->gg.angle = 60;
+	win->gg.angle_size = FOV / WIDTH;
+	win->gg.to_screen = WIDTH / tan(30);
+//	win->ray.centrX = WIDTH / 2;
+//	win->ray.centrY = HEIGHT / 2;
 }
