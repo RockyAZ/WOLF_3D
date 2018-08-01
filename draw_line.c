@@ -55,8 +55,9 @@ void			line_draw(t_main *win, int i, int h)
 	}
 }
 */
-void	line_draw(t_main *win, int i, int h)
+void	line_draw(t_main *win, int i, float h)
 {
+	printf("--->%f\n", h);
 	glColor3d(0, 254, 0);
 	glVertex2f(i, CENTR_H - h / 2);
 	glVertex2f(i, CENTR_H + h / 2);

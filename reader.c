@@ -87,6 +87,8 @@ void	reader(t_data *data)
 	data_writer(data);
 	if (data->pos[0] == -1)
 		error("error 404: 'P' not found\n");
-	// print_coord(data);
+	data->max_x = CUBE * data->col;
+	data->max_y = CUBE * data->line;	
+	print_coord(data);
 	close(data->fd);
 }

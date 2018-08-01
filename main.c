@@ -50,6 +50,7 @@ glfwSetKeyCallback(window, key_callback);
 
 	glfwSetWindowUserPointer(window, win);
 ray_player_prepare(win);
+		ray_casting(win);
 	while (!glfwWindowShouldClose(window))
 	{
 //		f();

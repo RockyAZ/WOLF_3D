@@ -12,6 +12,11 @@
 
 #include "wolf.h"
 
+float	ft_tan(float angle)
+{
+	return(tan((angle * 2 * M_PI) / 360));
+}
+
 void	ft_arrr_del(char **arr, char *line)
 {
 	int i;
@@ -42,5 +47,6 @@ void	print_coord(t_data *data)
 		i++;
 		printf("\n\n");
 	}
-		printf("X::%d\nY::%d\n", data->pos[0],data->pos[1]);
+		printf("MAX_X::%d\nMAX_Y::%d\n", data->max_x, data->max_y);
+		printf("PLAYER_X::%d\nPLAYER_Y::%d\n\n\n", data->pos[0],data->pos[1]);
 }

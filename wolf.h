@@ -38,8 +38,8 @@ typedef struct	s_dot
 
 typedef struct	s_player
 {
-	float		posX;
-	float		posY;
+	int		posX;
+	int		posY;
 	float		angle;
 	float		angle_size;
 	float		fov;
@@ -60,6 +60,8 @@ typedef struct  s_data
 	int         **map;
 	int         col;
 	int         line;
+	int			max_x;
+	int			max_y;
 	int			error;
 	int			fd;
 	int			pos[2];
@@ -96,6 +98,7 @@ void			error(char *name);
 ** additional.c
 */
 void			ft_arrr_del(char **arr, char *line);
+float			ft_tan(float angle);
 
 /*
 ** preparation.c
@@ -106,7 +109,7 @@ void			ray_player_prepare(t_main *win);
 /*
 ** draw_line.c
 */
-void			line_draw(t_main *win, int i, int h);
+void			line_draw(t_main *win, int i, float h);
 
 //
 void print_coord(t_data *data);
