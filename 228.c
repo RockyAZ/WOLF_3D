@@ -26,7 +26,8 @@ int		vertic_inter(t_main *win, float angle)
 	if (angle == 180 || angle == 0)
 		win->ray.v_dot.pix_y = win->gg.posY;
 	else
-		if ((win->ray.v_dot.pix_y = win->gg.posY + (win->gg.posX - win->ray.v_dot.pix_x) * ft_tan(angle)) >= win->data->max_y)
+		win->ray.v_dot.pix_y = win->gg.posY + (win->gg.posX - win->ray.v_dot.pix_x) * ft_tan(angle);
+	if (win->ray.v_dot.pix_y >= win->data->max_y || win->ray.v_dot.pix_y < 0)
 			return (-1);
 	printf("TAN:%f\n", ft_tan(angle));
 	printf("-->PIX_X::%d\n", win->ray.v_dot.pix_x);
@@ -81,7 +82,8 @@ int		horiz_inter(t_main *win, float angle)
 	if (angle == 90 || angle == 270)
 		win->ray.h_dot.pix_x = win->gg.posX;
 	else
-		if ((win->ray.h_dot.pix_x = win->gg.posX + (win->gg.posY - win->ray.h_dot.pix_y) / ft_tan(angle)) >= win->data->max_x)
+		win->ray.h_dot.pix_x = win->gg.posX + (win->gg.posY - win->ray.h_dot.pix_y) / ft_tan(angle);
+		if (win->ray.h_dot.pix_x >= win->data->max_x || win->ray.h_dot.pix_x < 0)
 			return (-1);
 // win->ray.h_dot.pix_x = win->gg.posX + (win->gg.posY - win->ray.h_dot.pix_y) / ft_tan(angle);
 	printf("TAN:%f\n", ft_tan(angle));
@@ -123,36 +125,6 @@ int		horiz_inter(t_main *win, float angle)
 }
 
 
-void	ray_casting(t_main *win)
-{
-	int		i;
-	float	angle = win->gg.angle;
-
-	i = 0;
-//	angle = win->gg.angle - (win->gg.fov / 2);
-//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glBegin(GL_LINES);
-//	while (i < WIDTH)
-//	{
-//		line_draw(win, i, CUBE / ft_min(horiz_inter(win, angle), vertic_inter(win, angle)));
-
-		printf("====\nV_return:%d\n", vertic_inter(win, 45));
-		printf("====\nV_return:%d\n", vertic_inter(win, 135));
-		printf("====\nV_return:%d\n", vertic_inter(win, 225));
-		printf("====\nV_return:%d\n", vertic_inter(win, 315));
-		
-		// printf("H_return:%d\n", horiz_inter(win, angle));
-		// printf("2:%f\n", win->gg.angle_size);
-//		printf("3:%f\n", angle);
-//		angle += win->gg.angle_size;
-//		i++;
-//	}
-	glEnd();
-}
-8?
-
-
-
 
 
 
@@ -181,24 +153,28 @@ void	ray_casting(t_main *win)
 int		vertic_inter(t_main *win, float angle)
 {
 	if (angle == 90 || angle == 270)
+	{
+		printf("VERIC_DONE\n");
 		return (-1);
+	}
 	if (angle > 90 && angle < 270)
 		win->ray.v_dot.pix_x = (win->gg.posX / CUBE) * CUBE - 1;
 	else
 		win->ray.v_dot.pix_x = (win->gg.posX / CUBE) * CUBE + CUBE;
 
-	if (angle == 180 || angle == 0)
+	if (angle == 180 || angle == 0 || angle == 360)
 		win->ray.v_dot.pix_y = win->gg.posY;
 	else
-		if ((win->ray.v_dot.pix_y = win->gg.posY + (win->gg.posX - win->ray.v_dot.pix_x) * ft_tan(angle)) >= win->data->max_y)
-			return (-1);
+		win->ray.v_dot.pix_y = win->gg.posY + (win->gg.posX - win->ray.v_dot.pix_x) * ft_tan(angle);
+	if (win->ray.v_dot.pix_y >= win->data->max_y || win->ray.v_dot.pix_y < 0)
+		return (-1);
 	win->ray.v_dot.real_x = win->ray.v_dot.pix_x / CUBE;
 	win->ray.v_dot.real_y = win->ray.v_dot.pix_y / CUBE;
 	if (angle > 90 && angle < 270)
 		win->ray.v_dot.var_x = -CUBE;
 	else
 		win->ray.v_dot.var_x = CUBE;
-	if (angle == 180 || angle == 0)
+	if (angle == 180 || angle == 0 || angle == 360)
 		win->ray.v_dot.var_y = 0;
 	else if (angle > 90 && angle < 270)
 		win->ray.v_dot.var_y = (CUBE * ft_tan(angle)) * -1;
@@ -211,13 +187,13 @@ int		vertic_inter(t_main *win, float angle)
 		win->ray.v_dot.real_x = win->ray.v_dot.pix_x / CUBE;
 		win->ray.v_dot.real_y = win->ray.v_dot.pix_y / CUBE;
 	}
-	// printf("VERIC_DONE\n");
+	printf("VERIC_DONE\n");
 	return ((int)sqrt(powf(win->gg.posX - win->ray.v_dot.pix_x, 2) + powf(win->gg.posY - win->ray.v_dot.pix_y, 2)));
 }
 
 int		horiz_inter(t_main *win, float angle)
 {
-	if (angle == 180 || angle == 0)
+	if (angle == 180 || angle == 0 || angle == 360)
 		return (-1);
 	if (angle > 0 && angle < 180)
 		win->ray.h_dot.pix_y = (win->gg.posY / CUBE) * CUBE - 1;
@@ -226,7 +202,8 @@ int		horiz_inter(t_main *win, float angle)
 	if (angle == 90 || angle == 270)
 		win->ray.h_dot.pix_x = win->gg.posX;
 	else
-		if ((win->ray.h_dot.pix_x = win->gg.posX + (win->gg.posY - win->ray.h_dot.pix_y) / ft_tan(angle)) >= win->data->max_x)
+		win->ray.h_dot.pix_x = win->gg.posX + (win->gg.posY - win->ray.h_dot.pix_y) / ft_tan(angle);
+		if (win->ray.h_dot.pix_x >= win->data->max_x || win->ray.h_dot.pix_x < 0)
 			return (-1);
 // win->ray.h_dot.pix_x = win->gg.posX + (win->gg.posY - win->ray.h_dot.pix_y) / ft_tan(angle);
 	win->ray.h_dot.real_x = win->ray.h_dot.pix_x / CUBE;
@@ -248,6 +225,6 @@ int		horiz_inter(t_main *win, float angle)
 		win->ray.h_dot.real_x = win->ray.h_dot.pix_x / CUBE;
 		win->ray.h_dot.real_y = win->ray.h_dot.pix_y / CUBE;
 	}
-	// printf("HORIZ_DONE\n");
+	printf("HORIZ_DONE\n");
 	return ((int)sqrt(powf(win->gg.posX - win->ray.h_dot.pix_x, 2) + powf(win->gg.posY - win->ray.h_dot.pix_y, 2)));
 }
