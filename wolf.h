@@ -72,6 +72,7 @@ typedef struct	s_main
 	t_data		*data;
 	t_ray		ray;
 	t_player	gg;
+int huy;
 }				t_main;
 
 /*
