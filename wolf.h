@@ -13,8 +13,10 @@
 #ifndef WOLF_H
 # define WOLF_H
 
-# define WIDTH 320
-# define HEIGHT 200
+// # define WIDTH 320
+// # define HEIGHT 200
+# define WIDTH 640
+# define HEIGHT 400
 # define CENTR_W WIDTH / 2
 # define CENTR_H HEIGHT / 2
 # define CUBE 64

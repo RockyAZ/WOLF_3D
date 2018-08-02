@@ -20,7 +20,6 @@ int		vertic_inter(t_main *win, float angle)
 		win->ray.v_dot.pix_x = (win->gg.posX / CUBE) * CUBE - 1;
 	else
 		win->ray.v_dot.pix_x = (win->gg.posX / CUBE) * CUBE + CUBE;
-
 	if (angle == 180 || angle == 0 || angle == 360)
 		win->ray.v_dot.pix_y = win->gg.posY;
 	else
@@ -35,6 +34,8 @@ int		vertic_inter(t_main *win, float angle)
 		win->ray.v_dot.var_x = CUBE;
 	if (angle == 180 || angle == 0 || angle == 360)
 		win->ray.v_dot.var_y = 0;
+	else if (angle < 90 || angle > 270)
+		win->ray.v_dot.var_y = (CUBE * ft_tan(angle)) * -1;
 	else
 		win->ray.v_dot.var_y = CUBE * ft_tan(angle);
 	while (win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x] == 0)
@@ -86,6 +87,7 @@ int		horiz_inter(t_main *win, float angle)
 	}
 	return ((int)sqrt(powf(win->gg.posX - win->ray.h_dot.pix_x, 2) + powf(win->gg.posY - win->ray.h_dot.pix_y, 2)));
 }
+
 void	ray_casting(t_main *win)
 {
 	int		i;
@@ -96,6 +98,8 @@ void	ray_casting(t_main *win)
 
 	i = 0;
 	angle = win->gg.angle + (win->gg.fov / 2);
+	// printf("VERTIC:%d\n", vertic_inter(win, 299));
+	// exit(1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glBegin(GL_LINES);
 	while (i < WIDTH)
@@ -104,8 +108,8 @@ void	ray_casting(t_main *win)
 			angle -= 360;
 		else if (angle < 0)
 			angle += 360;
-		h = horiz_inter(win, angle);
 		v = vertic_inter(win, angle);
+		h = horiz_inter(win, angle);
 win->huy = 0;
 if (angle == win->gg.angle)
 {
@@ -114,16 +118,24 @@ printf("PLAYER_X:%d\nPLAYER_Y:%d\n", win->gg.posX, win->gg.posY);
 printf("<><>PLAYER_ANGLE::%f\n", win->gg.angle);
 printf("I::%d\n", i);
 printf("HORIZ_return::%d\nVERIC_return::%d\n\n", h, v);
-printf("VERTIC_REAL_X::%d\n", win->ray.v_dot.real_x);
-printf("VERTIC_REAL_Y::%d\n", win->ray.v_dot.real_y);
 printf("HORIZ_REAL_X::%d\n", win->ray.h_dot.real_x);
 printf("HORIZ_REAL_Y::%d\n\n\n", win->ray.h_dot.real_y);
+printf("VERTIC_REAL_X::%d\n", win->ray.v_dot.real_x);
+printf("VERTIC_REAL_Y::%d\n", win->ray.v_dot.real_y);
 win->huy = 1;
 }
 		if (v == -1)
+		{
+			if (win->huy)
+			write(1, "-v\n", 3);
 			line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen, win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x]);
+		}
 		else if (h == -1)
+		{
+			if (win->huy)
+			write(1, "-h\n", 3);
 			line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen, win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x]);
+		}
 		else
 		{
 			if (v < h)
@@ -148,7 +160,7 @@ win->huy = 1;
 		}
 		angle -= win->gg.angle_size;
 		i++;
-win->huy = 0;		
+win->huy = 0;
 	}
 	glEnd();
 }
