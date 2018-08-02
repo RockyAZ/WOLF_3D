@@ -55,10 +55,13 @@ void			line_draw(t_main *win, int i, int h)
 	}
 }
 */
-void	line_draw(t_main *win, int i, float h)
+void	line_draw(t_main *win, int i, float h, int color)
 {
-	printf("--->%f\n", h);
-	glColor3d(0, 254, 0);
-	glVertex2f(i, CENTR_H - h / 2);
-	glVertex2f(i, CENTR_H + h / 2);
+	// printf("--->%f\n", h);
+	if (color == 1)
+		glColor3ub(0, 254, 0);
+	else
+		glColor3ub(254, 0, 0);
+	glVertex2d(i, CENTR_H - h / 2);
+	glVertex2d(i, CENTR_H + h / 2);
 }

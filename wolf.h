@@ -109,7 +109,7 @@ void			ray_player_prepare(t_main *win);
 /*
 ** draw_line.c
 */
-void			line_draw(t_main *win, int i, float h);
+void			line_draw(t_main *win, int i, float h, int color);
 
 //
 void print_coord(t_data *data);

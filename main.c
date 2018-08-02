@@ -12,16 +12,32 @@
 
 #include "wolf.h"
 
+int			mouse_pos(GLFWwindow* window, double x, double y)
+{
+	printf("X::%f, Y::%f\n", x, y);
+	return (0);
+}
+
 void	f()
 {
-	glBegin(GL_LINES);
-	glColor3d(0, 254, 0);
-	glVertex2f(0, 0);
-	glVertex2f(30, 30);
+	int i = 0;
+	int j = 0;
 
-	glColor3d(0, 0, 254);
-	glVertex2f(31, 31);
-	glVertex2f(40, 40);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glBegin(GL_LINES);
+	glColor3ub(100, 20, 200);
+	// while (i < WIDTH)
+	// {
+	// 	glVertex2d(i, 0);
+	// 	glVertex2d(i, HEIGHT);
+	// 	i++;
+	// }
+	while (i < HEIGHT)
+	{
+		glVertex2d(0, i);
+		glVertex2d(WIDTH, i);
+		i++;
+	}
 	glEnd();
 }
 
@@ -41,19 +57,24 @@ glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 glfwMakeContextCurrent(window);
 
 glfwSetKeyCallback(window, key_callback);
+// glfwSetCursorPosCallback(window, *mouse_pos);
 	glfwSwapInterval(1);
 
-//	glViewport(0, 0, WIDTH, HEIGHT);
+	glViewport(0, 0, WIDTH * 2, HEIGHT * 2);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0.0f, WIDTH, HEIGHT, 0.0f, 0.0f, 1.0f);
+	glOrtho(1, WIDTH, HEIGHT, 1, -1, 0);
+	// glOrtho(1, WIDTH, HEIGHT, 1, -1, 1);
+	// glOrtho(0, WIDTH, HEIGHT, 0, 0, 1);	
+	// glMatrixMode(GL_MODELVIEW);
+	// glLoadIdentity();
 
 	glfwSetWindowUserPointer(window, win);
 ray_player_prepare(win);
-		ray_casting(win);
+		// ray_casting(win);
 	while (!glfwWindowShouldClose(window))
 	{
-//		f();
+		// f();
 		ray_casting(win);
 		glfwSwapBuffers(window);
 		glfwWaitEvents();
