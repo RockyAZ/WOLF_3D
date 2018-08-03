@@ -13,19 +13,28 @@
 #ifndef WOLF_H
 # define WOLF_H
 
-// # define WIDTH 320
-// # define HEIGHT 200
+// # define WIDTH 1200
+// # define HEIGHT 1080
 # define WIDTH 640
 # define HEIGHT 400
 # define CENTR_W WIDTH / 2
 # define CENTR_H HEIGHT / 2
 # define CUBE 64
+# define RUN 10
 
 # include "./libft/libft.h"
 # include <GLFW/glfw3.h>
 # include <fcntl.h>
 # include <math.h>
 #include <stdio.h>
+
+typedef struct	s_keys
+{
+	int			right;
+	int			left;
+	int			up;
+	int			down;
+}				t_keys;
 
 typedef struct	s_dot
 {
@@ -42,6 +51,8 @@ typedef struct	s_player
 {
 	float		posX;
 	float		posY;
+	int			r_x;
+	int			r_y;	
 	float		angle;
 	float		angle_size;
 	float		fov;
@@ -74,6 +85,7 @@ typedef struct	s_main
 	t_data		*data;
 	t_ray		ray;
 	t_player	gg;
+	t_keys		keys;
 int huy;
 float rotate;
 }				t_main;
@@ -103,7 +115,14 @@ void			error(char *name);
 */
 void			ft_arrr_del(char **arr, char *line);
 float			ft_tan(float angle);
+float			ft_sin(float angle);
 float			ft_cos(float angle);
+float			ft_tan(float angle);
+
+/*
+** action.c
+*/
+void			active_keys(t_main *win);
 
 /*
 ** preparation.c

@@ -75,9 +75,10 @@ ray_player_prepare(win);
 	while (!glfwWindowShouldClose(window))
 	{
 		// f();
+		active_keys(win);
 		ray_casting(win);
 		glfwSwapBuffers(window);
-		glfwWaitEvents();
+		glfwPollEvents();
 	}
 system ("leaks -quiet wolf3d");
     glfwDestroyWindow(window);
