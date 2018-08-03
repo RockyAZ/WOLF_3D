@@ -103,6 +103,7 @@ void			error(char *name);
 */
 void			ft_arrr_del(char **arr, char *line);
 float			ft_tan(float angle);
+float			ft_cos(float angle);
 
 /*
 ** preparation.c

@@ -3,7 +3,7 @@
 int main()
 {
 	int i = 3;
-	float f = i / CUBE;
+	float f  = (float)i / (float)CUBE;
 	printf("%f\n", f);
 	return (0);
 }

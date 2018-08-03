@@ -17,6 +17,11 @@ float	ft_tan(float angle)
 	return(tan((angle * 2 * M_PI) / 360));
 }
 
+float	ft_cos(float angle)
+{
+	return(cos((angle * 2 * M_PI) / 360));
+}
+
 void	ft_arrr_del(char **arr, char *line)
 {
 	int i;

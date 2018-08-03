@@ -47,7 +47,7 @@ int		vertic_inter(t_main *win, float angle)
 		if (win->ray.v_dot.pix_y >= win->data->max_y || win->ray.v_dot.pix_y < 0)
 			return (-1);
 	}
-	return ((int)sqrt(powf(win->gg.posX - win->ray.v_dot.pix_x, 2) + powf(win->gg.posY - win->ray.v_dot.pix_y, 2)));
+	return (((int)sqrt(powf(win->gg.posX - win->ray.v_dot.pix_x, 2) + powf(win->gg.posY - win->ray.v_dot.pix_y, 2)))*ft_cos(win->gg.angle - angle));
 }
 
 int		horiz_inter(t_main *win, float angle)
@@ -85,7 +85,7 @@ int		horiz_inter(t_main *win, float angle)
 		if (win->ray.h_dot.pix_x >= win->data->max_x || win->ray.h_dot.pix_x < 0)
 			return (-1);
 	}
-	return ((int)sqrt(powf(win->gg.posX - win->ray.h_dot.pix_x, 2) + powf(win->gg.posY - win->ray.h_dot.pix_y, 2)));
+	return (((int)sqrt(powf(win->gg.posX - win->ray.h_dot.pix_x, 2) + powf(win->gg.posY - win->ray.h_dot.pix_y, 2)))*ft_cos(win->gg.angle - angle));
 }
 
 void	ray_casting(t_main *win)
