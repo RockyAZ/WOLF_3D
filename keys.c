@@ -24,16 +24,20 @@ void	key_callback(GLFWwindow* window, int key, int scan, int act, int mods)
 //			glfwSetWindowShouldClose(window, 1);
 		if (key == GLFW_KEY_RIGHT)
 		{
-			win->gg.angle -= 2;
+			win->gg.angle -= win->rotate;
 			if (win->gg.angle > 360)
 				win->gg.angle -= 360;
 		}
 		if (key == GLFW_KEY_LEFT)
 		{
-			win->gg.angle += 2;
+			win->gg.angle += win->rotate;
 			if (win->gg.angle < 0)
 				win->gg.angle += 360;
 		}
+		if (key == GLFW_KEY_SPACE)
+			win->rotate = win->gg.angle_size;
+		if (key == GLFW_KEY_BACKSPACE)
+			win->rotate = 2;
 		if (key == GLFW_KEY_UP)
 			win->gg.posX += 1;
 		if (key == GLFW_KEY_DOWN)

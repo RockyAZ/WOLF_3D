@@ -29,19 +29,19 @@
 
 typedef struct	s_dot
 {
-	int			pix_x;
-	int			pix_y;
+	float			pix_x;
+	float			pix_y;
 	int			real_x;
 	int			real_y;
-	int			var_x;
-	int			var_y;
+	float			var_x;
+	float			var_y;
 	int			minus;
 }				t_dot;
 
 typedef struct	s_player
 {
-	int		posX;
-	int		posY;
+	float		posX;
+	float		posY;
 	float		angle;
 	float		angle_size;
 	float		fov;
@@ -66,7 +66,7 @@ typedef struct  s_data
 	int			max_y;
 	int			error;
 	int			fd;
-	int			pos[2];
+	float			pos[2];
 }               t_data;
 
 typedef struct	s_main
@@ -75,6 +75,7 @@ typedef struct	s_main
 	t_ray		ray;
 	t_player	gg;
 int huy;
+float rotate;
 }				t_main;
 
 /*

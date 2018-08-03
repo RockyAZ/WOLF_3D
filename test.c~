@@ -1,0 +1,9 @@
+#include <stdio.h>
+# define CUBE 64
+int main()
+{
+	int i = 3;
+	float f = i / CUBE;
+	printf("%f\n", f);
+	return (0);
+}

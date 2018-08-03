@@ -59,8 +59,8 @@ void	line_draw(t_main *win, int i, float h, int color)
 {
 	if (win->huy)
 	{
-	printf("--->::%f\n", h);		
-	printf("--->color::%d\n", color);
+	printf("--->::%f\n", h);
+	printf("--->color::%d\n++++++++++++++++++++++++++++++++++\n", color);
 	}
 	if (color == 1)
 		glColor3ub(0, 254, 0);

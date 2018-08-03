@@ -27,11 +27,12 @@ void	main_prepare(int ac, char **av, t_main **win)
 
 void	ray_player_prepare(t_main *win)
 {
-	win->gg.posX = (win->data->pos[0] * CUBE) + (CUBE / 2);
-	win->gg.posY = (win->data->pos[1] * CUBE) + (CUBE / 2);
+	win->gg.posX = (win->data->pos[0] * (float)CUBE) + ((float)CUBE / (float)2);
+	win->gg.posY = (win->data->pos[1] * (float)CUBE) + ((float)CUBE / (float)2);
 	win->gg.angle = 45;
 	win->gg.fov = 60;
 	win->gg.angle_size = (float)(win->gg.fov / WIDTH);
 	win->gg.to_screen = (WIDTH / 2) / ft_tan(30);
-	printf("POS_X:%d         POS_Y:%d\n\n\n", win->gg.posX, win->gg.posY);
+win->rotate = 2;
+	printf("POS_X:%f         POS_Y:%f\n\n\n", win->gg.posX, win->gg.posY);
 }

@@ -17,9 +17,9 @@ int		vertic_inter(t_main *win, float angle)
 	if (angle == 90 || angle == 270)
 		return (-1);
 	if (angle > 90 && angle < 270)
-		win->ray.v_dot.pix_x = (win->gg.posX / CUBE) * CUBE - 1;
+		win->ray.v_dot.pix_x = ((int)win->gg.posX / CUBE) * CUBE - 1;
 	else
-		win->ray.v_dot.pix_x = (win->gg.posX / CUBE) * CUBE + CUBE;
+		win->ray.v_dot.pix_x = ((int)win->gg.posX / CUBE) * CUBE + CUBE;
 	if (angle == 180 || angle == 0 || angle == 360)
 		win->ray.v_dot.pix_y = win->gg.posY;
 	else
@@ -55,9 +55,9 @@ int		horiz_inter(t_main *win, float angle)
 	if (angle == 180 || angle == 0 || angle == 360)
 		return (-1);
 	if (angle > 0 && angle < 180)
-		win->ray.h_dot.pix_y = (win->gg.posY / CUBE) * CUBE - 1;
+		win->ray.h_dot.pix_y = ((int)win->gg.posY / CUBE) * CUBE - 1;
 	else
-		win->ray.h_dot.pix_y = (win->gg.posY / CUBE) * CUBE + CUBE;
+		win->ray.h_dot.pix_y = ((int)win->gg.posY / CUBE) * CUBE + CUBE;
 	if (angle == 90 || angle == 270)
 		win->ray.h_dot.pix_x = win->gg.posX;
 	else
@@ -113,8 +113,9 @@ void	ray_casting(t_main *win)
 win->huy = 0;
 if (angle == win->gg.angle)
 {
+printf("\nmap_line:%d\nmap_col:%d\n", win->data->line, win->data->col);
 printf("angle::%f\n", angle);
-printf("PLAYER_X:%d\nPLAYER_Y:%d\n", win->gg.posX, win->gg.posY);
+printf("PLAYER_X:%f\nPLAYER_Y:%f\n", win->gg.posX, win->gg.posY);
 printf("<><>PLAYER_ANGLE::%f\n", win->gg.angle);
 printf("I::%d\n", i);
 printf("HORIZ_return::%d\nVERIC_return::%d\n\n", h, v);

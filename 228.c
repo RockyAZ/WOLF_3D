@@ -12,26 +12,36 @@ return 0;
 
 
 #include "wolf.h"
-printf("angle:%f\n", angle);
+int		vertic_inter(t_main *win, float angle)
+{
+if (angle == win->gg.angle)
+{
+printf("--------------------------------\nangle:%f\n", angle);
+}
 	if (angle == 90 || angle == 270)
 		return (-1);
 	if (angle > 90 && angle < 270)
-		win->ray.v_dot.pix_x = (win->gg.posX / CUBE) * CUBE - 1;
+		win->ray.v_dot.pix_x = ((int)win->gg.posX / CUBE) * CUBE - 1;
 	else
-		win->ray.v_dot.pix_x = (win->gg.posX / CUBE) * CUBE + CUBE;
-
+		win->ray.v_dot.pix_x = ((int)win->gg.posX / CUBE) * CUBE + CUBE;
 	if (angle == 180 || angle == 0 || angle == 360)
 		win->ray.v_dot.pix_y = win->gg.posY;
 	else
 		win->ray.v_dot.pix_y = win->gg.posY + (win->gg.posX - win->ray.v_dot.pix_x) * ft_tan(angle);
 	if (win->ray.v_dot.pix_y >= win->data->max_y || win->ray.v_dot.pix_y < 0)
 		return (-1);
+if (angle == win->gg.angle)
+{
 printf("TAN:%f\n", ft_tan(angle));
-printf("-->PIX_X::%d\n", win->ray.v_dot.pix_x);
-printf("-->PIX_Y::%d\n", win->ray.v_dot.pix_y);
+printf("-->PIX_X::%f\n", win->ray.v_dot.pix_x);
+printf("-->PIX_Y::%f\n", win->ray.v_dot.pix_y);
+}
 	win->ray.v_dot.real_x = win->ray.v_dot.pix_x / CUBE;
 	win->ray.v_dot.real_y = win->ray.v_dot.pix_y / CUBE;
+if (angle == win->gg.angle)
+{
 printf("VERTI_REAL:x::%d      y::%d\n", win->ray.v_dot.real_x, win->ray.v_dot.real_y);
+}
 	if (angle > 90 && angle < 270)
 		win->ray.v_dot.var_x = -CUBE;
 	else
@@ -42,8 +52,11 @@ printf("VERTI_REAL:x::%d      y::%d\n", win->ray.v_dot.real_x, win->ray.v_dot.re
 		win->ray.v_dot.var_y = (CUBE * ft_tan(angle)) * -1;
 	else
 		win->ray.v_dot.var_y = CUBE * ft_tan(angle);
-printf("VAR_X::%d\n", win->ray.v_dot.var_x);
-printf("VAR_Y::%d\n\n\n", win->ray.v_dot.var_y);
+if (angle == win->gg.angle)
+{
+printf("VAR_X::%f\n", win->ray.v_dot.var_x);
+printf("VAR_Y::%f\n\n\n", win->ray.v_dot.var_y);
+}
 	while (win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x] == 0)
 	{
 		win->ray.v_dot.pix_y += win->ray.v_dot.var_y;
@@ -52,10 +65,17 @@ printf("VAR_Y::%d\n\n\n", win->ray.v_dot.var_y);
 		win->ray.v_dot.real_y = win->ray.v_dot.pix_y / CUBE;
 		if (win->ray.v_dot.pix_y >= win->data->max_y || win->ray.v_dot.pix_y < 0)
 			return (-1);
-printf("-->PIX_X::%d\n", win->ray.v_dot.pix_x);
-printf("-->PIX_Y::%d\n", win->ray.v_dot.pix_y);
+if (angle == win->gg.angle)
+{
+printf("-->PIX_X::%f\n", win->ray.v_dot.pix_x);
+printf("-->PIX_Y::%f\n", win->ray.v_dot.pix_y);
 printf("VERTIC_REAL:x::%d      y::%d\n", win->ray.v_dot.real_x, win->ray.v_dot.real_y);
+}
 	}
+if (angle == win->gg.angle)
+{	
+printf("\n----------------------------------\n");
+}
 	return ((int)sqrt(powf(win->gg.posX - win->ray.v_dot.pix_x, 2) + powf(win->gg.posY - win->ray.v_dot.pix_y, 2)));
 }
 
@@ -145,17 +165,14 @@ int		horiz_inter(t_main *win, float angle)
 
 
 ==================================NORMAL===============================================
-
-
 int		vertic_inter(t_main *win, float angle)
 {
 	if (angle == 90 || angle == 270)
 		return (-1);
 	if (angle > 90 && angle < 270)
-		win->ray.v_dot.pix_x = (win->gg.posX / CUBE) * CUBE - 1;
+		win->ray.v_dot.pix_x = ((int)win->gg.posX / CUBE) * CUBE - 1;
 	else
-		win->ray.v_dot.pix_x = (win->gg.posX / CUBE) * CUBE + CUBE;
-
+		win->ray.v_dot.pix_x = ((int)win->gg.posX / CUBE) * CUBE + CUBE;
 	if (angle == 180 || angle == 0 || angle == 360)
 		win->ray.v_dot.pix_y = win->gg.posY;
 	else
@@ -170,6 +187,8 @@ int		vertic_inter(t_main *win, float angle)
 		win->ray.v_dot.var_x = CUBE;
 	if (angle == 180 || angle == 0 || angle == 360)
 		win->ray.v_dot.var_y = 0;
+	else if (angle < 90 || angle > 270)
+		win->ray.v_dot.var_y = (CUBE * ft_tan(angle)) * -1;
 	else
 		win->ray.v_dot.var_y = CUBE * ft_tan(angle);
 	while (win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x] == 0)

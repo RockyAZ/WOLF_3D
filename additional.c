@@ -48,5 +48,5 @@ void	print_coord(t_data *data)
 		printf("\n\n");
 	}
 		printf("MAX_X::%d\nMAX_Y::%d\n", data->max_x, data->max_y);
-		printf("PLAYER_X::%d\nPLAYER_Y::%d\n\n\n", data->pos[0],data->pos[1]);
+		printf("PLAYER_X::%f\nPLAYER_Y::%f\n\n\n", data->pos[0],data->pos[1]);
 }
