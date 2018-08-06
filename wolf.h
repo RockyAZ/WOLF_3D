@@ -22,8 +22,18 @@
 # define CUBE 64
 # define RUN 10
 
+// #ifdef __APPLE__
+// #include <GLUT/glut.h>
+// #else
+// #include <GL/glut.h>
+// #endif
+
+# include <GL/glew.h>
 # include "./libft/libft.h"
 # include <GLFW/glfw3.h>
+// # include <GL/eglew.h>
+// # include <GL/glxew.h>
+// # include <GL/wglew.h>
 # include <fcntl.h>
 # include <math.h>
 #include <stdio.h>

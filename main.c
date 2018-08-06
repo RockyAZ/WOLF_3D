@@ -68,6 +68,10 @@ glfwSetKeyCallback(window, key_callback);
 	// glOrtho(0, WIDTH, HEIGHT, 0, 0, 1);	
 	// glMatrixMode(GL_MODELVIEW);
 	// glLoadIdentity();
+	// glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, 1024, 768, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
+
+
+
 
 	glfwSetWindowUserPointer(window, win);
 ray_player_prepare(win);
