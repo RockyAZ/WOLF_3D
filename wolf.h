@@ -29,6 +29,7 @@
 // #endif
 
 # include <GL/glew.h>
+# include <SOIL.h>
 # include "./libft/libft.h"
 # include <GLFW/glfw3.h>
 // # include <GL/eglew.h>
@@ -36,6 +37,7 @@
 // # include <GL/wglew.h>
 # include <fcntl.h>
 # include <math.h>
+# include "./include/stb_image.h"
 #include <stdio.h>
 
 typedef struct	s_keys

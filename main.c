@@ -20,31 +20,24 @@ int			mouse_pos(GLFWwindow* window, double x, double y)
 
 void	f()
 {
-	int i = 0;
-	int j = 0;
+	int width, height, nrChannels;
+	unsigned char *data = stbi_load("./WallPack/Blue.bmp", &width, &height, &nrChannels, 0);
+	GLuint texture;
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glBegin(GL_LINES);
-	glColor3ub(100, 20, 200);
-	// while (i < WIDTH)
-	// {
-	// 	glVertex2d(i, 0);
-	// 	glVertex2d(i, HEIGHT);
-	// 	i++;
-	// }
-	while (i < HEIGHT)
-	{
-		glVertex2d(0, i);
-		glVertex2d(WIDTH, i);
-		i++;
-	}
-	glEnd();
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	// gluBuild2DMipmaps(GL_TEXTURE_2D, 4, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+// 	unsigned int pid = SOIL_load_OGL_texture("./tex/wood.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS |
+	printf("W:%d\nH:%d\nChan:%d\n", width, height, nrChannels);
+	free(data);
 }
 
 int	main(int ac, char **av)
 {
-	GLFWwindow *window;
-	t_main *win;
+	GLFWwindow	*window;
+	t_main		*win;
+	void		*data;
 
 	main_prepare(ac, av, &win);
 	reader(win->data);
@@ -64,26 +57,42 @@ glfwSetKeyCallback(window, key_callback);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(1, WIDTH, HEIGHT, 1, -1, 0);
-	// glOrtho(1, WIDTH, HEIGHT, 1, -1, 1);
-	// glOrtho(0, WIDTH, HEIGHT, 0, 0, 1);	
 	// glMatrixMode(GL_MODELVIEW);
-	// glLoadIdentity();
-	// glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, 1024, 768, 0,GL_RGB, GL_UNSIGNED_BYTE, 0);
-
-
 
 
 	glfwSetWindowUserPointer(window, win);
-ray_player_prepare(win);
+// ray_player_prepare(win);
 		// ray_casting(win);
+	f();
+	int x, y;
 	while (!glfwWindowShouldClose(window))
 	{
-		// f();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		// glColor3ub(0, 254, 0);
+	    glEnable(GL_TEXTURE_2D);
+	    glBegin(GL_POINTS);
+	    y = 0;
+	    while (y < 64)
+	    {
+	    	x = 0;
+		    while (x < 64)
+		    {
+		    	glTexCoord2d(50, 50);
+		    	 glVertex2d(x, y);
+		    	x++;
+		    }
+		    y++;
+		}
+		glDisable(GL_TEXTURE_2D);
+		glEnd();
 		active_keys(win);
-		ray_casting(win);
+		// ray_casting(win);
 		glfwSwapBuffers(window);
-		glfwPollEvents();
+		// getchar();
+		glfwWaitEvents();
 	}
+
 system ("leaks -quiet wolf3d");
     glfwDestroyWindow(window);
 	glfwTerminate();

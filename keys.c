@@ -51,5 +51,5 @@ void	key_callback(GLFWwindow* window, int key, int scan, int act, int mods)
 		if (key == GLFW_KEY_DOWN)
 			win->keys.down = 0;
 	}
-		ray_casting(win);
+		// ray_casting(win);
 }
