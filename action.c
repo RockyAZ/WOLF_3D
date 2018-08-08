@@ -14,8 +14,8 @@
 
 void	active_keys(t_main *win)
 {
-	win->gg.r_x = win->gg.posX / 64;
-	win->gg.r_y = win->gg.posY / 64;
+	// win->gg.r_x = win->gg.posX / 64;
+	// win->gg.r_y = win->gg.posY / 64;
 	if (win->keys.right)
 	{
 		win->gg.angle -= win->rotate;
@@ -30,12 +30,12 @@ void	active_keys(t_main *win)
 	}
 	if (win->keys.up)
 	{
-		win->gg.posX += 15 * ft_cos(win->gg.angle);
-		win->gg.posY += 15 * (ft_sin(win->gg.angle) * -1);
+		win->gg.posX += 5 * ft_cos(win->gg.angle);
+		win->gg.posY += 5 * (ft_sin(win->gg.angle) * -1);
 	}
 	if (win->keys.down)
 	{
-		win->gg.posX -= 15 * ft_cos(win->gg.angle);
-		win->gg.posY -= 15 * (ft_sin(win->gg.angle) * -1);
+		win->gg.posX -= 5 * ft_cos(win->gg.angle);
+		win->gg.posY -= 5 * (ft_sin(win->gg.angle) * -1);
 	}
 }

@@ -11,63 +11,80 @@
 /* ************************************************************************** */
 
 #include "wolf.h"
-/*
-void			get_buff(double *buff, t_coord cd1, t_coord cd2)
-{
-	buff[0] = fabs(cd1.x - cd2.x);
-	buff[1] = fabs(cd1.y - cd2.y);
-	buff[2] = cd1.x < cd2.x ? 1 : -1;
-	buff[3] = cd1.y < cd2.y ? 1 : -1;
-	buff[4] = (buff[0] > buff[1] ? buff[0] : -buff[1]);
-	buff[6] = 1;
-}
 
-static void		draw_point(t_win *win)
-{
-	glVertex2d()
-}
+// void	draw(int X0, int Y0, int X1, int Y1, t_main *win, int color)
+// {
+//     int dx = X1 - X0;
+//     int dy = Y1 - Y0;
+//     int steps = ft_abs(dx) > ft_abs(dy) ? ft_abs(dx) : ft_abs(dy);
+//     float Xinc = dx / (float) steps;
+//     float Yinc = dy / (float) steps;
+//     float X = X0;
+//     float Y = Y0;
+//     for (int i = 0; i <= steps; i++)
+//     {
+//         glVertex2d(X,Y);
+//         X += Xinc;
+//         Y += Yinc;
+//     }
+// }
 
-void			line_draw(t_main *win, int i, int h)
-{
-	float buff[7];
+// void	draw(int x, int y, t_main *win)
+// {
+// 	int h;
+// 	printf("%d   ", y);
+// 	h = CENTR_H + y / 2;
+// 	y = CENTR_H - y / 2;
+// 	while (y < h)
+// 	{
+// 		glColor3ub(255, 0, 0);
+// 		glVertex2d(x, y);
+// 		y++;
+// 	}
+// 	exit(0);
+// }
 
-	if (v1.x < 0 && v1.x > WIDTH && v1.y < 0 && v1.y > HEIGHT)
-		return ;
-	get_buff(buff, v1, v2);
-	while (buff[6] == 1 && !((int)v1.x == (int)v2.x && (int)v1.y == (int)v2.y))
+
+void	draw(int x, int y, t_main *win)
+{
+	int i;
+	int h;
+	float tex;
+	float tex_size;
+	int	pos;
+
+	tex_size = (float)CUBE / (float)y;
+	tex = tex_size;
+	h = CENTR_H + y / 2;
+	y = CENTR_H - y / 2;
+	while (y < h)
 	{
-		if (v1.x >= 0 && v1.x <= WIDTH && v1.y >= 0 && v1.y <= HEIGHT)
-			draw_point(&v1, win, v1.color);
-		buff[5] = buff[4];
-		buff[6] = 0;
-		if (buff[5] > -buff[0] && (int)v1.x != (int)v2.x)
-		{
-			buff[4] -= buff[1];
-			v1.x += buff[2];
-			buff[6] = 1;
-		}
-		if (buff[5] < buff[1] && (int)v1.y != (int)v2.y)
-		{
-			buff[4] += buff[0];
-			v1.y += buff[3];
-			buff[6] = 1;
-		}
+		i = (win->img.pos * 3) + ((int)tex * (CUBE * 3));
+// printf("=============================%d======================", huy);
+// printf("X::%d\n", x);
+// printf("Y::%d\n", y);
+// printf("I::%d\n", i);
+// printf("TEX:%f\n", tex);
+// printf("TEX_size:%f\n", tex_size);
+// printf("IMG.POS::%d\n", win->img.pos);
+// printf("R:%d  G:%d  B:%d\n", (int)win->img.img[i], (int)win->img.img[i + 1], (int)win->img.img[i + 2]);
+		glColor3ub((int)win->img.img[i], (int)win->img.img[i + 1], (int)win->img.img[i + 2]);
+		glVertex2d(x, y);
+		tex += tex_size;
+		y++;
 	}
+// exit(0);
 }
-*/
-void	line_draw(t_main *win, int i, float h, int color)
+
+void	line_draw(t_main *win, int i, float h, int color, int xy)
 {
-	if (win->huy)
-	{
-	printf("--->::%f\n", h);
-	printf("--->color::%d\n++++++++++++++++++++++++++++++++++\n", color);
-	}
-	if (color == 1)
-		glColor3ub(0, 254, 0);
-	else if (color == 2)
-		glColor3ub(254, 0, 0);
-	else if (color == 3)
-		glColor3ub(0, 0, 254);
-	glVertex2d(i, CENTR_H - h / 2);
-	glVertex2d(i, CENTR_H + h / 2);
+	win->img.pos = xy % CUBE;
+	// if (color == 1)
+	// 	glColor3ub(0, 254, 0);
+	// else if (color == 2)
+	// 	glColor3ub(254, 0, 0);
+	// else if (color == 3)
+	// 	glColor3ub(0, 0, 254);
+	// draw(i, CENTR_H + h / 2, i, CENTR_H - h / 2, win, color);
+	draw(i, h, win);
 }

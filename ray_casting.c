@@ -96,12 +96,10 @@ void	ray_casting(t_main *win)
 	int		v;
 	int		h;
 
+	glClear ( GL_COLOR_BUFFER_BIT  |  GL_DEPTH_BUFFER_BIT  |  GL_STENCIL_BUFFER_BIT );
+	glBegin(GL_POINTS);
 	i = 0;
 	angle = win->gg.angle + (win->gg.fov / 2);
-	// printf("VERTIC:%d\n", vertic_inter(win, 299));
-	// exit(1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glBegin(GL_LINES);
 	while (i < WIDTH)
 	{
 		if (angle > 360)
@@ -110,58 +108,21 @@ void	ray_casting(t_main *win)
 			angle += 360;
 		v = vertic_inter(win, angle);
 		h = horiz_inter(win, angle);
-win->huy = 0;
-if (angle == win->gg.angle)
-{
-printf("\nmap_line:%d\nmap_col:%d\n", win->data->line, win->data->col);
-printf("angle::%f\n", angle);
-printf("PLAYER_X:%f\nPLAYER_Y:%f\n", win->gg.posX, win->gg.posY);
-printf("<><>PLAYER_ANGLE::%f\n", win->gg.angle);
-printf("I::%d\n", i);
-printf("HORIZ_return::%d\nVERIC_return::%d\n\n", h, v);
-printf("HORIZ_REAL_X::%d\n", win->ray.h_dot.real_x);
-printf("HORIZ_REAL_Y::%d\n\n\n", win->ray.h_dot.real_y);
-printf("VERTIC_REAL_X::%d\n", win->ray.v_dot.real_x);
-printf("VERTIC_REAL_Y::%d\n", win->ray.v_dot.real_y);
-win->huy = 1;
-}
 		if (v == -1)
-		{
-			if (win->huy)
-			write(1, "-v\n", 3);
-			line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen, win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x]);
-		}
+			line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen, win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x], win->ray.h_dot.pix_x);
 		else if (h == -1)
-		{
-			if (win->huy)
-			write(1, "-h\n", 3);
-			line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen, win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x]);
-		}
+			line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen, win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x], win->ray.v_dot.pix_y);
 		else
 		{
 			if (v < h)
-			{
-				if (win->huy)
-					write(1, "1\n", 2);
-				line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen, win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x]);
-			}
-			else if (h < v)
-			{
-				if (win->huy)
-					write(1, "2\n", 2);
-				line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen, win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x]);	
-			}
+				line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen, win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x], win->ray.v_dot.pix_y);
 			else
-			{
-				if (win->huy)
-					write(1, "3\n", 2);
-				line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen, win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x]);
-			}
-			// line_draw(win, i, (float)((float)CUBE / (float)ft_min(h, v)) * win->gg.to_screen);
+				line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen, win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x], win->ray.h_dot.pix_x);
+			// else
+				// line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen, win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x]);
 		}
 		angle -= win->gg.angle_size;
 		i++;
-win->huy = 0;
 	}
 	glEnd();
 }

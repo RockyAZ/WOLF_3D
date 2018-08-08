@@ -48,6 +48,15 @@ typedef struct	s_keys
 	int			down;
 }				t_keys;
 
+typedef struct	s_img
+{
+	unsigned char *img;
+	int width;
+	int height;
+	int nrChannel;
+	int pos;
+}				t_img;
+
 typedef struct	s_dot
 {
 	float			pix_x;
@@ -98,7 +107,7 @@ typedef struct	s_main
 	t_ray		ray;
 	t_player	gg;
 	t_keys		keys;
-int huy;
+	t_img		img;
 float rotate;
 }				t_main;
 
@@ -145,7 +154,9 @@ void			ray_player_prepare(t_main *win);
 /*
 ** draw_line.c
 */
-void			line_draw(t_main *win, int i, float h, int color);
+// void			line_draw(t_main *win, int i, float h, int color);
+void	line_draw(t_main *win, int i, float h, int color, int xy);
+
 
 //
 void print_coord(t_data *data);
