@@ -20,7 +20,8 @@ SOURCE = main.c \
 			ray_casting.c \
 			keys.c \
 			draw_line.c \
-			action.c
+			action.c \
+			mouse.c \
  # SOURCE = texture.c 
 
 GLFW_INC = -I ./include/

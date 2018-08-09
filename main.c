@@ -12,32 +12,6 @@
 
 #include "wolf.h"
 
-int			mouse_pos(GLFWwindow* window, double x, double y)
-{
-	printf("X::%f, Y::%f\n", x, y);
-	return (0);
-}
-
-// void	f()
-// {
-// 	int width, height, nrChannels;
-// 	// unsigned char *data = stbi_load("./WallPack/Flag9.bmp", &width, &height, &nrChannels, 0);
-// 	// unsigned char *data = stbi_load("./Drawing.png", &width, &height, &nrChannels, 0);
-// 	unsigned char *data = stbi_load("./Eridu757.bmp", &width, &height, &nrChannels, 0);
-// 	GLuint texture;
-
-// 	glGenTextures(1, &texture);
-// 	glBindTexture(GL_TEXTURE_2D, texture);
-// 	// gluBuild2DMipmaps(GL_TEXTURE_2D, 4, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
-// 	// glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-// 	for(int i = 0; i < 64 * 3; i += 3)
-// 		printf("R:%d  G:%d  B:%d\n", (int)data[i], (int)data[i + 1], (int)data[i + 2]);
-// 	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-// 	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-// 	// 	unsigned int pid = SOIL_load_OGL_texture("./tex/wood.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS |
-// 	printf("W:%d\nH:%d\nChan:%d\n", width, height, nrChannels);
-// 	free(data);
-// }
 void	f()
 {
 	int width, height, nrChannels, i;
@@ -55,7 +29,6 @@ int	main(int ac, char **av)
 {
 	GLFWwindow	*window;
 	t_main		*win;
-	// void		*data;
 
 	main_prepare(ac, av, &win);
 	reader(win->data);
@@ -66,7 +39,7 @@ int	main(int ac, char **av)
 		error("window open error\n");
 	glfwMakeContextCurrent(window);
 	glfwSetKeyCallback(window, key_callback);
-	// glfwSetCursorPosCallback(window, *mouse_pos);
+	glfwSetCursorPosCallback(window, *mouse_pos);
 	glfwSwapInterval(1);
 
 	glViewport(0, 0, WIDTH * 2, HEIGHT * 2);
@@ -76,16 +49,19 @@ int	main(int ac, char **av)
 	// glMatrixMode(GL_MODELVIEW);
 	glfwSetWindowUserPointer(window, win);
 
-	win->img.img = stbi_load("./WallPack/Flag5.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	// glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	// loat_textures(win);
+
+	win->img.tex[0] = stbi_load("./floor.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	win->img.tex[1] = stbi_load("./WallPack/Flag5.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	win->img.tex[2] = stbi_load("./neko.png", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	win->img.tex[3] = stbi_load("./WallPack/Black6.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	win->img.tex[4] = stbi_load("./WallPack/White1.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	// win->img.tex[4] = stbi_load("./pepe.png", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	printf("PICTURE_W:%d\nPICTURE_H:%d\nPICTURE_CHANNEL:%d\n", win->img.width, win->img.height, win->img.nrChannel);
 	// for(int i = 0; i < 64 * 3; i += 3)
-		// printf("R:%d  G:%d  B:%d\n", (int)win->img.img[i], (int)win->img.img[i + 1], (int)win->img.img[i + 2]);
-
-
-	// int width, height, nrChannels;
-	// unsigned char *data = stbi_load("./WallPack/Flag5.png", &width, &height, &nrChannels, 0);
-	// for(int i = 0; i < 64 * 3; i += 3)
-	// 	printf("R:%d  G:%d  B:%d\n", (int)data[i], (int)data[i + 1], (int)data[i + 2]);
-
+		// printf("R:%d  G:%d  B:%d\n", (int)win->img.black[i], (int)win->img.black[i + 1], (int)win->img.black[i + 2]);
 	ray_player_prepare(win);
 	ray_casting(win);
 	// f();

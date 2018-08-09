@@ -21,7 +21,7 @@ void	key_callback(GLFWwindow* window, int key, int scan, int act, int mods)
 	{
 		if (key == GLFW_KEY_ESCAPE)
 			exit(1);
-//			glfwSetWindowShouldClose(window, 1);
+			// glfwSetWindowShouldClose(window, 1);
 		if (key == GLFW_KEY_SPACE)
 			win->rotate = win->gg.angle_size;
 		if (key == GLFW_KEY_BACKSPACE)
@@ -35,10 +35,16 @@ void	key_callback(GLFWwindow* window, int key, int scan, int act, int mods)
 			win->keys.up = 1;
 		if (key == GLFW_KEY_DOWN)
 			win->keys.down = 1;
-		// if (key == GLFW_KEY_W)
-			// win->gg.to_screen += 6;
-		// if (key == GLFW_KEY_S)
-			// win->gg.to_screen -= 6;
+		if (key == GLFW_KEY_W)
+			win->keys.w = 1;
+		if (key == GLFW_KEY_S)
+			win->keys.s = 1;
+		if (key == GLFW_KEY_A)
+			win->keys.a = 1;
+		if (key == GLFW_KEY_D)		
+			win->keys.d = 1;
+		if (key == GLFW_KEY_LEFT_SHIFT)
+			win->keys.shift = 1;
 	}
 	if (act == GLFW_RELEASE)
 	{
@@ -50,6 +56,16 @@ void	key_callback(GLFWwindow* window, int key, int scan, int act, int mods)
 			win->keys.up = 0;
 		if (key == GLFW_KEY_DOWN)
 			win->keys.down = 0;
+		if (key == GLFW_KEY_W)
+			win->keys.w = 0;
+		if (key == GLFW_KEY_S)
+			win->keys.s = 0;
+		if (key == GLFW_KEY_A)
+			win->keys.a = 0;
+		if (key == GLFW_KEY_D)
+			win->keys.d = 0;
+		if (key == GLFW_KEY_LEFT_SHIFT)
+			win->keys.shift = 0;
 	}
 		// ray_casting(win);
 }

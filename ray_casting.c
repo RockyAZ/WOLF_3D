@@ -95,13 +95,14 @@ void	ray_casting(t_main *win)
 	float	angle;
 	int		v;
 	int		h;
-
 	glClear ( GL_COLOR_BUFFER_BIT  |  GL_DEPTH_BUFFER_BIT  |  GL_STENCIL_BUFFER_BIT );
 	glBegin(GL_POINTS);
 	i = 0;
 	angle = win->gg.angle + (win->gg.fov / 2);
 	while (i < WIDTH)
 	{
+	if (angle == win->gg.angle)
+		printf("%f\n", angle);
 		if (angle > 360)
 			angle -= 360;
 		else if (angle < 0)

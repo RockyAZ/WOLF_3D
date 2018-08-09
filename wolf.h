@@ -20,7 +20,10 @@
 # define CENTR_W WIDTH / 2
 # define CENTR_H HEIGHT / 2
 # define CUBE 64
-# define RUN 10
+# define FACE 10
+// # define RUN 10
+# define TEXTURES 5
+
 
 // #ifdef __APPLE__
 // #include <GLUT/glut.h>
@@ -29,7 +32,7 @@
 // #endif
 
 # include <GL/glew.h>
-# include <SOIL.h>
+// # include <SOIL.h>
 # include "./libft/libft.h"
 # include <GLFW/glfw3.h>
 // # include <GL/eglew.h>
@@ -46,11 +49,22 @@ typedef struct	s_keys
 	int			left;
 	int			up;
 	int			down;
+	int			w;
+	int			s;
+	int			a;
+	int			d;
+	int			shift;
 }				t_keys;
+
+typedef struct	s_mouse
+{
+	int x;
+	int y;
+}				t_mouse;
 
 typedef struct	s_img
 {
-	unsigned char *img;
+	unsigned char *tex[TEXTURES];
 	int width;
 	int height;
 	int nrChannel;
@@ -108,6 +122,7 @@ typedef struct	s_main
 	t_player	gg;
 	t_keys		keys;
 	t_img		img;
+	t_mouse		m;
 float rotate;
 }				t_main;
 
@@ -125,6 +140,11 @@ void			ray_casting(t_main *win);
 ** keys.c
 */
 void			key_callback(GLFWwindow* window, int key, int scan, int act, int mods);
+
+/*
+** mouse.c
+*/
+void		    mouse_pos(GLFWwindow *window, double x, double y);
 
 /*
 ** error.c
@@ -154,8 +174,7 @@ void			ray_player_prepare(t_main *win);
 /*
 ** draw_line.c
 */
-// void			line_draw(t_main *win, int i, float h, int color);
-void	line_draw(t_main *win, int i, float h, int color, int xy);
+void			line_draw(t_main *win, int i, float h, int tex, int xy);
 
 
 //

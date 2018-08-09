@@ -22,7 +22,18 @@ void	main_prepare(int ac, char **av, t_main **win)
 		error("main malloc error\n");
 	cp_win->data = (t_data*)malloc(sizeof(t_data));
 	cp_win->data->name = av[1];
-	*win = cp_win;
+	cp_win->keys.right = 0;
+	cp_win->keys.left = 0;
+	cp_win->keys.up = 0;
+	cp_win->keys.down = 0;	
+	cp_win->keys.w = 0;
+	cp_win->keys.s = 0;
+	cp_win->keys.a = 0;
+	cp_win->keys.d = 0;
+	cp_win->keys.shift = 0;
+	cp_win->m.x = 0;
+	cp_win->m.y = 0;
+	*win = cp_win;	
 }
 
 void	ray_player_prepare(t_main *win)
