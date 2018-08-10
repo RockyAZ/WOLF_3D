@@ -142,7 +142,8 @@ void	ray_casting(t_main *win)
 		if (angle < 0)
 			angle += 360;
 if (i == WIDTH >> 1)
-printf("GG_X:%f\nGG_Y:%f\n\n", win->gg.posX, win->gg.posY);
+printf("%f\n", angle);
+// printf("GG_X:%f\nGG_Y:%f\n\n", win->gg.posX, win->gg.posY);
 		if (angle > 0 && angle < 180)
 			h = horiz_inter_top(win, angle);
 		else if (angle > 180 && angle < 360)

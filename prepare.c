@@ -44,6 +44,7 @@ void	ray_player_prepare(t_main *win)
 	win->gg.fov = 60;
 	win->gg.angle_size = (float)(win->gg.fov / WIDTH);
 	win->gg.to_screen = (WIDTH / 2) / ft_tan(30);
+	win->gg.speed = 5;
 win->rotate = 2;
 	printf("POS_X:%f         POS_Y:%f\n\n\n", win->gg.posX, win->gg.posY);
 }

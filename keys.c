@@ -44,7 +44,8 @@ void	key_callback(GLFWwindow* window, int key, int scan, int act, int mods)
 		if (key == GLFW_KEY_D)		
 			win->keys.d = 1;
 		if (key == GLFW_KEY_LEFT_SHIFT)
-			win->keys.shift = 1;
+			win->gg.speed = 10;
+			// win->keys.shift = 1;
 	}
 	if (act == GLFW_RELEASE)
 	{
@@ -65,7 +66,8 @@ void	key_callback(GLFWwindow* window, int key, int scan, int act, int mods)
 		if (key == GLFW_KEY_D)
 			win->keys.d = 0;
 		if (key == GLFW_KEY_LEFT_SHIFT)
-			win->keys.shift = 0;
+			win->gg.speed = 5;
+			// win->keys.shift = 0;
 	}
 		// ray_casting(win);
 }

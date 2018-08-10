@@ -32,8 +32,12 @@ void	moving_up(t_main *win)
 		f_y = FACE;
 	if (win->keys.up || win->keys.w)
 	{
-		posX += 5 * ft_cos(win->gg.angle) + f_x;
-		posY += 5 * (ft_sin(win->gg.angle) * -1) + f_y;
+		posX += win->gg.speed * ft_cos(win->gg.angle) + f_x;
+		if (!(win->data->map[(int)posY / CUBE][(int)posX / CUBE]))
+			win->gg.posX = posX - f_x;
+		posY += win->gg.speed * (ft_sin(win->gg.angle) * -1) + f_y;
+		if (!(win->data->map[(int)posY / CUBE][(int)posX / CUBE]))
+			win->gg.posY = posY - f_y;
 		if (!(win->data->map[(int)posY / CUBE][(int)posX / CUBE]))
 		{
 			win->gg.posX = posX - f_x;
