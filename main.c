@@ -49,7 +49,7 @@ int	main(int ac, char **av)
 	// glMatrixMode(GL_MODELVIEW);
 	glfwSetWindowUserPointer(window, win);
 
-	// glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	// char *ver = glGetString(GL_VERSION);
 	// printf("%s\n", ver);
 	texture_prepare(win);

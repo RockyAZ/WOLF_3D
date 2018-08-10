@@ -11,14 +11,23 @@
 /* ************************************************************************** */
 
 #include "wolf.h"
-
-void    mouse_pos(GLFWwindow *window, double x, double y)
+/*
+** static or just if (==0) to fix bad mouse at the start at the game???!!!?
+*/
+void	mouse_pos(GLFWwindow *window, double x, double y)
 {
-    t_main *win;
+	t_main *win;
+	static int m;
 
-    win = glfwGetWindowUserPointer(window);
-    // printf("X:%f\nY:%f\n\n", x, y);
-    win->gg.angle -= (x - win->m.x) * 0.3;
-    win->m.x = (int)x;
-    win->m.y = (int)y;
+	win = glfwGetWindowUserPointer(window);
+	if (!m)
+	{
+		win->m.x = (int)x;
+		win->m.y = (int)y;
+		m = 1;
+	}
+	// printf("X:%f\nY:%f\n\n", x, y);
+	win->gg.angle -= (x - win->m.x) * 0.3;
+	win->m.x = (int)x;
+	win->m.y = (int)y;
 }
