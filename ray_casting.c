@@ -133,7 +133,7 @@ void	ray_casting(t_main *win)
 	angle = win->gg.angle + (win->gg.fov / 2);
 	v = -5;
 	h = -5;
-	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glBegin(GL_POINTS);
 	while (i < WIDTH)
 	{
