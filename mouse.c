@@ -18,7 +18,7 @@ void    mouse_pos(GLFWwindow *window, double x, double y)
 
     win = glfwGetWindowUserPointer(window);
     // printf("X:%f\nY:%f\n\n", x, y);
-    win->gg.angle -= (x - win->m.x) * 0.6;
+    win->gg.angle -= (x - win->m.x) * 0.3;
     win->m.x = (int)x;
     win->m.y = (int)y;
 }

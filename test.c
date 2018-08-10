@@ -1,9 +1,9 @@
 #include <stdio.h>
 int main()
 {
-	int m = -5;
-	int i = 10;
-	i -= m;
-	printf("%d\n", i);
+	int i = 500;
+	int j = 64;
+	printf("HUY::%d\n", i >> 6);
+	printf("NORM::%d\n", i / j);
 	return (0);
 }

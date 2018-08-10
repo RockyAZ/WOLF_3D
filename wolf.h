@@ -20,6 +20,7 @@
 # define CENTR_W WIDTH / 2
 # define CENTR_H HEIGHT / 2
 # define CUBE 64
+# define BIT 6
 # define FACE 10
 // # define RUN 10
 # define TEXTURES 5
