@@ -13,10 +13,10 @@
 #ifndef WOLF_H
 # define WOLF_H
 
-// # define WIDTH 1200
-// # define HEIGHT 1080
-# define WIDTH 640
-# define HEIGHT 400
+# define WIDTH 1200
+# define HEIGHT 1080
+// # define WIDTH 640
+// # define HEIGHT 400
 # define CENTR_W WIDTH / 2
 # define CENTR_H HEIGHT / 2
 # define CUBE 64
@@ -171,6 +171,7 @@ void			active_keys(t_main *win);
 */
 void			main_prepare(int ac, char **av, t_main **win);
 void			ray_player_prepare(t_main *win);
+void			texture_prepare(t_main *win);
 
 /*
 ** draw_line.c

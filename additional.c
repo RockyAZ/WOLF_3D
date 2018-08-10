@@ -51,7 +51,7 @@ void	print_coord(t_data *data)
 		j = 0;
 		while (j < data->col)
 		{
-			printf("%d   ", data->map[i][j]);
+			printf("%d-", data->map[i][j]);
 			j++;
 		}
 		i++;

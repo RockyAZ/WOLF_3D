@@ -50,18 +50,9 @@ int	main(int ac, char **av)
 	glfwSetWindowUserPointer(window, win);
 
 	// glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-	// loat_textures(win);
-
-	win->img.tex[0] = stbi_load("./floor.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	win->img.tex[1] = stbi_load("./WallPack/Flag5.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	win->img.tex[2] = stbi_load("./neko.png", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	win->img.tex[3] = stbi_load("./WallPack/Black6.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	win->img.tex[4] = stbi_load("./WallPack/White1.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	// win->img.tex[4] = stbi_load("./pepe.png", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	printf("PICTURE_W:%d\nPICTURE_H:%d\nPICTURE_CHANNEL:%d\n", win->img.width, win->img.height, win->img.nrChannel);
-	// for(int i = 0; i < 64 * 3; i += 3)
-		// printf("R:%d  G:%d  B:%d\n", (int)win->img.black[i], (int)win->img.black[i + 1], (int)win->img.black[i + 2]);
+	// char *ver = glGetString(GL_VERSION);
+	// printf("%s\n", ver);
+	texture_prepare(win);
 	ray_player_prepare(win);
 	ray_casting(win);
 	// f();

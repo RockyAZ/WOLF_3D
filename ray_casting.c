@@ -133,7 +133,7 @@ void	ray_casting(t_main *win)
 	angle = win->gg.angle + (win->gg.fov / 2);
 	v = -5;
 	h = -5;
-	glClear ( GL_COLOR_BUFFER_BIT  |  GL_DEPTH_BUFFER_BIT  |  GL_STENCIL_BUFFER_BIT );
+	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glBegin(GL_POINTS);
 	while (i < WIDTH)
 	{
@@ -141,12 +141,17 @@ void	ray_casting(t_main *win)
 			angle -= 360;
 		if (angle < 0)
 			angle += 360;
+if (i == WIDTH >> 1)
+printf("GG_X:%f\nGG_Y:%f\n\n", win->gg.posX, win->gg.posY);
 		if (angle > 0 && angle < 180)
 			h = horiz_inter_top(win, angle);
 		else if (angle > 180 && angle < 360)
 			h = horiz_inter_bot(win, angle);
 		if (angle > 90 && angle < 270)
 			v = vertic_inter_left(win, angle);
+/*
+** be carfull with || insted && in the case bellow!!!
+*/
 		else if (angle > 270 || angle < 90)
 			v = vertic_inter_right(win, angle);
 		if (v == -1)

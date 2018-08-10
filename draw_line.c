@@ -47,7 +47,6 @@
 
 void	draw(int x, int y, t_main *win, int col)
 {
-int huy = 0;
 	int i;
 	int h;
 	float tex;
@@ -56,8 +55,17 @@ int huy = 0;
 
 	tex_size = (float)CUBE / (float)y;
 	tex = tex_size;
-	h = CENTR_H + y / 2;
-	y = CENTR_H - y / 2;
+	// h = CENTR_H + y >> 1;->looks like camera downing
+	// y = CENTR_H - y >> 1;
+	h = CENTR_H + (y >> 1);
+	y = CENTR_H - (y >> 1);
+	if (h > HEIGHT)
+		h = HEIGHT;
+	if (y < 0)
+	{
+		tex = tex_size * (ft_abs(y));
+		y = 0;
+	}
 	while (y < h)
 	{
 		i = (win->img.pos * 3) + ((int)tex * (CUBE * 3));
@@ -74,7 +82,6 @@ int huy = 0;
 		glVertex2d(x, y);
 		tex += tex_size;
 		y++;
-huy++;
 	}
 // exit(0);
 }
@@ -82,12 +89,5 @@ huy++;
 void	line_draw(t_main *win, int i, float h, int tex, int xy)
 {
 	win->img.pos = xy % CUBE;
-	// if (color == 1)
-	// 	glColor3ub(0, 254, 0);
-	// else if (color == 2)
-	// 	glColor3ub(254, 0, 0);
-	// else if (color == 3)
-	// 	glColor3ub(0, 0, 254);
-	// draw(i, CENTR_H + h / 2, i, CENTR_H - h / 2, win, color);
 	draw(i, h, win, tex);
 }

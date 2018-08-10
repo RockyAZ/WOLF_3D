@@ -25,7 +25,7 @@ void	main_prepare(int ac, char **av, t_main **win)
 	cp_win->keys.right = 0;
 	cp_win->keys.left = 0;
 	cp_win->keys.up = 0;
-	cp_win->keys.down = 0;	
+	cp_win->keys.down = 0;
 	cp_win->keys.w = 0;
 	cp_win->keys.s = 0;
 	cp_win->keys.a = 0;
@@ -46,4 +46,17 @@ void	ray_player_prepare(t_main *win)
 	win->gg.to_screen = (WIDTH / 2) / ft_tan(30);
 win->rotate = 2;
 	printf("POS_X:%f         POS_Y:%f\n\n\n", win->gg.posX, win->gg.posY);
+}
+
+void	texture_prepare(t_main *win)
+{
+	win->img.tex[0] = stbi_load("./floor.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	win->img.tex[1] = stbi_load("./WallPack/Flag5.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	win->img.tex[2] = stbi_load("./neko.png", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	win->img.tex[3] = stbi_load("./WallPack/Black6.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	win->img.tex[4] = stbi_load("./WallPack/White1.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	// win->img.tex[4] = stbi_load("./pepe.png", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	printf("PICTURE_W:%d\nPICTURE_H:%d\nPICTURE_CHANNEL:%d\n", win->img.width, win->img.height, win->img.nrChannel);
+	// for(int i = 0; i < 64 * 3; i += 3)
+		// printf("R:%d  G:%d  B:%d\n", (int)win->img.black[i], (int)win->img.black[i + 1], (int)win->img.black[i + 2]);
 }
