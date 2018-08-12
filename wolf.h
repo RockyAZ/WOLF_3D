@@ -24,6 +24,7 @@
 # define FACE 10
 // # define RUN 10
 # define TEXTURES 5
+# define PLAYERHEIGHT 32
 
 
 // #ifdef __APPLE__
@@ -63,25 +64,24 @@ typedef struct	s_mouse
 	int y;
 }				t_mouse;
 
-typedef struct	s_img
+typedef struct		s_img
 {
-	unsigned char *tex[TEXTURES];
-	int width;
-	int height;
-	int nrChannel;
-	int pos;
-}				t_img;
+	unsigned char	*tex[TEXTURES];
+	int				width;
+	int				height;
+	int				nrChannel;
+	int				pos;
+}					t_img;
 
-typedef struct	s_dot
+typedef struct		s_dot
 {
 	float			pix_x;
 	float			pix_y;
-	int			real_x;
-	int			real_y;
+	int				real_x;
+	int				real_y;
 	float			var_x;
 	float			var_y;
-	int			minus;
-}				t_dot;
+}					t_dot;
 
 typedef struct	s_player
 {
@@ -126,6 +126,7 @@ typedef struct	s_main
 	t_img		img;
 	t_mouse		m;
 float rotate;
+float angle;
 }				t_main;
 
 /*
@@ -177,7 +178,7 @@ void			texture_prepare(t_main *win);
 /*
 ** draw_line.c
 */
-void			line_draw(t_main *win, int i, float h, int tex, int xy);
+void	line_draw(t_main *win, int i, int dist, t_dot *dot, int xy);
 
 
 //

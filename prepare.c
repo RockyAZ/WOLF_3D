@@ -40,7 +40,7 @@ void	ray_player_prepare(t_main *win)
 {
 	win->gg.posX = (win->data->pos[0] * (float)CUBE) + ((float)CUBE / (float)2);
 	win->gg.posY = (win->data->pos[1] * (float)CUBE) + ((float)CUBE / (float)2);
-	win->gg.angle = 0;
+	win->gg.angle = 60;
 	win->gg.fov = 60;
 	win->gg.angle_size = (float)(win->gg.fov / WIDTH);
 	win->gg.to_screen = (WIDTH / 2) / ft_tan(30);
@@ -56,8 +56,7 @@ void	texture_prepare(t_main *win)
 	win->img.tex[2] = stbi_load("./neko.png", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
 	win->img.tex[3] = stbi_load("./WallPack/Black6.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
 	win->img.tex[4] = stbi_load("./WallPack/White1.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	// win->img.tex[4] = stbi_load("./pepe.png", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	printf("PICTURE_W:%d\nPICTURE_H:%d\nPICTURE_CHANNEL:%d\n", win->img.width, win->img.height, win->img.nrChannel);
+	// printf("PICTURE_W:%d\nPICTURE_H:%d\nPICTURE_CHANNEL:%d\n", win->img.width, win->img.height, win->img.nrChannel);
 	// for(int i = 0; i < 64 * 3; i += 3)
 		// printf("R:%d  G:%d  B:%d\n", (int)win->img.black[i], (int)win->img.black[i + 1], (int)win->img.black[i + 2]);
 }

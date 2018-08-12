@@ -1,9 +1,12 @@
 #include <stdio.h>
+
+int		get_color(int x, int y)
+{
+	return((x * 3) + (y * 3 * 4));
+}
+
 int main()
 {
-	int i = 500;
-	int j = 64;
-	printf("HUY::%d\n", i >> 6);
-	printf("NORM::%d\n", i / j);
+	printf("HUY::%d\n", get_color(3, 1));
 	return (0);
 }

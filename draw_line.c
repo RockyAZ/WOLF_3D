@@ -12,53 +12,43 @@
 
 #include "wolf.h"
 
-// void	draw(int X0, int Y0, int X1, int Y1, t_main *win, int color)
-// {
-//     int dx = X1 - X0;
-//     int dy = Y1 - Y0;
-//     int steps = ft_abs(dx) > ft_abs(dy) ? ft_abs(dx) : ft_abs(dy);
-//     float Xinc = dx / (float) steps;
-//     float Yinc = dy / (float) steps;
-//     float X = X0;
-//     float Y = Y0;
-//     for (int i = 0; i <= steps; i++)
-//     {
-//         glVertex2d(X,Y);
-//         X += Xinc;
-//         Y += Yinc;
-//     }
-// }
+int		get_color(int x, int y, t_main *win)
+{
+	return((x * 3) + (y * 3 * win->data->col));
+}
 
-// void	draw(int x, int y, t_main *win)
-// {
-// 	int h;
-// 	printf("%d   ", y);
-// 	h = CENTR_H + y / 2;
-// 	y = CENTR_H - y / 2;
-// 	while (y < h)
-// 	{
-// 		glColor3ub(255, 0, 0);
-// 		glVertex2d(x, y);
-// 		y++;
-// 	}
-// 	exit(0);
-// }
+void	draw_floor(int x, int y, int dist, t_main *win, int color)
+{
+	float	cur;
+	float	weight;
+	int		fx;
+	int		fy;
+	int		pix;
 
+	while (y < HEIGHT)
+	{
+		cur = HEIGHT / (2.0f * y - HEIGHT);
+		weight = cur / dist;
+		fx = (int)((weight * ft_cos(win->angle) + (1.0f - weight) * (win->gg.posX / CUBE)) * 32) % 32;
+		fy = (int)((weight * ft_sin(win->angle) + (1.0f - weight) * (win->gg.posY / CUBE)) * 32) % 32;
+		pix = get_color(fx, fy, win);
+		glColor3ub((int)win->img.tex[0][pix], (int)win->img.tex[0][pix + 1], (int)win->img.tex[0][pix + 2]);
+		glVertex2d(x, y);
+		y++;
+	}
+}
 
-void	draw(int x, int y, t_main *win, int col)
+void	draw(int x, int y, int dist, t_main *win, int color)
 {
 	int i;
 	int h;
 	float tex;
 	float tex_size;
-	int	pos;
 
 	tex_size = (float)CUBE / (float)y;
 	tex = tex_size;
-	// h = CENTR_H + y >> 1;->looks like camera downing
-	// y = CENTR_H - y >> 1;
-	h = CENTR_H + (y >> 1);
-	y = CENTR_H - (y >> 1);
+	h = CENTR_H + (y >> 1);							// h = CENTR_H + y >> 1;				 ->looks like camera downing
+	y = CENTR_H - (y >> 1);							// y = CENTR_H - y >> 1;				 ->looks like camera downing
 	if (h > HEIGHT)
 		h = HEIGHT;
 	if (y < 0)
@@ -69,25 +59,21 @@ void	draw(int x, int y, t_main *win, int col)
 	while (y < h)
 	{
 		i = (win->img.pos * 3) + ((int)tex * (CUBE * 3));
-// printf("=============================%d======================\n", huy);
-// printf("X::%d\n", x);
-// printf("Y::%d\n", y);
-// printf("I::%d\n", i);
-// printf("TEX:%f\n", tex);
-// printf("TEX_size:%f\n", tex_size);
-// printf("IMG.POS::%d\n", win->img.pos);
-// printf("R:%d  G:%d  B:%d\n", (int)win->img.img[i], (int)win->img.img[i + 1], (int)win->img.img[i + 2]);
-		// glColor3ub((int)win->img.flag[i], (int)win->img.flag[i + 1], (int)win->img.flag[i + 2]);
-		glColor3ub((int)win->img.tex[col][i], (int)win->img.tex[col][i + 1], (int)win->img.tex[col][i + 2]);
+		glColor3ub((int)win->img.tex[color][i], (int)win->img.tex[color][i + 1], (int)win->img.tex[color][i + 2]);
 		glVertex2d(x, y);
 		tex += tex_size;
 		y++;
 	}
-// exit(0);
+	draw_floor(x, y, dist, win, color);
 }
 
-void	line_draw(t_main *win, int i, float h, int tex, int xy)
+void	line_draw(t_main *win, int i, int dist, t_dot *dot, int xy)
 {
+	int color;
+	float height;
+
+	color = win->data->map[dot->real_y][dot->real_x];
+	height = ((float)CUBE / (float)dist) * win->gg.to_screen;
 	win->img.pos = xy % CUBE;
-	draw(i, h, win, tex);
+	draw(i, height, dist, win, color);
 }
