@@ -37,7 +37,6 @@ void	moving_up(t_main *win)
 		posY += win->gg.speed * (ft_sin(win->gg.angle) * -1) + f_y;
 		if (!(win->data->map[(int)posY / CUBE][(int)posX / CUBE]))
 			win->gg.posY = posY - f_y;
-		printf("GG_X:%d\nGG_Y%d\n\n", (int)win->gg.posX / CUBE, (int)win->gg.posY / CUBE);
 		// if (!(win->data->map[(int)posY / CUBE][(int)posX / CUBE]))
 		// {
 		// 	win->gg.posX = posX - f_x;

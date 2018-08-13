@@ -17,28 +17,167 @@ int		get_color(int x, int y, t_main *win)
 	return((x * 3) + (y * 3 * win->data->col));
 }
 
-void	draw_floor(int x, int y, int dist, t_main *win, int color)
+void	draw_floor(int x, int y, t_main *win, int color, int wallX)
 {
-	float	cur;
-	float	weight;
-	int		fx;
-	int		fy;
-	int		pix;
+	float floorXWall;
+	float floorYWall;
 
+	if (win->ray.side == 0 && (win->angle <= 90 || win->angle >= 270))
+	{
+		floorXWall = win->ray.mapX;
+		floorYWall = win->ray.mapY + wallX;
+	}
+	else if (win->ray.side == 0 && (win->angle >= 90 && win->angle <= 270))
+	{
+		floorXWall = win->ray.mapX + 64;
+		floorYWall = win->ray.mapY + wallX;
+	}
+	else if (win->ray.side == 1 && (win->angle >= 180 && win->angle < 360))
+	{
+		floorXWall = win->ray.mapX + wallX;
+		floorYWall = win->ray.mapX;
+	}
+	else
+	{
+		floorXWall = win->ray.mapX + wallX;
+		floorYWall = win->ray.mapX + 64;
+	}
+	if (win->huy == 1)
+	{
+	printf("GG_X:%d\nGG_Y%d\n\n", (int)win->gg.posX / CUBE, (int)win->gg.posY / CUBE);
+	printf("AANNGGLLEE:::%f\n", win->angle);
+	printf("wallX:%d\n", wallX);
+	printf("floorXWall::%f\nfloorYWall::%f\n\n\n", floorXWall, floorYWall);
+	printf("DISTANCE:%d\n", win->ray.dist);
+	}
 	while (y < HEIGHT)
 	{
-		cur = HEIGHT / (2.0f * y - HEIGHT);
-		weight = cur / dist;
-		fx = (int)((weight * ft_cos(win->angle) + (1.0f - weight) * (win->gg.posX / CUBE)) * 32) % 32;
-		fy = (int)((weight * ft_sin(win->angle) + (1.0f - weight) * (win->gg.posY / CUBE)) * 32) % 32;
-		pix = get_color(fx, fy, win);
-		glColor3ub((int)win->img.tex[0][pix], (int)win->img.tex[0][pix + 1], (int)win->img.tex[0][pix + 2]);
+		double currentDist = HEIGHT / (2.0 * y - HEIGHT);
+		float weight = currentDist / win->ray.dist;
+		double currentFloorX = weight * floorXWall + (64.0 - weight) * win->gg.posX;//хуевый
+        double currentFloorY = weight * floorYWall + (64.0 - weight) * win->gg.posY;
+
+		int floorTexX, floorTexY;
+        floorTexX = (int)(currentFloorX) % CUBE;//хуевый
+        floorTexY = (int)(currentFloorY) % CUBE;
+		int i = get_color(floorTexX, floorTexY, win);
+		
+if (win->huy == 1 && y == 1078)
+	printf("+++++++\nY::::%d\ncurrentDist:%f\n weight:%f\n currentFloorX:%f\n currentFloorY:%f\nfloorTexX:%d\n floorTexY:%d\nI:::%d\n+++++++\n\n", y, currentDist, weight, currentFloorX, currentFloorY, floorTexX, floorTexY, i);
+		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
 		glVertex2d(x, y);
 		y++;
 	}
 }
 
-void	draw(int x, int y, t_main *win, int color)
+
+// void	draw_floor(int x, int y, t_main *win, int color, int wallX)
+// {
+// 	float floorXWall;
+// 	float floorYWall;
+
+// 	if (win->huy == 1)
+// 	{
+// 	printf("GG_X:%d\nGG_Y%d\n\n", (int)win->gg.posX / CUBE, (int)win->gg.posY / CUBE);
+// 	printf("wallX:%d\n", wallX);
+// 	printf("floorXWall::%f\nfloorYWall::%f\n\n\n", floorXWall, floorYWall);
+// 	printf("DISTANCE:%d\n", win->ray.dist);
+// 	}
+// 	int i;
+// 	int nx,ny;
+// 	double floorPointDistance;
+
+// 	while (y < HEIGHT)
+// 	{
+// 		floorPointDistance = ((win->gg.height * win->gg.to_screen) / ((64 / 2) - y)) / ft_sin(win->gg.angle + win->angle);
+// 		nx = ft_abs((-floorPointDistance * ft_sin(win->angle)) + win->gg.posX) % 64;
+// 		ny = ft_abs((floorPointDistance * ft_cos(win->angle)) + win->gg.posY) % 64;
+// 		i = get_color(nx, ny, win);
+// 		if (win->huy == 1 && y == 1078)
+// 		printf("minidistance:%f\nnx:%d\nny:%d\nI:%d\n\n", floorPointDistance, nx, ny, i);
+// 		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
+// 		glVertex2d(x, y);
+// 		y++;
+// 	}
+// }
+
+// void	draw_floor(int x, int y, t_main *win, int color, int wallX)
+// {
+// 	float floorXWall;
+// 	float floorYWall;
+
+// 	if (win->huy == 1)
+// 	{
+// 	printf("GG_X:%d\nGG_Y%d\n\n", (int)win->gg.posX / CUBE, (int)win->gg.posY / CUBE);
+// 	printf("wallX:%d\n", wallX);
+// 	printf("floorXWall::%f\nfloorYWall::%f\n\n\n", floorXWall, floorYWall);
+// 	printf("DISTANCE:%d\n", win->ray.dist);
+// 	}
+
+
+// 	int i;
+// 	double floorCastingStartPixel = HEIGHT / 2;
+// 	int nx,ny;
+// 	double distance;
+
+// 	while (y < HEIGHT)
+// 	{
+// 		distance = (float)(((float)win->gg.height / (y - (HEIGHT / 2))) * win->gg.to_screen);
+// 		nx = ((int)distance * ft_cos(win->angle)) + win->gg.posX;
+// 		ny = ((int)distance * ft_sin(win->angle)) + win->gg.posY;
+// 		i = get_color(nx, ny, win);
+// 		if (win->huy == 1 && y == 1078)
+// 		printf("minidistance:%f\nnx:%d\nny:%d\nI:%d\n\n", distance, nx, ny, i);
+// 		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
+// 		glVertex2d(x, y);
+// 		y++;
+// 	}
+// }
+
+// void	draw_floor(int x, int y, t_main *win, int color, int wallX)
+// {
+
+// 	if (win->huy == 1)
+// 	{
+// 	printf("GG_X:%d\nGG_Y%d\n\n", (int)win->gg.posX / CUBE, (int)win->gg.posY / CUBE);
+// 	printf("angle:::%f\n", win->gg.angle);
+// 	printf("wallX:%d\n", wallX);
+// 	// printf("floorXWall::%f\nfloorYWall::%f\n\n\n", floorXWall, floorYWall);
+// 	printf("DISTANCE:%d\n", win->ray.dist);
+// 	}
+
+// 	float column_angle = atan((float) (x - (WIDTH/2) ) / HEIGHT);
+// 	float rayangle = win->gg.angle + column_angle;
+// 	float distance;
+
+// 	int nx;
+// 	int ny;
+
+// 	int i;
+// 	while (y < HEIGHT)
+// 	{
+// 		distance = ((float)win->gg.height / (y - HEIGHT / 2)) * win->gg.to_screen * ft_cos(column_angle);
+// 		nx = -distance * (ft_sin(win->angle));
+// 		ny = distance * (ft_cos(win->angle));
+
+// 		nx += win->gg.posX;
+// 		ny += win->gg.posY;
+
+// 		nx = nx >> 6;
+// 		ny = ny >> 6;
+// 		nx &= 63;
+// 		ny &= 63;
+// 		if (win->huy == 1 && y == 1078)
+// 		printf("minidistance:%f\nnx:%d\nny:%d\nI:%d\n\n", distance, nx, ny, i);
+// 		i = get_color(nx, ny, win);
+// 		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
+// 		glVertex2d(x, y);	
+// 		y++;	
+// 	}
+
+// }
+
+void	draw(int x, int y, t_main *win, int color, int wallX)
 {
 	int i;
 	int h;
@@ -64,11 +203,13 @@ void	draw(int x, int y, t_main *win, int color)
 		tex += tex_size;
 		y++;
 	}
+	draw_floor(x, y, win, color, wallX);
+
 }
 
-void	line_draw(t_main *win, int i, float h, int tex, int xy)
+void	line_draw(t_main *win, int i, float h, int tex, int wallX)
 {
-	win->img.pos = xy % CUBE;
+	win->img.pos = wallX % CUBE;
 	// if (color == 1)
 	// 	glColor3ub(0, 254, 0);
 	// else if (color == 2)
@@ -76,5 +217,5 @@ void	line_draw(t_main *win, int i, float h, int tex, int xy)
 	// else if (color == 3)
 	// 	glColor3ub(0, 0, 254);
 	// draw(i, CENTR_H + h / 2, i, CENTR_H - h / 2, win, color);
-	draw(i, h, win, tex);
+	draw(i, h, win, tex, wallX);
 }

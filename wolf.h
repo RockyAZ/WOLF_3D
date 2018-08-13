@@ -88,7 +88,8 @@ typedef struct	s_player
 	float		posX;
 	float		posY;
 	int			r_x;
-	int			r_y;	
+	int			r_y;
+	int			height;
 	float		angle;
 	float		angle_size;
 	float		fov;
@@ -102,6 +103,10 @@ typedef struct	s_ray
 	t_dot		v_dot;
 	int			horiz_int;
 	int			vertic_int;
+int side;
+int mapX;
+int mapY;
+int dist;
 }				t_ray;
 
 typedef struct  s_data
@@ -127,6 +132,8 @@ typedef struct	s_main
 	t_mouse		m;
 float rotate;
 float angle;
+
+int huy;
 }				t_main;
 
 /*
@@ -179,7 +186,6 @@ void			texture_prepare(t_main *win);
 ** draw_line.c
 */
 void	line_draw(t_main *win, int i, float h, int tex, int xy);
-
 
 //
 void print_coord(t_data *data);

@@ -1,6 +1,14 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "__config": "c",
+        "__nullptr": "c",
+        "exception": "c",
+        "initializer_list": "c",
+        "new": "c",
+        "stdexcept": "c",
+        "typeinfo": "c",
+        "algorithm": "c"
     }
 }

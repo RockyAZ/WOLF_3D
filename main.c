@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 		error("window open error\n");
 	glfwMakeContextCurrent(window);
 	glfwSetKeyCallback(window, key_callback);
-	glfwSetCursorPosCallback(window, *mouse_pos);
+	// glfwSetCursorPosCallback(window, *mouse_pos);
 	glfwSwapInterval(1);
 
 	glViewport(0, 0, WIDTH * 2, HEIGHT * 2);
@@ -49,7 +49,7 @@ int	main(int ac, char **av)
 	// glMatrixMode(GL_MODELVIEW);
 	glfwSetWindowUserPointer(window, win);
 
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	// glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	// char *ver = glGetString(GL_VERSION);
 	// printf("%s\n", ver);
 	texture_prepare(win);
