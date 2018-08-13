@@ -17,58 +17,58 @@ int		get_color(int x, int y, t_main *win)
 	return((x * 3) + (y * 3 * win->data->col));
 }
 
-void	draw_floor(int x, int y, t_main *win, int color, int wallX)
-{
-	float floorXWall;
-	float floorYWall;
+// void	draw_floor(int x, int y, t_main *win, int color, int wallX)
+// {
+// 	float floorXWall;
+// 	float floorYWall;
 
-	if (win->ray.side == 0 && (win->angle <= 90 || win->angle >= 270))
-	{
-		floorXWall = win->ray.mapX;
-		floorYWall = win->ray.mapY + wallX;
-	}
-	else if (win->ray.side == 0 && (win->angle >= 90 && win->angle <= 270))
-	{
-		floorXWall = win->ray.mapX + 64;
-		floorYWall = win->ray.mapY + wallX;
-	}
-	else if (win->ray.side == 1 && (win->angle >= 180 && win->angle < 360))
-	{
-		floorXWall = win->ray.mapX + wallX;
-		floorYWall = win->ray.mapX;
-	}
-	else
-	{
-		floorXWall = win->ray.mapX + wallX;
-		floorYWall = win->ray.mapX + 64;
-	}
-	if (win->huy == 1)
-	{
-	printf("GG_X:%d\nGG_Y%d\n\n", (int)win->gg.posX / CUBE, (int)win->gg.posY / CUBE);
-	printf("AANNGGLLEE:::%f\n", win->angle);
-	printf("wallX:%d\n", wallX);
-	printf("floorXWall::%f\nfloorYWall::%f\n\n\n", floorXWall, floorYWall);
-	printf("DISTANCE:%d\n", win->ray.dist);
-	}
-	while (y < HEIGHT)
-	{
-		double currentDist = HEIGHT / (2.0 * y - HEIGHT);
-		float weight = currentDist / win->ray.dist;
-		double currentFloorX = weight * floorXWall + (64.0 - weight) * win->gg.posX;//хуевый
-        double currentFloorY = weight * floorYWall + (64.0 - weight) * win->gg.posY;
+// 	if (win->ray.side == 0 && (win->angle <= 90 || win->angle >= 270))
+// 	{
+// 		floorXWall = win->ray.mapX;
+// 		floorYWall = win->ray.mapY + wallX;
+// 	}
+// 	else if (win->ray.side == 0 && (win->angle >= 90 && win->angle <= 270))
+// 	{
+// 		floorXWall = win->ray.mapX + 64;
+// 		floorYWall = win->ray.mapY + wallX;
+// 	}
+// 	else if (win->ray.side == 1 && (win->angle >= 180 && win->angle < 360))
+// 	{
+// 		floorXWall = win->ray.mapX + wallX;
+// 		floorYWall = win->ray.mapY;
+// 	}
+// 	else
+// 	{
+// 		floorXWall = win->ray.mapX + wallX;
+// 		floorYWall = win->ray.mapY + 64;
+// 	}
+// 	if (win->huy == 1)
+// 	{
+// 	printf("GG_X:%d\nGG_Y%d\n\n", (int)win->gg.posX / CUBE, (int)win->gg.posY / CUBE);
+// 	printf("AANNGGLLEE:::%f\n", win->angle);
+// 	printf("wallX:%d\n", wallX);
+// 	printf("floorXWall::%f\nfloorYWall::%f\n\n\n", floorXWall, floorYWall);
+// 	printf("DISTANCE:%d\n", win->ray.dist);
+// 	}
+// 	while (y < HEIGHT)
+// 	{
+// 		double currentDist = HEIGHT / (2.0 * y - HEIGHT);
+// 		float weight = currentDist / win->ray.dist;
+// 		double currentFloorX = weight * floorXWall + (64.0 - weight) * win->gg.posX;//хуевый
+//         double currentFloorY = weight * floorYWall + (64.0 - weight) * win->gg.posY;
 
-		int floorTexX, floorTexY;
-        floorTexX = (int)(currentFloorX) % CUBE;//хуевый
-        floorTexY = (int)(currentFloorY) % CUBE;
-		int i = get_color(floorTexX, floorTexY, win);
+// 		int floorTexX, floorTexY;
+//         floorTexX = (int)(currentFloorX) % CUBE;//хуевый
+//         floorTexY = (int)(currentFloorY) % CUBE;
+// 		int i = get_color(floorTexX, floorTexY, win);
 		
-if (win->huy == 1 && y == 1078)
-	printf("+++++++\nY::::%d\ncurrentDist:%f\n weight:%f\n currentFloorX:%f\n currentFloorY:%f\nfloorTexX:%d\n floorTexY:%d\nI:::%d\n+++++++\n\n", y, currentDist, weight, currentFloorX, currentFloorY, floorTexX, floorTexY, i);
-		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
-		glVertex2d(x, y);
-		y++;
-	}
-}
+// if (win->huy == 1 && y == 1078)
+// 	printf("+++++++\nY::::%d\ncurrentDist:%f\n weight:%f\n currentFloorX:%f\n currentFloorY:%f\nfloorTexX:%d\n floorTexY:%d\nI:::%d\n+++++++\n\n", y, currentDist, weight, currentFloorX, currentFloorY, floorTexX, floorTexY, i);
+// 		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
+// 		glVertex2d(x, y);
+// 		y++;
+// 	}
+// }
 
 
 // void	draw_floor(int x, int y, t_main *win, int color, int wallX)
@@ -101,38 +101,40 @@ if (win->huy == 1 && y == 1078)
 // 	}
 // }
 
-// void	draw_floor(int x, int y, t_main *win, int color, int wallX)
-// {
-// 	float floorXWall;
-// 	float floorYWall;
+void	draw_floor(int x, int y, t_main *win, int color, int wallX)
+{
+	float floorXWall;
+	float floorYWall;
 
-// 	if (win->huy == 1)
-// 	{
-// 	printf("GG_X:%d\nGG_Y%d\n\n", (int)win->gg.posX / CUBE, (int)win->gg.posY / CUBE);
-// 	printf("wallX:%d\n", wallX);
-// 	printf("floorXWall::%f\nfloorYWall::%f\n\n\n", floorXWall, floorYWall);
-// 	printf("DISTANCE:%d\n", win->ray.dist);
-// 	}
+	// if (win->huy == 1)
+	// {
+	// printf("GG_X:%d\nGG_Y%d\n\n", (int)win->gg.posX / CUBE, (int)win->gg.posY / CUBE);
+	// printf("wallX:%d\n", wallX);
+	// printf("floorXWall::%f\nfloorYWall::%f\n\n\n", floorXWall, floorYWall);
+	// printf("DISTANCE:%d\n", win->ray.dist);
+	// }
 
 
-// 	int i;
-// 	double floorCastingStartPixel = HEIGHT / 2;
-// 	int nx,ny;
-// 	double distance;
+	int i;
+	double floorCastingStartPixel = HEIGHT / 2;
+	int nx,ny;
+	double distance;
 
-// 	while (y < HEIGHT)
-// 	{
-// 		distance = (float)(((float)win->gg.height / (y - (HEIGHT / 2))) * win->gg.to_screen);
-// 		nx = ((int)distance * ft_cos(win->angle)) + win->gg.posX;
-// 		ny = ((int)distance * ft_sin(win->angle)) + win->gg.posY;
-// 		i = get_color(nx, ny, win);
-// 		if (win->huy == 1 && y == 1078)
-// 		printf("minidistance:%f\nnx:%d\nny:%d\nI:%d\n\n", distance, nx, ny, i);
-// 		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
-// 		glVertex2d(x, y);
-// 		y++;
-// 	}
-// }
+	while (y < HEIGHT)
+	{
+		distance = (float)(((float)win->gg.height / (y - (HEIGHT / 2))) * win->gg.to_screen);
+		nx = ((int)distance * ft_cos(win->angle)) + win->gg.posX;
+		ny = ((int)distance * ft_sin(win->angle)) + win->gg.posY;
+		i = get_color(nx, ny, win);
+		printf("%f\n", distance);
+		// if (win->huy == 1 && y == 1078)
+		// printf("minidistance:%f\nnx:%d\nny:%d\nI:%d\n\n", distance, nx, ny, i);
+		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
+		glVertex2d(x, y);
+		y++;
+	}
+	exit(0);
+}
 
 // void	draw_floor(int x, int y, t_main *win, int color, int wallX)
 // {
