@@ -38,7 +38,7 @@ void	draw_floor(int x, int y, int dist, t_main *win, int color)
 	}
 }
 
-void	draw(int x, int y, int dist, t_main *win, int color)
+void	draw(int x, int y, t_main *win, int color)
 {
 	int i;
 	int h;
@@ -64,16 +64,17 @@ void	draw(int x, int y, int dist, t_main *win, int color)
 		tex += tex_size;
 		y++;
 	}
-	draw_floor(x, y, dist, win, color);
 }
 
-void	line_draw(t_main *win, int i, int dist, t_dot *dot, int xy)
+void	line_draw(t_main *win, int i, float h, int tex, int xy)
 {
-	int color;
-	float height;
-
-	color = win->data->map[dot->real_y][dot->real_x];
-	height = ((float)CUBE / (float)dist) * win->gg.to_screen;
 	win->img.pos = xy % CUBE;
-	draw(i, height, dist, win, color);
+	// if (color == 1)
+	// 	glColor3ub(0, 254, 0);
+	// else if (color == 2)
+	// 	glColor3ub(254, 0, 0);
+	// else if (color == 3)
+	// 	glColor3ub(0, 0, 254);
+	// draw(i, CENTR_H + h / 2, i, CENTR_H - h / 2, win, color);
+	draw(i, h, win, tex);
 }

@@ -178,7 +178,7 @@ void			texture_prepare(t_main *win);
 /*
 ** draw_line.c
 */
-void	line_draw(t_main *win, int i, int dist, t_dot *dot, int xy);
+void	line_draw(t_main *win, int i, float h, int tex, int xy);
 
 
 //

@@ -156,19 +156,21 @@ win->angle = angle;
 */
 		else if (angle > 270 || angle < 90)
 			v = vertic_inter_right(win, angle);
+			// printf("H_X:%d\nH_Y:%d\n\nV_X:%d\nV_Y:%d\n\n", win->ray.h_dot.real_x, win->ray.h_dot.real_y, win->ray.v_dot.real_x, win->ray.v_dot.real_y);
+			// printf("H:::%d\nV:::%d\n\n\n", h, v);
 /*
 ** last argument in functions for serching places on textures
 */
-		if (v == -1)
-			line_draw(win, i, h, &win->ray.h_dot, win->ray.h_dot.pix_x);
-		else if (h == -1)
-			line_draw(win, i, v, &win->ray.v_dot, win->ray.v_dot.pix_y);
+		if (v < 0)
+			line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen, win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x], win->ray.h_dot.pix_x);
+		else if (h < 0)
+			line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen, win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x], win->ray.v_dot.pix_y);
 		else
 		{
 			if (v < h)
-				line_draw(win, i, v, &win->ray.v_dot, win->ray.v_dot.pix_y);
+				line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen, win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x], win->ray.v_dot.pix_y);
 			else
-				line_draw(win, i, h, &win->ray.h_dot, win->ray.h_dot.pix_x);
+				line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen, win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x], win->ray.h_dot.pix_x);
 		}
 		angle -= win->gg.angle_size;
 		i++;
