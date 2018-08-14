@@ -188,13 +188,13 @@ void	draw_floor(int x, int y, t_main *win)
 	while (y < HEIGHT)
 	{
 		dist = ((float)win->gg.height / ((float)y - (float)CENTR_H) * win->gg.to_screen) / ft_cos(win->angle - win->gg.angle);
+	if (win->huy == 1)
 		printf("H:%d\nY:%d\nCENTER:%d\nS:%f\nft_cos:%f\nDIST::::::::%f\n\n", win->gg.height, y, CENTR_H, win->gg.to_screen, ft_cos(win->angle - win->gg.angle), dist);
-	// if (win->huy == 1)
 		// printf("%f\n", dist);
 		y++;
 	}
 	// if (win->huy == 1)	
-	exit(0);
+	// exit(0);
 }
 
 void	draw(int x, int y, t_main *win, int color, int wallX)
@@ -223,7 +223,7 @@ void	draw(int x, int y, t_main *win, int color, int wallX)
 		tex += tex_size;
 		y++;
 	}
-	if (win->huy == 1)
+	// if (win->huy == 1)
 	draw_floor(x, y, win);
 
 }
@@ -231,8 +231,8 @@ void	draw(int x, int y, t_main *win, int color, int wallX)
 void	line_draw(t_main *win, int i, float h, int tex, int wallX)
 {
 	win->img.pos = wallX % CUBE;
-	if (win->huy == 1)
-		printf("MAIN_HEIGHT::%f\n", h);
+// if (win->huy == 1)
+// printf("MAIN_HEIGHT::%f\n", h);
 	// if (color == 1)
 	// 	glColor3ub(0, 254, 0);
 	// else if (color == 2)

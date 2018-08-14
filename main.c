@@ -71,3 +71,4 @@ system ("leaks -quiet wolf3d");
 	exit(EXIT_SUCCESS);
 }
 // /usr/local/include/
+//convert stb_image to static library???
