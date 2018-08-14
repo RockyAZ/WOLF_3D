@@ -40,7 +40,7 @@ void	ray_player_prepare(t_main *win)
 {
 	win->gg.posX = (win->data->pos[0] * (float)CUBE) + ((float)CUBE / (float)2);
 	win->gg.posY = (win->data->pos[1] * (float)CUBE) + ((float)CUBE / (float)2);
-	win->gg.angle = 45;
+	win->gg.angle = 90;
 	win->gg.fov = 60;
 	win->gg.angle_size = (float)(win->gg.fov / WIDTH);
 	win->gg.to_screen = (WIDTH / 2) / ft_tan(30);
@@ -52,7 +52,8 @@ win->rotate = 2;//change to speedest rotation when some keys realized
 
 void	texture_prepare(t_main *win)
 {
-	win->img.tex[0] = stbi_load("./floor.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
+	if (!(win->img.tex[0] = stbi_load("./floor.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0)))
+		error("texture[0] open error D:\n");
 	win->img.tex[1] = stbi_load("./WallPack/Flag5.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
 	win->img.tex[2] = stbi_load("./neko.png", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
 	win->img.tex[3] = stbi_load("./WallPack/Black6.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);

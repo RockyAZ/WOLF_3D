@@ -13,16 +13,15 @@
 #ifndef WOLF_H
 # define WOLF_H
 
-# define WIDTH 1200
-# define HEIGHT 1080
-// # define WIDTH 640
-// # define HEIGHT 400
-# define CENTR_W WIDTH / 2
+// # define WIDTH 1200
+// # define HEIGHT 1080
+# define WIDTH 320
+# define HEIGHT 200
+# define CENTR_W WIDTH / 1
 # define CENTR_H HEIGHT / 2
 # define CUBE 64
 # define BIT 6
 # define FACE 10
-// # define RUN 10
 # define TEXTURES 5
 # define PLAYERHEIGHT 32
 
@@ -132,7 +131,6 @@ typedef struct	s_main
 	t_mouse		m;
 float rotate;
 float angle;
-
 int huy;
 }				t_main;
 
