@@ -12,11 +12,6 @@
 
 #include "wolf.h"
 
-int		get_color(int x, int y, t_main *win)
-{
-	return((x * 3) + (y * 3 * win->data->col));
-}
-
 // void	draw_floor(int x, int y, t_main *win, int color, int wallX)
 // {
 // 	float floorXWall;
@@ -181,20 +176,74 @@ int		get_color(int x, int y, t_main *win)
 
 // }
 
+int		get_color(int x, int y, t_main *win)
+{
+	return((x * 3) + (y * 3 * CUBE));
+}
+
+
 void	draw_floor(int x, int y, t_main *win)
 {
 	float dist;
+	float var;
+	float nx;
+	float ny;
+	int		i;
+
+	int CAL = 0;
+	if (win->huy == 1)
+		printf("============\n");
 
 	while (y < HEIGHT)
 	{
-		dist = ((float)win->gg.height / ((float)y - (float)CENTR_H) * win->gg.to_screen) / ft_cos(win->angle - win->gg.angle);
-	if (win->huy == 1)
-		printf("H:%d\nY:%d\nCENTER:%d\nS:%f\nft_cos:%f\nDIST::::::::%f\n\n", win->gg.height, y, CENTR_H, win->gg.to_screen, ft_cos(win->angle - win->gg.angle), dist);
-		// printf("%f\n", dist);
+CAL++;
+		var = (((float)win->gg.height / ((float)y - (float)CENTR_H)) * win->gg.to_screen);
+		// dist = var / ft_cos(win->gg.angle);
+		dist = var / ft_cos(ft_abs(win->angle - win->gg.angle));
+		// if (win->angle >= 0 && win->angle <= 180)
+			ny = win->gg.posY - (dist * ft_sin(win->angle));
+			// ny = win->gg.posY - var;
+		// else
+			// ny = win->gg.posY - (dist * ft_sin(win->angle));		
+			// ny = win->gg.posY + var;
+		if (win->angle >= 90 && win->angle <= 270)
+			nx = win->gg.posX + (dist * ft_cos(win->angle));
+			// nx = win->gg.posX - (dist * ft_abs(ft_sin(win->angle - win->gg.angle)));
+		else
+			nx = win->gg.posX + (dist * ft_cos(win->angle));		
+			// nx = win->gg.posX + (dist * ft_abs(ft_sin(win->angle)));
+		i = get_color(nx, ny, win);
+		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
+		glVertex2d(x, y);
+		// nx = dist * sin(win->angle - win->gg.angle) + win->gg.posX;
+		// ny = var + win->gg.posY;
+
+// if (win->huy == 1 && CAL == 1)
+if (win->huy == 1)
+{
+printf("III:::%d\n", i);
+printf("GG_X:%f\nGG_Y:%f\n", win->gg.posX, win->gg.posY);
+printf("NX:%f\nNY:%f<<<<<------\n", nx, ny);
+printf("REAL-->>NX:%d\nREAL-->>NY:%d\n", (int)nx / CUBE, (int)ny / CUBE);
+printf("ON_MAP____NX:%d\nON_MAP___NY:%d\n", (int)nx % CUBE, (int)ny % CUBE);
+printf("H:%d\nY:%d\nCENTER:%d\nS:%f\nft_cos:%f\nDIST::::::::%f\n---->>>--->>>VAR::%f\nWIN_ANGLE:%f\nGG_ANGLE:%f\nCOS::%f\n\n",
+win->gg.height, y, CENTR_H, win->gg.to_screen, ft_cos(win->angle - win->gg.angle), dist, var, win->angle, win->gg.angle, ft_cos(win->angle - win->gg.angle));
+}
+// if (win->huy == 1 && y == 199)
+// {
+// printf("III:::%d\n", i);
+// printf("GG_X:%f\nGG_Y:%f\n", win->gg.posX, win->gg.posY);
+// printf("NX:%f\nNY:%f\n", nx, ny);
+// printf("REAL-->>NX:%d\nREAL-->>NY:%d\n", (int)nx / CUBE, (int)ny / CUBE);
+// printf("ON_MAP____NX:%d\nON_MAP___NY:%d\n", (int)nx % CUBE, (int)ny % CUBE);
+// printf("H:%d\nY:%d\nCENTER:%d\nS:%f\nft_cos:%f\nDIST::::::::%f\n---->>>--->>>VAR::%f\nWIN_ANGLE:%f\nGG_ANGLE:%f\nCOS::%f\n\n",
+// win->gg.height, y, CENTR_H, win->gg.to_screen, ft_cos(win->angle - win->gg.angle), dist, var, win->angle, win->gg.angle, ft_cos(win->angle - win->gg.angle));
+// }
+
 		y++;
 	}
-	// if (win->huy == 1)	
-	// exit(0);
+	if (win->huy == 1)
+		printf("++++%d+++++++++++++++++++++++++++++++++++++++++++++++++++++\n", CAL);
 }
 
 void	draw(int x, int y, t_main *win, int color, int wallX)
@@ -218,6 +267,7 @@ void	draw(int x, int y, t_main *win, int color, int wallX)
 	while (y < h)
 	{
 		i = (win->img.pos * 3) + ((int)tex * (CUBE * 3));
+		// i = get_color(win->img.pos, y, win);
 		glColor3ub((int)win->img.tex[color][i], (int)win->img.tex[color][i + 1], (int)win->img.tex[color][i + 2]);
 		glVertex2d(x, y);
 		tex += tex_size;
@@ -225,7 +275,6 @@ void	draw(int x, int y, t_main *win, int color, int wallX)
 	}
 	// if (win->huy == 1)
 	draw_floor(x, y, win);
-
 }
 
 void	line_draw(t_main *win, int i, float h, int tex, int wallX)
@@ -233,12 +282,6 @@ void	line_draw(t_main *win, int i, float h, int tex, int wallX)
 	win->img.pos = wallX % CUBE;
 // if (win->huy == 1)
 // printf("MAIN_HEIGHT::%f\n", h);
-	// if (color == 1)
-	// 	glColor3ub(0, 254, 0);
-	// else if (color == 2)
-	// 	glColor3ub(254, 0, 0);
-	// else if (color == 3)
-	// 	glColor3ub(0, 0, 254);
 	// draw(i, CENTR_H + h / 2, i, CENTR_H - h / 2, win, color);
 	draw(i, h, win, tex, wallX);
 }

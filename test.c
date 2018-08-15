@@ -49,9 +49,9 @@
 // 21	if(y>=MAP_HEIGHT*64 || y<0) tile = 2;
 // 22	*/
 // 23	    
-// 24	 putpixel(buf,column,row,getpixel(tex,x&63,y&63);      
-// 25	 
-// 26	      
+// 24	 putpixel(buf,column,row,getpixel(tex,x&63,y&63);
+// 25
+// 26
 // 27	}
 
 #include <stdio.h>
