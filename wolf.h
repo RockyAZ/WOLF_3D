@@ -15,8 +15,10 @@
 
 // # define WIDTH 1200
 // # define HEIGHT 1080
-# define WIDTH 320
-# define HEIGHT 200
+// # define WIDTH 320
+// # define HEIGHT 200
+# define WIDTH 640
+# define HEIGHT 400
 # define CENTR_W WIDTH / 1
 # define CENTR_H HEIGHT / 2
 # define CUBE 64
