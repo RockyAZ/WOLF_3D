@@ -56,11 +56,19 @@
 
 #include <stdio.h>
 
+int		get_color(int x, int y)
+{
+	return((x * 3) + (y * 3 * 64));
+}
+
+
 int main()
 {
     // for(float i = 150; i < 200; i++)
         // printf("%f::%f\n", i - 100, 32 / (i - 100) * 277);
-        printf("%d\n", (32 / (191 - 100) * 277) / 1);
-        printf("%f\n", (32.0 / (191.0 - 100.0) * 277.0) / 1.0);
+printf("%d\n", get_color(63, 63));
+printf("%d\n", get_color(32, 57));
+        // printf("%d\n", (32 / (191 - 100) * 277) / 1);
+        // printf("%f\n", (32.0 / (191.0 - 100.0) * 277.0) / 1.0);
     return (0);
 }

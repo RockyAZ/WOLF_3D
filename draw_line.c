@@ -176,18 +176,19 @@
 
 // }
 
-int		get_color(int x, int y, t_main *win)
+int		get_color(int x, int y)
 {
 	return((x * 3) + (y * 3 * CUBE));
 }
-
 
 void	draw_floor(int x, int y, t_main *win)
 {
 	float dist;
 	float var;
-	float nx;
-	float ny;
+	// float nx;
+	// float ny;
+	int nx;
+	int ny;
 	int		i;
 
 	int CAL = 0;
@@ -212,8 +213,8 @@ CAL++;
 		else
 			nx = win->gg.posX + (dist * ft_cos(win->angle));		
 			// nx = win->gg.posX + (dist * ft_abs(ft_sin(win->angle)));
-		i = get_color(nx, ny, win);
-		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
+		i = get_color(nx % CUBE, ny % CUBE);
+		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);//=========================================================
 		glVertex2d(x, y);
 		// nx = dist * sin(win->angle - win->gg.angle) + win->gg.posX;
 		// ny = var + win->gg.posY;
@@ -223,7 +224,7 @@ if (win->huy == 1)
 {
 printf("III:::%d\n", i);
 printf("GG_X:%f\nGG_Y:%f\n", win->gg.posX, win->gg.posY);
-printf("NX:%f\nNY:%f<<<<<------\n", nx, ny);
+printf("NX:%d\nNY:%d<<<<<------\n", nx, ny);
 printf("REAL-->>NX:%d\nREAL-->>NY:%d\n", (int)nx / CUBE, (int)ny / CUBE);
 printf("ON_MAP____NX:%d\nON_MAP___NY:%d\n", (int)nx % CUBE, (int)ny % CUBE);
 printf("H:%d\nY:%d\nCENTER:%d\nS:%f\nft_cos:%f\nDIST::::::::%f\n---->>>--->>>VAR::%f\nWIN_ANGLE:%f\nGG_ANGLE:%f\nCOS::%f\n\n",
