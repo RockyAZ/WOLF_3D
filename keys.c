@@ -46,6 +46,19 @@ void	key_callback(GLFWwindow* window, int key, int scan, int act, int mods)
 		if (key == GLFW_KEY_LEFT_SHIFT)
 			win->gg.speed = 10;
 			// win->keys.shift = 1;
+		// if (key == GLFW_KEY_Z)
+		// 	win->gg.height++;
+		// if (key == GLFW_KEY_X)
+		// 	win->gg.height--;
+		if (key == GLFW_KEY_Z)
+			win->gg.angle = 0;
+		if (key == GLFW_KEY_X)
+			win->gg.angle = 90;		
+		if (key == GLFW_KEY_C)
+			win->gg.angle = 180;
+		if (key == GLFW_KEY_V)
+			win->gg.angle = 270;
+		
 	}
 	if (act == GLFW_RELEASE)
 	{

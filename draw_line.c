@@ -19,24 +19,25 @@ int		get_color(int x, int y)
 
 void	draw_floor(int x, int y, t_main *win)
 {
-	float dist;
-	float var;
-	int nx;
-	int ny;
+	float	dist;
+	// float	var;
+	int		nx;
+	int		ny;
 	int		i;
 
 	while (y < HEIGHT)
 	{
-		var = (((float)win->gg.height / ((float)y - (float)CENTR_H)) * win->gg.to_screen);
-		dist = var / ft_cos(ft_abs(win->angle - win->gg.angle));
-			ny = win->gg.posY - (dist * ft_sin(win->angle));
-		if (win->angle >= 90 && win->angle <= 270)
-			nx = win->gg.posX + (dist * ft_cos(win->angle));
-		else
-			nx = win->gg.posX + (dist * ft_cos(win->angle));
+		// var = (((float)win->gg.height / ((float)y - (float)CENTR_H)) * win->gg.to_screen);
+		// dist = var / ft_cos(ft_abs(win->ray.angle - win->gg.angle));
+		dist = (((float)win->gg.height / ((float)y - (float)CENTR_H)) * win->gg.to_screen) / ft_cos(ft_abs(win->ray.angle - win->gg.angle));
+			ny = win->gg.posY - (dist * ft_sin(win->ray.angle));
+		// if (win->ray.angle >= 90 && win->ray.angle <= 270)
+			nx = win->gg.posX + (dist * ft_cos(win->ray.angle));
+		// else
+			// nx = win->gg.posX + (dist * ft_cos(win->ray.angle));
 		i = get_color(nx % CUBE, ny % CUBE);
-		// glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
-		glColor3ub((int)win->img.tex[2][i], (int)win->img.tex[2][i + 1], (int)win->img.tex[2][i + 2]);
+		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
+		// glColor3ub((int)win->img.tex[2][i], (int)win->img.tex[2][i + 1], (int)win->img.tex[2][i + 2]);
 		glVertex2d(x, y);
 		glVertex2d(x, HEIGHT - y);		
 		y++;
@@ -52,8 +53,10 @@ void	draw(int x, int y, t_main *win, int color, int wallX)
 
 	tex_size = (float)CUBE / (float)y;
 	tex = tex_size;
-	h = CENTR_H + (y >> 1);							// h = CENTR_H + y >> 1;				 ->looks like camera downing
-	y = CENTR_H - (y >> 1);							// y = CENTR_H - y >> 1;				 ->looks like camera downing
+	h = CENTR_H + (y >> 1);
+	// h = CENTR_H + y / 1;//				 ->looks like camera downing
+	y = CENTR_H - (y >> 1);
+	// y = CENTR_H - y / 1;//				 ->looks like camera downing
 	if (h > HEIGHT)
 		h = HEIGHT;
 	if (y < 0)
@@ -81,3 +84,4 @@ void	line_draw(t_main *win, int i, float h, int tex, int wallX)
 	// draw(i, CENTR_H + h / 2, i, CENTR_H - h / 2, win, color);
 	draw(i, h, win, tex, wallX);
 }
+// double i * 256 = 

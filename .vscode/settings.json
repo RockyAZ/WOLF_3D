@@ -9,6 +9,7 @@
         "new": "c",
         "stdexcept": "c",
         "typeinfo": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "ios": "c"
     }
 }

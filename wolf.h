@@ -17,8 +17,11 @@
 // # define HEIGHT 1080
 // # define WIDTH 320
 // # define HEIGHT 200
+
 # define WIDTH 640
 # define HEIGHT 400
+// # define WIDTH 740
+// # define HEIGHT 500
 # define CENTR_W WIDTH / 1
 # define CENTR_H HEIGHT / 2
 # define CUBE 64
@@ -104,10 +107,7 @@ typedef struct	s_ray
 	t_dot		v_dot;
 	int			horiz_int;
 	int			vertic_int;
-int side;
-int mapX;
-int mapY;
-int dist;
+	float		angle;
 }				t_ray;
 
 typedef struct  s_data
@@ -131,9 +131,8 @@ typedef struct	s_main
 	t_keys		keys;
 	t_img		img;
 	t_mouse		m;
+//size to change player view angle
 float rotate;
-float angle;
-int huy;
 }				t_main;
 
 /*
