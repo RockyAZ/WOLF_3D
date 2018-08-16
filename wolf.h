@@ -64,8 +64,8 @@ typedef struct	s_keys
 
 typedef struct	s_mouse
 {
-	int x;
-	int y;
+	int 		x;
+	int 		y;
 }				t_mouse;
 
 typedef struct		s_img
@@ -116,8 +116,8 @@ typedef struct  s_data
 	int         **map;
 	int         col;
 	int         line;
-	int			max_x;
-	int			max_y;
+	int			m_x;
+	int			m_y;
 	int			error;
 	int			fd;
 	float			pos[2];
@@ -131,8 +131,9 @@ typedef struct	s_main
 	t_keys		keys;
 	t_img		img;
 	t_mouse		m;
-//size to change player view angle
-float rotate;
+	int			v_is;
+	int			h_is;
+	float		rotate;
 }				t_main;
 
 /*
@@ -165,13 +166,14 @@ void		    mouse_pos(GLFWwindow *window, double x, double y);
 void			error(char *name);
 
 /*
-** additional.c
+** additional.c && ray_simple.c
 */
 void			ft_arrr_del(char **arr, char *line);
 float			ft_tan(float angle);
 float			ft_sin(float angle);
 float			ft_cos(float angle);
-float			ft_tan(float angle);
+int				pifagor(t_main *win, float angle, char c);
+void			ray_simple(t_main *win, float angle, int v, int h);
 
 /*
 ** action.c

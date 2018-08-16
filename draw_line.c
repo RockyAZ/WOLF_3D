@@ -43,13 +43,13 @@ void	add_draw(t_main *win, int i, int color)
 {
 	if (color == 5)
 	{
-		if (win->gg.angle >= 0 && win->gg.angle <= 180)
+		if (win->ray.angle >= 0 && win->ray.angle <= 180 && win->h_is)
 			glColor3ub((int)win->img.tex[5][i], (int)win->img.tex[5][i + 1], (int)win->img.tex[5][i + 2]);
-		else if (win->gg.angle >= 90 && win->gg.angle <= 270)
+		else if (win->ray.angle >= 90 && win->ray.angle <= 270 && win->v_is)
 			glColor3ub((int)win->img.tex[6][i], (int)win->img.tex[6][i + 1], (int)win->img.tex[6][i + 2]);
-		else if (win->gg.angle >= 180 && win->gg.angle < 360)
+		else if (win->ray.angle >= 180 && win->ray.angle < 360 && win->h_is)
 			glColor3ub((int)win->img.tex[7][i], (int)win->img.tex[7][i + 1], (int)win->img.tex[7][i + 2]);
-		else
+		else if ((win->ray.angle > 270 || win->ray.angle < 90) && win->v_is)
 			glColor3ub((int)win->img.tex[8][i], (int)win->img.tex[8][i + 1], (int)win->img.tex[8][i + 2]);
 	}
 	else
@@ -86,8 +86,8 @@ void	draw(int x, int y, t_main *win, int color)
 	draw_floor(x, y, win);
 }
 
-void	line_draw(t_main *win, int i, float h, int tex, int wallX)
+void	line_draw(t_main *win, int i, float h, int tex, int wall_X)
 {
-	win->img.pos = wallX % CUBE;
+	win->img.pos = wall_X % CUBE;
 	draw(i, h, win, tex);
 }

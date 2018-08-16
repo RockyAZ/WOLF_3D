@@ -18,8 +18,9 @@ int		vertic_inter_left(t_main *win, float angle)
 	if (angle == 180)
 		win->ray.v_dot.pix_y = win->gg.posY;
 	else
-		win->ray.v_dot.pix_y = win->gg.posY + (win->gg.posX - win->ray.v_dot.pix_x) * ft_tan(angle);
-	if (win->ray.v_dot.pix_y >= win->data->max_y || win->ray.v_dot.pix_y < 0)
+		win->ray.v_dot.pix_y = win->gg.posY +\
+		(win->gg.posX - win->ray.v_dot.pix_x) * ft_tan(angle);
+	if (win->ray.v_dot.pix_y >= win->data->m_y || win->ray.v_dot.pix_y < 0)
 		return (-1);
 	win->ray.v_dot.real_x = (int)win->ray.v_dot.pix_x >> BIT;
 	win->ray.v_dot.real_y = (int)win->ray.v_dot.pix_y >> BIT;
@@ -33,10 +34,10 @@ int		vertic_inter_left(t_main *win, float angle)
 		win->ray.v_dot.pix_x += win->ray.v_dot.var_x;
 		win->ray.v_dot.real_x = (int)win->ray.v_dot.pix_x >> BIT;
 		win->ray.v_dot.real_y = (int)win->ray.v_dot.pix_y >> BIT;
-		if (win->ray.v_dot.pix_y >= win->data->max_y || win->ray.v_dot.pix_y < 0)
+		if (win->ray.v_dot.pix_y >= win->data->m_y || win->ray.v_dot.pix_y < 0)
 			return (-1);
 	}
-	return (((int)sqrt(powf(win->gg.posX - win->ray.v_dot.pix_x, 2) + powf(win->gg.posY - win->ray.v_dot.pix_y, 2))) * ft_cos(win->gg.angle - angle));
+	return (pifagor(win, angle, 'v'));
 }
 
 int		vertic_inter_right(t_main *win, float angle)
@@ -45,8 +46,9 @@ int		vertic_inter_right(t_main *win, float angle)
 	if (angle == 0)
 		win->ray.v_dot.pix_y = win->gg.posY;
 	else
-		win->ray.v_dot.pix_y = win->gg.posY + (win->gg.posX - win->ray.v_dot.pix_x) * ft_tan(angle);
-	if (win->ray.v_dot.pix_y >= win->data->max_y || win->ray.v_dot.pix_y < 0)
+		win->ray.v_dot.pix_y = win->gg.posY +\
+		(win->gg.posX - win->ray.v_dot.pix_x) * ft_tan(angle);
+	if (win->ray.v_dot.pix_y >= win->data->m_y || win->ray.v_dot.pix_y < 0)
 		return (-1);
 	win->ray.v_dot.real_x = (int)win->ray.v_dot.pix_x >> BIT;
 	win->ray.v_dot.real_y = (int)win->ray.v_dot.pix_y >> BIT;
@@ -60,10 +62,10 @@ int		vertic_inter_right(t_main *win, float angle)
 		win->ray.v_dot.pix_x += win->ray.v_dot.var_x;
 		win->ray.v_dot.real_x = (int)win->ray.v_dot.pix_x >> BIT;
 		win->ray.v_dot.real_y = (int)win->ray.v_dot.pix_y >> BIT;
-		if (win->ray.v_dot.pix_y >= win->data->max_y || win->ray.v_dot.pix_y < 0)
+		if (win->ray.v_dot.pix_y >= win->data->m_y || win->ray.v_dot.pix_y < 0)
 			return (-1);
 	}
-	return (((int)sqrt(powf(win->gg.posX - win->ray.v_dot.pix_x, 2) + powf(win->gg.posY - win->ray.v_dot.pix_y, 2))) * ft_cos(win->gg.angle - angle));
+	return (pifagor(win, angle, 'v'));
 }
 
 int		horiz_inter_top(t_main *win, float angle)
@@ -72,8 +74,9 @@ int		horiz_inter_top(t_main *win, float angle)
 	if (angle == 90)
 		win->ray.h_dot.pix_x = win->gg.posX;
 	else
-		win->ray.h_dot.pix_x = win->gg.posX + (win->gg.posY - win->ray.h_dot.pix_y) / ft_tan(angle);
-	if (win->ray.h_dot.pix_x >= win->data->max_x || win->ray.h_dot.pix_x < 0)
+		win->ray.h_dot.pix_x = win->gg.posX +\
+		(win->gg.posY - win->ray.h_dot.pix_y) / ft_tan(angle);
+	if (win->ray.h_dot.pix_x >= win->data->m_x || win->ray.h_dot.pix_x < 0)
 		return (-1);
 	win->ray.h_dot.real_x = (int)win->ray.h_dot.pix_x >> BIT;
 	win->ray.h_dot.real_y = (int)win->ray.h_dot.pix_y >> BIT;
@@ -88,10 +91,10 @@ int		horiz_inter_top(t_main *win, float angle)
 		win->ray.h_dot.pix_y += win->ray.h_dot.var_y;
 		win->ray.h_dot.real_x = (int)win->ray.h_dot.pix_x >> BIT;
 		win->ray.h_dot.real_y = (int)win->ray.h_dot.pix_y >> BIT;
-		if (win->ray.h_dot.pix_x >= win->data->max_x || win->ray.h_dot.pix_x < 0)
+		if (win->ray.h_dot.pix_x >= win->data->m_x || win->ray.h_dot.pix_x < 0)
 			return (-1);
 	}
-	return (((int)sqrt(powf(win->gg.posX - win->ray.h_dot.pix_x, 2) + powf(win->gg.posY - win->ray.h_dot.pix_y, 2))) * ft_cos(win->gg.angle - angle));
+	return (pifagor(win, angle, 'h'));
 }
 
 int		horiz_inter_bot(t_main *win, float angle)
@@ -100,8 +103,9 @@ int		horiz_inter_bot(t_main *win, float angle)
 	if (angle == 270)
 		win->ray.h_dot.pix_x = win->gg.posX;
 	else
-		win->ray.h_dot.pix_x = win->gg.posX + (win->gg.posY - win->ray.h_dot.pix_y) / ft_tan(angle);
-	if (win->ray.h_dot.pix_x >= win->data->max_x || win->ray.h_dot.pix_x < 0)
+		win->ray.h_dot.pix_x = win->gg.posX +\
+		(win->gg.posY - win->ray.h_dot.pix_y) / ft_tan(angle);
+	if (win->ray.h_dot.pix_x >= win->data->m_x || win->ray.h_dot.pix_x < 0)
 		return (-1);
 	win->ray.h_dot.real_x = (int)win->ray.h_dot.pix_x >> BIT;
 	win->ray.h_dot.real_y = (int)win->ray.h_dot.pix_y >> BIT;
@@ -116,55 +120,23 @@ int		horiz_inter_bot(t_main *win, float angle)
 		win->ray.h_dot.pix_y += win->ray.h_dot.var_y;
 		win->ray.h_dot.real_x = (int)win->ray.h_dot.pix_x >> BIT;
 		win->ray.h_dot.real_y = (int)win->ray.h_dot.pix_y >> BIT;
-		if (win->ray.h_dot.pix_x >= win->data->max_x || win->ray.h_dot.pix_x < 0)
+		if (win->ray.h_dot.pix_x >= win->data->m_x || win->ray.h_dot.pix_x < 0)
 			return (-1);
 	}
-	return (((int)sqrt(powf(win->gg.posX - win->ray.h_dot.pix_x, 2) + powf(win->gg.posY - win->ray.h_dot.pix_y, 2)))*ft_cos(win->gg.angle - angle));
+	return (pifagor(win, angle, 'h'));
 }
 
 void	ray_casting(t_main *win)
 {
-	int		i;
 	float	angle;
 	int		v;
 	int		h;
 
-	i = 0;
-	angle = win->gg.angle + (win->gg.fov / 2);
+	angle = 0;
 	v = -1;
 	h = -1;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glBegin(GL_POINTS);
-	while (i < WIDTH)
-	{
-	// if (i == WIDTH / 2)
-		// printf("ANGLE-->>%f\npX-->>%f\npY-->>%f\nX--->>>%d\nY--->>>%d\n\n", win->gg.angle, win->gg.posX, win->gg.posY, win->gg.r_x, win->gg.r_y);
-		if (angle >= 360)
-			angle -= 360;
-		if (angle < 0)
-			angle += 360;
-		win->ray.angle = angle;
-		if (angle > 0 && angle < 180)
-			h = horiz_inter_top(win, angle);
-		else if (angle > 180 && angle < 360)
-			h = horiz_inter_bot(win, angle);
-		if (angle > 90 && angle < 270)
-			v = vertic_inter_left(win, angle);
-		else if (angle > 270 || angle < 90)
-			v = vertic_inter_right(win, angle);
-		if (v < 0)
-			line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen, win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x], win->ray.h_dot.pix_x);
-		else if (h < 0)
-			line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen, win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x], win->ray.v_dot.pix_y);
-		else
-		{
-			if (v < h)
-				line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen, win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x], win->ray.v_dot.pix_y);
-			else
-				line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen, win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x], win->ray.h_dot.pix_x);
-		}
-		angle -= win->gg.angle_size;
-		i++;
-	}
+	ray_simple(win, angle, v, h);
 	glEnd();
 }

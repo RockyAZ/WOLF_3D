@@ -14,17 +14,17 @@
 
 float	ft_tan(float angle)
 {
-	return(tan((angle * 2 * M_PI) / 360));
+	return (tan((angle * 2 * M_PI) / 360));
 }
 
 float	ft_cos(float angle)
 {
-	return(cos((angle * 2 * M_PI) / 360));
+	return (cos((angle * 2 * M_PI) / 360));
 }
 
 float	ft_sin(float angle)
 {
-	return(sin((angle * 2 * M_PI) / 360));
+	return (sin((angle * 2 * M_PI) / 360));
 }
 
 void	ft_arrr_del(char **arr, char *line)
@@ -41,27 +41,20 @@ void	ft_arrr_del(char **arr, char *line)
 	free(line);
 }
 
-// void	add_ray(t_main *win)
-// {
-// 
-// }
-
-void	print_coord(t_data *data)
+int		pifagor(t_main *win, float angle, char c)
 {
-	int i = 0;
-	int j = 0;
-
-	while (i < data->line)
+	if (c == 'v')
 	{
-		j = 0;
-		while (j < data->col)
-		{
-			printf("%d-", data->map[i][j]);
-			j++;
-		}
-		i++;
-		printf("\n\n");
+		return (((int)sqrt(powf(win->gg.posX - win->ray.v_dot.pix_x, 2) +\
+		powf(win->gg.posY - win->ray.v_dot.pix_y, 2))) *\
+		ft_cos(win->gg.angle - angle));
 	}
-		printf("MAX_X::%d\nMAX_Y::%d\n", data->max_x, data->max_y);
-		printf("PLAYER_X::%f\nPLAYER_Y::%f\n\n\n", data->pos[0],data->pos[1]);
+	else if (c == 'h')
+	{
+		return (((int)sqrt(powf(win->gg.posX - win->ray.h_dot.pix_x, 2) +\
+		powf(win->gg.posY - win->ray.h_dot.pix_y, 2))) *\
+		ft_cos(win->gg.angle - angle));
+	}
+	else
+		return (0);
 }

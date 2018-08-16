@@ -22,7 +22,7 @@ SOURCE = main.c \
 			draw_line.c \
 			action.c \
 			mouse.c \
- # SOURCE = texture.c 
+			ray_simple.c \
 
 GLFW_INC = -I ./include/
 GLFW_LIB = ./GLFW/libglfw3.a

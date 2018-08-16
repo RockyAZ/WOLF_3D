@@ -33,6 +33,8 @@ void	main_prepare(int ac, char **av, t_main **win)
 	cp_win->keys.shift = 0;
 	cp_win->m.x = 0;
 	cp_win->m.y = 0;
+	cp_win->v_is = 0;
+	cp_win->h_is = 0;
 	*win = cp_win;
 }
 
