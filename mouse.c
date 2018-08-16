@@ -18,17 +18,20 @@ void	mouse_pos(GLFWwindow *window, double x, double y)
 	static int	m;
 
 	win = glfwGetWindowUserPointer(window);
-	if (!m)
+	if (win->keys.space)
 	{
+		if (!m)
+		{
+			win->m.x = (int)x;
+			win->m.y = (int)y;
+			m = 1;
+		}
+		win->gg.angle -= (x - win->m.x) * 0.3;
+		if (win->gg.angle >= 360)
+			win->gg.angle -= 360;
+		if (win->gg.angle < 0)
+			win->gg.angle += 360;
 		win->m.x = (int)x;
 		win->m.y = (int)y;
-		m = 1;
 	}
-	win->gg.angle -= (x - win->m.x) * 0.3;
-	if (win->gg.angle >= 360)
-		win->gg.angle -= 360;
-	if (win->gg.angle < 0)
-		win->gg.angle += 360;
-	win->m.x = (int)x;
-	win->m.y = (int)y;
 }

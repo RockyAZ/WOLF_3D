@@ -56,6 +56,23 @@ void	key_release_add(int key, t_main *win)
 		win->gg.speed = 5;
 }
 
+void	key_space(GLFWwindow *window, t_main *win, int key)
+{
+	if (key == GLFW_KEY_SPACE)
+	{
+		if (win->keys.space == 0)
+		{
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			win->keys.space = 1;
+		}
+		else if (win->keys.space == 1)
+		{
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			win->keys.space = 0;
+		}
+	}
+}
+
 void	key_callback(GLFWwindow *window, int key, int scan, int act, int mods)
 {
 	t_main *win;
@@ -68,10 +85,7 @@ void	key_callback(GLFWwindow *window, int key, int scan, int act, int mods)
 	{
 		if (key == GLFW_KEY_ESCAPE)
 			glfwSetWindowShouldClose(window, 1);
-		if (key == GLFW_KEY_SPACE)
-			win->rotate = win->gg.angle_size;
-		if (key == GLFW_KEY_BACKSPACE)
-			win->rotate = 2;
+		key_space(window, win, key);
 		key_press_add(key, win);
 	}
 	if (act == GLFW_RELEASE)

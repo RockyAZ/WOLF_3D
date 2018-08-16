@@ -23,7 +23,6 @@ void	add_main(GLFWwindow *window, t_main *win)
 	glLoadIdentity();
 	glOrtho(1, WIDTH, HEIGHT, 1, 1, 0);
 	glfwSetWindowUserPointer(window, win);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 int		main(int ac, char **av)

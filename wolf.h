@@ -41,6 +41,7 @@ typedef struct		s_keys
 	int				a;
 	int				d;
 	int				shift;
+	int				space;
 }					t_keys;
 
 typedef struct		s_mouse
