@@ -27,7 +27,7 @@
 # define CUBE 64
 # define BIT 6
 # define FACE 10
-# define TEXTURES 5
+# define TEXTURES 9
 # define PLAYERHEIGHT 32
 
 
@@ -37,7 +37,7 @@
 // #include <GL/glut.h>
 // #endif
 
-# include <GL/glew.h>
+// # include <GLEW/glew.h>
 // # include <SOIL.h>
 # include "./libft/libft.h"
 # include <GLFW/glfw3.h>
@@ -144,6 +144,10 @@ void			reader(t_data *data);
 ** ray_casting.h
 */
 void			ray_casting(t_main *win);
+int				vertic_inter_left(t_main *win, float angle);
+int				vertic_inter_right(t_main *win, float angle);
+int				horiz_inter_top(t_main *win, float angle);
+int				horiz_inter_bot(t_main *win, float angle);
 
 /*
 ** keys.c

@@ -46,20 +46,28 @@ void	ray_player_prepare(t_main *win)
 	win->gg.to_screen = (WIDTH / 2) / ft_tan(30);
 	win->gg.speed = 5;
 	win->gg.height = 32;
-win->rotate = 2;//change to speedest rotation when some keys realized
+	win->rotate = 2;
 	printf("POS_X:%f         POS_Y:%f\n\n\n", win->gg.posX, win->gg.posY);
 }
 
 void	texture_prepare(t_main *win)
 {
-	// if (!(win->img.tex[0] = stbi_load("./floor.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0)))
-		// error("texture[0] open error D:\n");
-	win->img.tex[0] = stbi_load("./floor.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	win->img.tex[1] = stbi_load("./WallPack/Flag5.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	win->img.tex[2] = stbi_load("./neko.png", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	win->img.tex[3] = stbi_load("./WallPack/Black6.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	win->img.tex[4] = stbi_load("./WallPack/White1.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0);
-	// printf("PICTURE_W:%d\nPICTURE_H:%d\nPICTURE_CHANNEL:%d\n", win->img.width, win->img.height, win->img.nrChannel);
-	// for(int i = 0; i < 64 * 3; i += 3)
-		// printf("R:%d  G:%d  B:%d\n", (int)win->img.black[i], (int)win->img.black[i + 1], (int)win->img.black[i + 2]);
+	if (!(win->img.tex[0] = stbi_load("./tex/floor.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0)))
+		error("texture[0] open error D:\n");
+	if (!(win->img.tex[1] = stbi_load("./tex/Flag4.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0)))
+		error("texture[1] open error D:\n");
+	if (!(win->img.tex[2] = stbi_load("./tex/neko.png", &win->img.width, &win->img.height, &win->img.nrChannel, 0)))
+		error("texture[2] open error D:\n");
+	if (!(win->img.tex[3] = stbi_load("./tex/Silver3.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0)))
+		error("texture[3] open error D:\n");
+	if (!(win->img.tex[4] = stbi_load("./tex/White1.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0)))
+		error("texture[4] open error D:\n");
+	if (!(win->img.tex[5] = stbi_load("./tex/mand1.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0)))
+		error("texture[5] open error D:\n");
+	if (!(win->img.tex[6] = stbi_load("./tex/mand2.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0)))
+		error("texture[6] open error D:\n");
+	if (!(win->img.tex[7] = stbi_load("./tex/mand3.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0)))
+		error("texture[7] open error D:\n");
+	if (!(win->img.tex[8] = stbi_load("./tex/mand4.bmp", &win->img.width, &win->img.height, &win->img.nrChannel, 0)))
+		error("texture[8] open error D:\n");
 }

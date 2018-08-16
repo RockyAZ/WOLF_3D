@@ -41,6 +41,11 @@ void	ft_arrr_del(char **arr, char *line)
 	free(line);
 }
 
+// void	add_ray(t_main *win)
+// {
+// 
+// }
+
 void	print_coord(t_data *data)
 {
 	int i = 0;

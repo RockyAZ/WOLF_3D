@@ -45,7 +45,8 @@ int	main(int ac, char **av)
 	glViewport(0, 0, WIDTH * 2, HEIGHT * 2);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(1, WIDTH, HEIGHT, 1, -1, 0);
+	// glOrtho(1, WIDTH, HEIGHT, 1, -1, 0);
+	glOrtho(1, WIDTH, HEIGHT, 1, 1, 0);	
 	// glOrtho(0, WIDTH, HEIGHT, 0, 0, 1);
 	// glMatrixMode(GL_MODELVIEW);
 	glfwSetWindowUserPointer(window, win);

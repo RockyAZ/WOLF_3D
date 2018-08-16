@@ -131,14 +131,14 @@ void	ray_casting(t_main *win)
 
 	i = 0;
 	angle = win->gg.angle + (win->gg.fov / 2);
-	v = -5;
-	h = -5;
+	v = -1;
+	h = -1;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glBegin(GL_POINTS);
 	while (i < WIDTH)
 	{
-	if (i == WIDTH / 2)
-		printf("ANGLE-->>%f\npX-->>%f\npY-->>%f\nX--->>>%d\nY--->>>%d\n\n", win->gg.angle, win->gg.posX, win->gg.posY, win->gg.r_x, win->gg.r_y);
+	// if (i == WIDTH / 2)
+		// printf("ANGLE-->>%f\npX-->>%f\npY-->>%f\nX--->>>%d\nY--->>>%d\n\n", win->gg.angle, win->gg.posX, win->gg.posY, win->gg.r_x, win->gg.r_y);
 		if (angle >= 360)
 			angle -= 360;
 		if (angle < 0)
@@ -150,14 +150,8 @@ void	ray_casting(t_main *win)
 			h = horiz_inter_bot(win, angle);
 		if (angle > 90 && angle < 270)
 			v = vertic_inter_left(win, angle);
-/*
-** be carfull with || insted && in the case bellow!!!
-*/
 		else if (angle > 270 || angle < 90)
 			v = vertic_inter_right(win, angle);
-/*
-** last argument in functions for serching places on textures
-*/
 		if (v < 0)
 			line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen, win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x], win->ray.h_dot.pix_x);
 		else if (h < 0)

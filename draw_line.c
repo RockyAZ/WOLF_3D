@@ -14,37 +14,49 @@
 
 int		get_color(int x, int y)
 {
-	return((x * 3) + (y * 3 * CUBE));
+	return ((x * 3) + (y * 3 * CUBE));
 }
 
 void	draw_floor(int x, int y, t_main *win)
 {
 	float	dist;
-	// float	var;
 	int		nx;
 	int		ny;
 	int		i;
 
 	while (y < HEIGHT)
 	{
-		// var = (((float)win->gg.height / ((float)y - (float)CENTR_H)) * win->gg.to_screen);
-		// dist = var / ft_cos(ft_abs(win->ray.angle - win->gg.angle));
-		dist = (((float)win->gg.height / ((float)y - (float)CENTR_H)) * win->gg.to_screen) / ft_cos(ft_abs(win->ray.angle - win->gg.angle));
-			ny = win->gg.posY - (dist * ft_sin(win->ray.angle));
-		// if (win->ray.angle >= 90 && win->ray.angle <= 270)
-			nx = win->gg.posX + (dist * ft_cos(win->ray.angle));
-		// else
-			// nx = win->gg.posX + (dist * ft_cos(win->ray.angle));
+		dist = (((float)win->gg.height / ((float)y - (float)CENTR_H)) *\
+		win->gg.to_screen) / ft_cos(ft_abs(win->ray.angle - win->gg.angle));
+		ny = win->gg.posY - (dist * ft_sin(win->ray.angle));
+		nx = win->gg.posX + (dist * ft_cos(win->ray.angle));
 		i = get_color(nx % CUBE, ny % CUBE);
-		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
-		// glColor3ub((int)win->img.tex[2][i], (int)win->img.tex[2][i + 1], (int)win->img.tex[2][i + 2]);
+		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1],\
+		(int)win->img.tex[0][i + 2]);
 		glVertex2d(x, y);
-		glVertex2d(x, HEIGHT - y);		
+		glVertex2d(x, HEIGHT - y);
 		y++;
 	}
 }
 
-void	draw(int x, int y, t_main *win, int color, int wallX)
+void	add_draw(t_main *win, int i, int color)
+{
+	if (color == 5)
+	{
+		if (win->gg.angle >= 0 && win->gg.angle <= 180)
+			glColor3ub((int)win->img.tex[5][i], (int)win->img.tex[5][i + 1], (int)win->img.tex[5][i + 2]);
+		else if (win->gg.angle >= 90 && win->gg.angle <= 270)
+			glColor3ub((int)win->img.tex[6][i], (int)win->img.tex[6][i + 1], (int)win->img.tex[6][i + 2]);
+		else if (win->gg.angle >= 180 && win->gg.angle < 360)
+			glColor3ub((int)win->img.tex[7][i], (int)win->img.tex[7][i + 1], (int)win->img.tex[7][i + 2]);
+		else
+			glColor3ub((int)win->img.tex[8][i], (int)win->img.tex[8][i + 1], (int)win->img.tex[8][i + 2]);
+	}
+	else
+		glColor3ub((int)win->img.tex[color][i], (int)win->img.tex[color][i + 1], (int)win->img.tex[color][i + 2]);		
+}
+
+void	draw(int x, int y, t_main *win, int color)
 {
 	int i;
 	int h;
@@ -54,9 +66,7 @@ void	draw(int x, int y, t_main *win, int color, int wallX)
 	tex_size = (float)CUBE / (float)y;
 	tex = tex_size;
 	h = CENTR_H + (y >> 1);
-	// h = CENTR_H + y / 1;//				 ->looks like camera downing
 	y = CENTR_H - (y >> 1);
-	// y = CENTR_H - y / 1;//				 ->looks like camera downing
 	if (h > HEIGHT)
 		h = HEIGHT;
 	if (y < 0)
@@ -67,21 +77,17 @@ void	draw(int x, int y, t_main *win, int color, int wallX)
 	while (y < h)
 	{
 		i = (win->img.pos * 3) + ((int)tex * (CUBE * 3));
-		glColor3ub((int)win->img.tex[color][i], (int)win->img.tex[color][i + 1], (int)win->img.tex[color][i + 2]);
+		add_draw(win, i, color);
+		// glColor3ub((int)win->img.tex[color][i], (int)win->img.tex[color][i + 1], (int)win->img.tex[color][i + 2]);
 		glVertex2d(x, y);
 		tex += tex_size;
 		y++;
 	}
-	// if (win->huy == 1)
 	draw_floor(x, y, win);
 }
 
 void	line_draw(t_main *win, int i, float h, int tex, int wallX)
 {
 	win->img.pos = wallX % CUBE;
-// if (win->huy == 1)
-// printf("MAIN_HEIGHT::%f\n", h);
-	// draw(i, CENTR_H + h / 2, i, CENTR_H - h / 2, win, color);
-	draw(i, h, win, tex, wallX);
+	draw(i, h, win, tex);
 }
-// double i * 256 = 

@@ -10,6 +10,7 @@
         "stdexcept": "c",
         "typeinfo": "c",
         "algorithm": "c",
-        "ios": "c"
+        "ios": "c",
+        "__locale": "c"
     }
 }
