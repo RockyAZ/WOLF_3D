@@ -12,8 +12,8 @@
 
 #include "wolf.h"
 
-void    error(char *name)
+void	error(char *name)
 {
-    ft_putstr(name);
-    exit (EXIT_FAILURE);
+	ft_putstr(name);
+	exit(EXIT_FAILURE);
 }

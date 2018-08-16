@@ -31,22 +31,18 @@ void	call_drawer(t_main *win, int i, int v, int h)
 {
 	if (v < 0)
 		line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen,\
-		win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x],\
-		win->ray.h_dot.pix_x);
+		win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x]);
 	else if (h < 0)
 		line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen,\
-		win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x],\
-		win->ray.v_dot.pix_y);
+		win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x]);
 	else
 	{
 		if (v < h)
 			line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen,\
-			win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x],\
-			win->ray.v_dot.pix_y);
+			win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x]);
 		else
 			line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen,\
-			win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x],\
-			win->ray.h_dot.pix_x);
+			win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x]);
 	}
 }
 

@@ -45,14 +45,14 @@ int		pifagor(t_main *win, float angle, char c)
 {
 	if (c == 'v')
 	{
-		return (((int)sqrt(powf(win->gg.posX - win->ray.v_dot.pix_x, 2) +\
-		powf(win->gg.posY - win->ray.v_dot.pix_y, 2))) *\
+		return (((int)sqrt(powf(win->gg.p_x - win->ray.v_dot.pix_x, 2) +\
+		powf(win->gg.p_y - win->ray.v_dot.pix_y, 2))) *\
 		ft_cos(win->gg.angle - angle));
 	}
 	else if (c == 'h')
 	{
-		return (((int)sqrt(powf(win->gg.posX - win->ray.h_dot.pix_x, 2) +\
-		powf(win->gg.posY - win->ray.h_dot.pix_y, 2))) *\
+		return (((int)sqrt(powf(win->gg.p_x - win->ray.h_dot.pix_x, 2) +\
+		powf(win->gg.p_y - win->ray.h_dot.pix_y, 2))) *\
 		ft_cos(win->gg.angle - angle));
 	}
 	else
