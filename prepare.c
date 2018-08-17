@@ -17,7 +17,7 @@ void	main_prepare(int ac, char **av, t_main **win)
 	t_main *cp_win;
 
 	if (ac != 2)
-		error("number of arguments error\n");
+		error("number of arguments error\n./wolf3d [map]\n");
 	if (!(cp_win = (t_main*)malloc(sizeof(t_main))))
 		error("main malloc error\n");
 	cp_win->data = (t_data*)malloc(sizeof(t_data));

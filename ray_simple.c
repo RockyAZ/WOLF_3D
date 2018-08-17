@@ -25,6 +25,8 @@ void	set_param(t_main *win, int v, int h)
 		else if (h < v)
 			win->h_is = 1;
 	}
+	if (win->ray.angle == win->gg.angle)
+		ft_putnbr_end(win->gg.angle);
 }
 
 void	call_drawer(t_main *win, int i, int v, int h)

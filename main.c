@@ -21,7 +21,7 @@ void	add_main(GLFWwindow *window, t_main *win)
 	glViewport(0, 0, WIDTH * 2, HEIGHT * 2);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(1, WIDTH, HEIGHT, 1, 1, 0);
+	glOrtho(-1, WIDTH, HEIGHT, 0, 0, 1);
 	glfwSetWindowUserPointer(window, win);
 }
 

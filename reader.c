@@ -127,5 +127,9 @@ void	reader(t_data *data)
 		OR YOU TRY TO OPEN DIR!!!\n");
 	data->m_x = CUBE * data->col;
 	data->m_y = CUBE * data->line;
+	if (data->pos[0] <= 0 || data->pos[0] >= data->col - 1)
+		error("INVALID PLAYER PLACE\n");
+	if (data->pos[1] <= 0 || data->pos[1] >= data->line - 1)
+		error("INVALID PLAYER PLACE\n");
 	close(data->fd);
 }
