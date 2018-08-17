@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "../wolf.h"
 
 void	key_press_add(int key, t_main *win)
 {

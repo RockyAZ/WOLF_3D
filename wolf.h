@@ -103,6 +103,7 @@ typedef struct		s_data
 	int				error;
 	int				fd;
 	float			pos[2];
+	int				p_c;
 }					t_data;
 
 typedef struct		s_main

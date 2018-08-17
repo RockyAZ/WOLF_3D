@@ -18,11 +18,11 @@ SOURCE = main.c \
 			reader.c \
 			prepare.c \
 			ray_casting.c \
-			keys.c \
 			draw_line.c \
 			action.c \
 			mouse.c \
 			ray_simple.c \
+			GLFW/keys.c \
 
 HEADER = wolf.h
 OBJECTS = $(addprefix $(OBJDIR),$(SOURCE:.c=.o))
@@ -32,7 +32,7 @@ GLFW_INC = -I ./include/
 GLFW_LIB = ./GLFW/libglfw3.a
 
 GLEW_INC = -I ./include/
-GLEW_LIB = ./GLEW/libGLEW.a
+GLEW_LIB = ./GLFW/libGLEW.a
 
 SOIL_INC = -I ./inclide/
 SOIL_LIB = ./include/libSOIL.a
@@ -64,6 +64,7 @@ all: obj $(LIBFT) $(NAME)
 
 obj:
 	@mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)/GLFW/
 
 $(OBJDIR)%.o: %.c $(HEADER)
 	@printf "\033[0;34m->    "
