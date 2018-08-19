@@ -12,43 +12,32 @@
 
 #include "wolf.h"
 
-void	add_main(GLFWwindow *window, t_main *win)
-{
-	glfwMakeContextCurrent(window);
-	glfwSetKeyCallback(window, key_callback);
-	glfwSetCursorPosCallback(window, *mouse_pos);
-	glfwSwapInterval(1);
-	glViewport(0, 0, WIDTH * 2, HEIGHT * 2);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(-1, WIDTH, HEIGHT, 0, 0, 1);
-	glfwSetWindowUserPointer(window, win);
-}
-
 int		main(int ac, char **av)
 {
-	GLFWwindow	*window;
 	t_main		*win;
 
 	main_prepare(ac, av, &win);
 	reader(win->data);
-	if (!glfwInit())
-		error("init error\n");
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	if (!(window = glfwCreateWindow(WIDTH, HEIGHT, "WOLF", NULL, NULL)))
-		error("window open error\n");
-	add_main(window, win);
+	SDL_Init(SDL_INIT_VIDEO);
+	win->win = SDL_CreateWindow("WOLF_SDL", 100, 100, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
+	win->ren = SDL_CreateRenderer(win->win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
+	SDL_SetHint(SDL_HINT_RENDER_VSYNC, "0");
+	
 	texture_prepare(win);
 	ray_player_prepare(win);
 	ray_casting(win);
-	while (!glfwWindowShouldClose(window))
+
+	while (!win->quit)
 	{
+		SDL_SetRenderDrawColor(win->ren, 0, 0, 0, 0);
+		SDL_RenderClear(win->ren);
+		event_callback(win);
 		active_keys(win);
 		ray_casting(win);
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+		SDL_RenderPresent(win->ren);
 	}
-	glfwDestroyWindow(window);
-	glfwTerminate();
-	exit(EXIT_SUCCESS);
+	SDL_DestroyRenderer(win->ren);
+	SDL_DestroyWindow(win->win);
+	SDL_Quit();
 }

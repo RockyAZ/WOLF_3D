@@ -25,7 +25,12 @@
 # define MAX_LINE 20
 
 # include "./libft/libft.h"
-# include "./include/GLFW/glfw3.h"
+// # include "./include/GLFW/glfw3.h"
+# include "SDL.h"
+
+// #include "SDL2/SDL_timer.h" 
+// #include "SDL2/SDL_image.h"
+
 # include <fcntl.h>
 # include <math.h>
 # include "./include/stb_image.h"
@@ -108,6 +113,11 @@ typedef struct		s_data
 
 typedef struct		s_main
 {
+	SDL_Window		*win;
+	SDL_Renderer	*ren;
+	SDL_Event		e;
+	int				quit;
+
 	t_data			*data;
 	t_ray			ray;
 	t_player		gg;
@@ -134,15 +144,15 @@ int					horiz_inter_top(t_main *win, float angle);
 int					horiz_inter_bot(t_main *win, float angle);
 
 /*
-** keys.c
+** keys.c && mouse.c
 */
-void				key_callback(GLFWwindow *window, int key,\
+void				event_callback(t_main *win);
+void				mouse_pos(t_main *win);
+// void				key_callback(GLFWwindow *window, int key,\
 					int scan, int act, int mods);
-
 /*
 ** mouse.c
 */
-void				mouse_pos(GLFWwindow *window, double x, double y);
 
 /*
 ** error.c

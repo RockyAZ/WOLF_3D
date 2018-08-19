@@ -135,8 +135,5 @@ void	ray_casting(t_main *win)
 	angle = 0;
 	v = -1;
 	h = -1;
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	glBegin(GL_POINTS);
 	ray_simple(win, angle, v, h);
-	glEnd();
 }

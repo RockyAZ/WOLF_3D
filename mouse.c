@@ -12,26 +12,25 @@
 
 #include "wolf.h"
 
-void	mouse_pos(GLFWwindow *window, double x, double y)
+void	mouse_pos(t_main *win)
 {
-	t_main		*win;
 	static int	m;
 
-	win = glfwGetWindowUserPointer(window);
-	if (win->keys.space)
+	// if (win->keys.space)
+	if (win->e.type == SDL_MOUSEMOTION)
 	{
 		if (!m)
 		{
-			win->m.x = (int)x;
-			win->m.y = (int)y;
+			win->m.x = win->e.motion.x;
+			win->m.y = win->e.motion.y;
 			m = 1;
 		}
-		win->gg.angle -= (x - win->m.x) * 0.3;
+		win->gg.angle -= (win->e.motion.x - win->m.x) * 0.3;
 		if (win->gg.angle >= 360)
 			win->gg.angle -= 360;
 		if (win->gg.angle < 0)
 			win->gg.angle += 360;
-		win->m.x = (int)x;
-		win->m.y = (int)y;
+		win->m.x = win->e.motion.x;
+		win->m.y = win->e.motion.y;
 	}
 }

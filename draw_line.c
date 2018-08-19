@@ -31,12 +31,12 @@ void	draw_floor(int x, int y, t_main *win)
 		ny = win->gg.p_y - (dist * ft_sin(win->ray.angle));
 		nx = win->gg.p_x + (dist * ft_cos(win->ray.angle));
 		i = get_color(nx % CUBE, ny % CUBE);
-		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1],\
-		(int)win->img.tex[0][i + 2]);
-		glVertex2d(x, y);
-		glColor3ub((int)win->img.tex[9][i], (int)win->img.tex[9][i + 1],\
-		(int)win->img.tex[9][i + 2]);
-		glVertex2d(x, HEIGHT - y);
+		SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[0][i], (int)win->img.tex[0][i + 1],\
+		(int)win->img.tex[0][i + 2], 0);
+		SDL_RenderDrawPoint(win->ren, x, y);
+		SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[9][i], (int)win->img.tex[9][i + 1],\
+		(int)win->img.tex[9][i + 2], 0);
+		SDL_RenderDrawPoint(win->ren, x, y);
 		y++;
 	}
 }
@@ -46,21 +46,21 @@ void	add_draw(t_main *win, int i, int color)
 	if (color == 5)
 	{
 		if (win->ray.angle >= 0 && win->ray.angle <= 180 && win->h_is)
-			glColor3ub((int)win->img.tex[5][i], (int)win->img.tex[5][i + 1],\
-			(int)win->img.tex[5][i + 2]);
+			SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[5][i], (int)win->img.tex[5][i + 1],\
+			(int)win->img.tex[5][i + 2], 0);
 		else if (win->ray.angle >= 90 && win->ray.angle <= 270 && win->v_is)
-			glColor3ub((int)win->img.tex[6][i], (int)win->img.tex[6][i + 1],\
-			(int)win->img.tex[6][i + 2]);
+			SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[6][i], (int)win->img.tex[6][i + 1],\
+			(int)win->img.tex[6][i + 2], 0);
 		else if (win->ray.angle >= 180 && win->ray.angle < 360 && win->h_is)
-			glColor3ub((int)win->img.tex[7][i], (int)win->img.tex[7][i + 1],\
-			(int)win->img.tex[7][i + 2]);
+			SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[7][i], (int)win->img.tex[7][i + 1],\
+			(int)win->img.tex[7][i + 2], 0);
 		else if ((win->ray.angle > 270 || win->ray.angle < 90) && win->v_is)
-			glColor3ub((int)win->img.tex[8][i], (int)win->img.tex[8][i + 1],\
-			(int)win->img.tex[8][i + 2]);
+			SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[8][i], (int)win->img.tex[8][i + 1],\
+			(int)win->img.tex[8][i + 2], 0);
 	}
 	else
-		glColor3ub((int)win->img.tex[color][i],\
-		(int)win->img.tex[color][i + 1], (int)win->img.tex[color][i + 2]);
+		SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[color][i],\
+		(int)win->img.tex[color][i + 1], (int)win->img.tex[color][i + 2], 0);
 }
 
 void	draw(int x, int y, t_main *win, int color)
@@ -85,7 +85,7 @@ void	draw(int x, int y, t_main *win, int color)
 	{
 		i = (win->img.pos * 3) + ((int)tex * (CUBE * 3));
 		add_draw(win, i, color);
-		glVertex2d(x, y);
+		SDL_RenderDrawPoint(win->ren, x, y);
 		tex += tex_size;
 		y++;
 	}

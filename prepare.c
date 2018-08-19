@@ -36,6 +36,7 @@ void	main_prepare(int ac, char **av, t_main **win)
 	cp_win->v_is = 0;
 	cp_win->h_is = 0;
 	cp_win->keys.space = 0;
+	cp_win->quit = 0;
 	*win = cp_win;
 }
 
