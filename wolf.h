@@ -27,6 +27,7 @@
 # include "./libft/libft.h"
 // # include "./include/GLFW/glfw3.h"
 # include "SDL.h"
+# include "SDL_image.h"
 
 // #include "SDL2/SDL_timer.h" 
 // #include "SDL2/SDL_image.h"
@@ -57,7 +58,7 @@ typedef struct		s_mouse
 
 typedef struct		s_img
 {
-	unsigned char	*tex[TEXTURES];
+	SDL_Surface		*tex[TEXTURES];
 	int				width;
 	int				height;
 	int				nr_channel;
@@ -117,7 +118,10 @@ typedef struct		s_main
 	SDL_Renderer	*ren;
 	SDL_Event		e;
 	int				quit;
-
+	// unsigned int **bufer;
+unsigned int	buffer[HEIGHT][WIDTH];
+SDL_Texture		*screen;
+	
 	t_data			*data;
 	t_ray			ray;
 	t_player		gg;
@@ -127,6 +131,7 @@ typedef struct		s_main
 	int				v_is;
 	int				h_is;
 	float			rotate;
+	int				fps;
 }					t_main;
 
 /*
@@ -185,4 +190,13 @@ void				texture_prepare(t_main *win);
 ** draw_line.c
 */
 void				line_draw(t_main *win, int i, float h, int tex);
+
+
+
+
+
+
+
+unsigned int	get_pixel(SDL_Surface *surface, int x, int y);
+SDL_Surface	*load_image(char *path);
 #endif

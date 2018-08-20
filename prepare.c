@@ -53,41 +53,66 @@ void	ray_player_prepare(t_main *win)
 	win->rotate = 2;
 }
 
-void	texture_prepare_cont(t_main *win)
-{
-	if (!(win->img.tex[5] = stbi_load("./tex/mand1.bmp",\
-	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
-		error("texture[5] open error D:\n");
-	if (!(win->img.tex[6] = stbi_load("./tex/mand2.bmp",\
-	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
-		error("texture[6] open error D:\n");
-	if (!(win->img.tex[7] = stbi_load("./tex/mand3.bmp",\
-	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
-		error("texture[7] open error D:\n");
-	if (!(win->img.tex[8] = stbi_load("./tex/mand4.bmp",\
-	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
-		error("texture[8] open error D:\n");
-	if (!(win->img.tex[9] = stbi_load("./tex/moon.bmp",\
-	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
-		error("texture[9] open error D:\n");
-}
+// void	texture_prepare_cont(t_main *win)
+// {
+// 	if (!(win->img.tex[5] = stbi_load("./tex/mand1.bmp",\
+// 	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
+// 		error("texture[5] open error D:\n");
+// 	if (!(win->img.tex[6] = stbi_load("./tex/mand2.bmp",\
+// 	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
+// 		error("texture[6] open error D:\n");
+// 	if (!(win->img.tex[7] = stbi_load("./tex/mand3.bmp",\
+// 	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
+// 		error("texture[7] open error D:\n");
+// 	if (!(win->img.tex[8] = stbi_load("./tex/mand4.bmp",\
+// 	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
+// 		error("texture[8] open error D:\n");
+// 	if (!(win->img.tex[9] = stbi_load("./tex/moon.bmp",\
+// 	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
+// 		error("texture[9] open error D:\n");
+// }
+
+// void	texture_prepare(t_main *win)
+// {
+// 	if (!(win->img.tex[0] = stbi_load("./tex/floor.bmp",\
+// 	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
+// 		error("texture[0] open error D:\n");
+// 	if (!(win->img.tex[1] = stbi_load("./tex/Flag4.bmp",\
+// 	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
+// 		error("texture[1] open error D:\n");
+// 	if (!(win->img.tex[2] = stbi_load("./tex/neko.png",\
+// 	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
+// 		error("texture[2] open error D:\n");
+// 	if (!(win->img.tex[3] = stbi_load("./tex/Silver3.bmp",\
+// 	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
+// 		error("texture[3] open error D:\n");
+// 	if (!(win->img.tex[4] = stbi_load("./tex/White1.bmp",\
+// 	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
+// 		error("texture[4] open error D:\n");
+// 	texture_prepare_cont(win);
+// }
 
 void	texture_prepare(t_main *win)
 {
-	if (!(win->img.tex[0] = stbi_load("./tex/floor.bmp",\
-	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
-		error("texture[0] open error D:\n");
-	if (!(win->img.tex[1] = stbi_load("./tex/Flag4.bmp",\
-	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
-		error("texture[1] open error D:\n");
-	if (!(win->img.tex[2] = stbi_load("./tex/neko.png",\
-	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
-		error("texture[2] open error D:\n");
-	if (!(win->img.tex[3] = stbi_load("./tex/Silver3.bmp",\
-	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
-		error("texture[3] open error D:\n");
-	if (!(win->img.tex[4] = stbi_load("./tex/White1.bmp",\
-	&win->img.width, &win->img.height, &win->img.nr_channel, 0)))
-		error("texture[4] open error D:\n");
-	texture_prepare_cont(win);
+	win->img.tex[0] = load_image("./tex/floor.bmp");
+	win->img.tex[1] = load_image("./tex/Flag4.bmp");
+
+	// win->img.tex[0] = load_image("./tex/neko.png");
+	// win->img.tex[1] = load_image("./tex/neko.png");
+	win->img.tex[2] = load_image("./tex/neko.png");
+	// win->img.tex[3] = load_image("./tex/neko.png");
+	// win->img.tex[4] = load_image("./tex/neko.png");
+	// win->img.tex[5] = load_image("./tex/neko.png");
+	// win->img.tex[6] = load_image("./tex/neko.png");
+	// win->img.tex[7] = load_image("./tex/neko.png");
+	// win->img.tex[8] = load_image("./tex/neko.png");
+	// win->img.tex[9] = load_image("./tex/neko.png");
+
+	win->img.tex[3] = load_image("./tex/Silver3.bmp");
+	win->img.tex[4] = load_image("./tex/White1.bmp");
+	win->img.tex[5] = load_image("./tex/mand1.bmp");
+	win->img.tex[6] = load_image("./tex/mand2.bmp");
+	win->img.tex[7] = load_image("./tex/mand3.bmp");
+	win->img.tex[8] = load_image("./tex/mand4.bmp");
+	win->img.tex[9] = load_image("./tex/moon.bmp");
 }
