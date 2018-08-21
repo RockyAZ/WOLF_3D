@@ -12,11 +12,6 @@
 
 #include "wolf.h"
 
-int		get_color(int x, int y)
-{
-	return ((x * 3) + (y * 3 * CUBE));
-}
-
 unsigned int	get_pixel(SDL_Surface *surface, int x, int y)
 {
 	unsigned int	*pixels;
@@ -30,7 +25,6 @@ void	draw_floor(int x, int y, t_main *win)
 	float	dist;
 	int		nx;
 	int		ny;
-	int		i;
 
 	while (y < HEIGHT)
 	{
@@ -38,37 +32,27 @@ void	draw_floor(int x, int y, t_main *win)
 		win->gg.to_screen) / ft_cos(ft_abs(win->ray.angle - win->gg.angle));
 		ny = win->gg.p_y - (dist * ft_sin(win->ray.angle));
 		nx = win->gg.p_x + (dist * ft_cos(win->ray.angle));
-		// i = get_color(nx % CUBE, ny % CUBE);
-			win->buffer[y][x] = get_pixel(win->img.tex[6], nx, ny);
-			win->buffer[HEIGHT - y][x] = get_pixel(win->img.tex[6], nx, ny);
-		// SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2], 0);
-		// SDL_RenderDrawPoint(win->ren, x, y);
-		// SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[9][i], (int)win->img.tex[9][i + 1], (int)win->img.tex[9][i + 2], 0);
-		// SDL_RenderDrawPoint(win->ren, x, y);
+		win->buffer[y][x] = get_pixel(win->img.tex[6], nx % CUBE, ny % CUBE);
+		win->buffer[HEIGHT - y][x] = get_pixel(win->img.tex[6], nx % CUBE, ny % CUBE);
 		y++;
 	}
 }
 
-void	add_draw(t_main *win, int x, int y, int color)
+void	add_draw(t_main *win, int x, int y, int tex_x, int tex_y, int color)
 {
 	if (color == 5)
 	{
 		if (win->ray.angle >= 0 && win->ray.angle <= 180 && win->h_is)
-			win->buffer[y][x] = get_pixel(win->img.tex[5], x, y);
-			// SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[5][i], (int)win->img.tex[5][i + 1], (int)win->img.tex[5][i + 2], 0);
+			win->buffer[y][x] = get_pixel(win->img.tex[5], tex_x, tex_y);
 		else if (win->ray.angle >= 90 && win->ray.angle <= 270 && win->v_is)
-			win->buffer[y][x] = get_pixel(win->img.tex[6], x, y);
-			// SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[6][i], (int)win->img.tex[6][i + 1], (int)win->img.tex[6][i + 2], 0);
+			win->buffer[y][x] = get_pixel(win->img.tex[6], tex_x, tex_y);
 		else if (win->ray.angle >= 180 && win->ray.angle < 360 && win->h_is)
-			win->buffer[y][x] = get_pixel(win->img.tex[7], x, y);
-			// SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[7][i], (int)win->img.tex[7][i + 1], (int)win->img.tex[7][i + 2], 0);
+			win->buffer[y][x] = get_pixel(win->img.tex[7], tex_x, tex_y);
 		else if ((win->ray.angle > 270 || win->ray.angle < 90) && win->v_is)
-			win->buffer[y][x] = get_pixel(win->img.tex[8], x, y);
-			// SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[8][i], (int)win->img.tex[8][i + 1], (int)win->img.tex[8][i + 2], 0);
+			win->buffer[y][x] = get_pixel(win->img.tex[8], tex_x, tex_y);
 	}
 	else
-			win->buffer[y][x] = get_pixel(win->img.tex[color], x, y);
-		// SDL_SetRenderDrawColor(win->ren, (int)win->img.tex[color][i], (int)win->img.tex[color][i + 1], (int)win->img.tex[color][i + 2], 0);
+			win->buffer[y][x] = get_pixel(win->img.tex[color], tex_x, tex_y);
 }
 
 void	draw(int x, int y, t_main *win, int color)
@@ -91,13 +75,11 @@ void	draw(int x, int y, t_main *win, int color)
 	}
 	while (y < h)
 	{
-		// i = (win->img.pos * 3) + ((int)tex * (CUBE * 3));
-		add_draw(win, x, y, color);
-		// SDL_RenderDrawPoint(win->ren, x, y);
+		add_draw(win, x, y, win->img.pos, tex, color);
 		tex += tex_size;
 		y++;
 	}
-	// draw_floor(x, y, win);
+	draw_floor(x, y, win);
 }
 
 void	line_draw(t_main *win, int i, float h, int tex)

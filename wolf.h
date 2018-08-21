@@ -12,8 +12,10 @@
 
 #ifndef WOLF_H
 # define WOLF_H
-# define WIDTH 640
-# define HEIGHT 400
+// # define WIDTH 640
+// # define HEIGHT 400
+# define WIDTH 1000
+# define HEIGHT 740
 # define CENTR_W WIDTH / 1
 # define CENTR_H HEIGHT / 2
 # define CUBE 64
@@ -132,6 +134,7 @@ SDL_Texture		*screen;
 	int				h_is;
 	float			rotate;
 	int				fps;
+int hy;
 }					t_main;
 
 /*

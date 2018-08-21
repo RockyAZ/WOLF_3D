@@ -40,21 +40,6 @@ void	call_drawer(t_main *win, int i, int v, int h)
 	else
 		line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen,\
 		win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x]);
-	// if (v < 0)
-	// 	line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen,\
-	// 	win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x]);
-	// else if (h < 0)
-	// 	line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen,\
-	// 	win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x]);
-	// else
-	// {
-	// 	if (v < h)
-	// 		line_draw(win, i, ((float)CUBE / (float)v) * win->gg.to_screen,\
-	// 		win->data->map[win->ray.v_dot.real_y][win->ray.v_dot.real_x]);
-	// 	else
-	// 		line_draw(win, i, ((float)CUBE / (float)h) * win->gg.to_screen,\
-	// 		win->data->map[win->ray.h_dot.real_y][win->ray.h_dot.real_x]);
-	// }
 }
 
 void	ray_simple(t_main *win, float angle, int v, int h)
@@ -65,6 +50,9 @@ void	ray_simple(t_main *win, float angle, int v, int h)
 	angle = win->gg.angle + (win->gg.fov / 2);
 	while (++i < WIDTH)
 	{
+win->hy = 0;	
+if (i == WIDTH / 2)
+win->hy = 1;
 		win->v_is = 0;
 		win->h_is = 0;
 		if (angle >= 360)
@@ -82,6 +70,7 @@ void	ray_simple(t_main *win, float angle, int v, int h)
 			v = vertic_inter_right(win, angle);
 		set_param(win, v, h);
 		call_drawer(win, i, v, h);
+win->hy = 0;	
 		angle -= win->gg.angle_size;
 	}
 }

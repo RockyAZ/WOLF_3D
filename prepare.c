@@ -92,27 +92,28 @@ void	ray_player_prepare(t_main *win)
 // 	texture_prepare_cont(win);
 // }
 
+
+SDL_Surface	*load_image(char *path)
+{
+	SDL_Surface	*texture;
+
+	texture = IMG_Load(path);
+	if (texture == NULL)
+		error("Unable to load texture image!\n");
+	return (texture);
+}
+
+
 void	texture_prepare(t_main *win)
 {
-	win->img.tex[0] = load_image("./tex/floor.bmp");
-	win->img.tex[1] = load_image("./tex/Flag4.bmp");
-
-	// win->img.tex[0] = load_image("./tex/neko.png");
-	// win->img.tex[1] = load_image("./tex/neko.png");
+	win->img.tex[0] = load_image("./tex/floor.png");
+	win->img.tex[1] = load_image("./tex/Flag4.png");
 	win->img.tex[2] = load_image("./tex/neko.png");
-	// win->img.tex[3] = load_image("./tex/neko.png");
-	// win->img.tex[4] = load_image("./tex/neko.png");
-	// win->img.tex[5] = load_image("./tex/neko.png");
-	// win->img.tex[6] = load_image("./tex/neko.png");
-	// win->img.tex[7] = load_image("./tex/neko.png");
-	// win->img.tex[8] = load_image("./tex/neko.png");
-	// win->img.tex[9] = load_image("./tex/neko.png");
-
-	win->img.tex[3] = load_image("./tex/Silver3.bmp");
-	win->img.tex[4] = load_image("./tex/White1.bmp");
-	win->img.tex[5] = load_image("./tex/mand1.bmp");
-	win->img.tex[6] = load_image("./tex/mand2.bmp");
-	win->img.tex[7] = load_image("./tex/mand3.bmp");
-	win->img.tex[8] = load_image("./tex/mand4.bmp");
-	win->img.tex[9] = load_image("./tex/moon.bmp");
+	win->img.tex[3] = load_image("./tex/Silver3.png");
+	win->img.tex[4] = load_image("./tex/White1.png");
+	win->img.tex[5] = load_image("./tex/mand1.png");
+	win->img.tex[6] = load_image("./tex/mand2.png");
+	win->img.tex[7] = load_image("./tex/mand3.png");
+	win->img.tex[8] = load_image("./tex/mand4.png");
+	win->img.tex[9] = load_image("./tex/moon.png");
 }
