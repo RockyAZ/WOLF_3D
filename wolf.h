@@ -27,16 +27,11 @@
 # define MAX_LINE 20
 
 # include "./libft/libft.h"
-// # include "./include/GLFW/glfw3.h"
 # include "SDL.h"
 # include "SDL_image.h"
 
-// #include "SDL2/SDL_timer.h" 
-// #include "SDL2/SDL_image.h"
-
 # include <fcntl.h>
 # include <math.h>
-# include "./include/stb_image.h"
 
 typedef struct		s_keys
 {

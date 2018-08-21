@@ -56,31 +56,6 @@ void	key_release_add(int key, t_main *win)
 		win->gg.speed = 5;
 }
 
-/*
-**		hide mouse:
-**		if (SDL_GetRelativeMouseMode() == SDL_TRUE)
-**			SDL_SetRelativeMouseMode(SDL_FALSE);
-**		else
-**   SDL_SetRelativeMouseMode(SDL_TRUE);
-*/
-
-// void	key_space(GLFWwindow *window, t_main *win, int key)
-// {
-// 	if (key == GLFW_KEY_SPACE)
-// 	{
-// 		if (win->keys.space == 0)
-// 		{
-// 			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-// 			win->keys.space = 1;
-// 		}
-// 		else if (win->keys.space == 1)
-// 		{
-// 			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-// 			win->keys.space = 0;
-// 		}
-// 	}
-// }
-
 void	event_callback(t_main *win)
 {
 	while (SDL_PollEvent(&win->e))
@@ -89,10 +64,16 @@ void	event_callback(t_main *win)
 			mouse_pos(win);
 		if (win->e.type == SDL_KEYDOWN)
 		{
+			if (win->e.key.keysym.sym == SDLK_SPACE)
+			{
+				if (SDL_GetRelativeMouseMode() == SDL_TRUE)
+					SDL_SetRelativeMouseMode(SDL_FALSE);
+				else
+					SDL_SetRelativeMouseMode(SDL_TRUE);
+			}
 			if (win->e.key.keysym.sym  == SDLK_ESCAPE)
 				win->quit = 1;
 			key_press_add(win->e.key.keysym.sym, win);		
-			// key_space(window, win, key);
 		}
 		if (win->e.type == SDL_KEYUP)
 			key_release_add(win->e.key.keysym.sym, win);
