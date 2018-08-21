@@ -50,6 +50,7 @@ void	ray_player_prepare(t_main *win)
 	win->gg.to_screen = (WIDTH / 2) / ft_tan(30);
 	win->gg.speed = 5;
 	win->gg.height = 32;
+	win->gg.up_down = 0;	
 	win->rotate = 2;
 }
 

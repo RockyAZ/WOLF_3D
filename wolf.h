@@ -84,6 +84,7 @@ typedef struct		s_player
 	float			fov;
 	float			to_screen;
 	int				speed;
+	int				up_down;
 }					t_player;
 
 typedef struct		s_ray
