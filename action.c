@@ -42,19 +42,21 @@ void	moving_up(t_main *win, int lr)
 
 void	moving_down(t_main *win)
 {
-	float p_x;
-	float p_y;
-
-	p_x = win->gg.p_x;
-	p_y = win->gg.p_y;
-	if (win->keys.down || win->keys.s)
+	if (win->keys.s)
 	{
-		p_x -= win->gg.speed * ft_cos(win->gg.angle);
-		if (!(win->data->map[(int)win->gg.p_y >> BIT][(int)p_x >> BIT]))
-			win->gg.p_x = p_x;
-		p_y -= win->gg.speed * (ft_sin(win->gg.angle) * -1);
-		if (!(win->data->map[(int)p_y >> BIT][(int)win->gg.p_x >> BIT]))
-			win->gg.p_y = p_y;
+		if (win->keys.s)
+			win->gg.angle += 180;
+		if (win->gg.angle >= 360)
+			win->gg.angle -= 360;
+		if (win->gg.angle < 0)
+			win->gg.angle += 360;
+		moving_up(win, 1);
+		if (win->keys.s)
+			win->gg.angle -= 180;
+		if (win->gg.angle >= 360)
+			win->gg.angle -= 360;
+		if (win->gg.angle < 0)
+			win->gg.angle += 360;
 	}
 }
 

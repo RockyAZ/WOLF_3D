@@ -60,10 +60,14 @@ void	event_callback(t_main *win)
 {
 	while (SDL_PollEvent(&win->e))
 	{
+		if (win->e.type == SDL_QUIT)
+			win->quit = 1;
 		if (win->e.type == SDL_MOUSEMOTION)
 			mouse_pos(win);
 		if (win->e.type == SDL_KEYDOWN)
 		{
+			if (win->e.key.keysym.sym == SDLK_ESCAPE)
+				win->quit = 1;
 			if (win->e.key.keysym.sym == SDLK_SPACE)
 			{
 				if (SDL_GetRelativeMouseMode() == SDL_TRUE)
@@ -71,8 +75,6 @@ void	event_callback(t_main *win)
 				else
 					SDL_SetRelativeMouseMode(SDL_TRUE);
 			}
-			if (win->e.key.keysym.sym == SDLK_ESCAPE)
-				win->quit = 1;
 			key_press_add(win->e.key.keysym.sym, win);
 		}
 		if (win->e.type == SDL_KEYUP)
