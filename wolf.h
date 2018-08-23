@@ -12,10 +12,8 @@
 
 #ifndef WOLF_H
 # define WOLF_H
-// # define WIDTH 640
-// # define HEIGHT 400
-# define WIDTH 1000
-# define HEIGHT 740
+# define WIDTH 640
+# define HEIGHT 400
 # define CENTR_W WIDTH / 1
 # define CENTR_H HEIGHT / 2
 # define CUBE 64
@@ -116,10 +114,8 @@ typedef struct		s_main
 	SDL_Renderer	*ren;
 	SDL_Event		e;
 	int				quit;
-	// unsigned int **bufer;
-unsigned int	buffer[HEIGHT][WIDTH];
-SDL_Texture		*screen;
-	
+	unsigned int	buffer[HEIGHT][WIDTH];
+	SDL_Texture		*screen;
 	t_data			*data;
 	t_ray			ray;
 	t_player		gg;
@@ -129,8 +125,9 @@ SDL_Texture		*screen;
 	int				v_is;
 	int				h_is;
 	float			rotate;
+	int				fps_print;
 	int				fps;
-int hy;
+	int				arr;
 }					t_main;
 
 /*
@@ -152,11 +149,6 @@ int					horiz_inter_bot(t_main *win, float angle);
 */
 void				event_callback(t_main *win);
 void				mouse_pos(t_main *win);
-// void				key_callback(GLFWwindow *window, int key,\
-					int scan, int act, int mods);
-/*
-** mouse.c
-*/
 
 /*
 ** error.c
@@ -189,13 +181,6 @@ void				texture_prepare(t_main *win);
 ** draw_line.c
 */
 void				line_draw(t_main *win, int i, float h, int tex);
-
-
-
-
-
-
-
-unsigned int	get_pixel(SDL_Surface *surface, int x, int y);
-SDL_Surface	*load_image(char *path);
+unsigned int		get_pixel(SDL_Surface *surface, int x, int y);
+SDL_Surface			*load_image(char *path);
 #endif

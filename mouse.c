@@ -14,10 +14,12 @@
 
 void	mouse_pos(t_main *win)
 {
+	int i;
+
 	if (win->e.type == SDL_MOUSEMOTION)
 	{
 		win->gg.angle -= win->e.motion.xrel * 0.3;
-		win->gg.up_down += win->e.motion.yrel * 0.3;
+		i = win->gg.up_down - win->e.motion.yrel * 0.3;
 		if (win->gg.angle >= 360)
 			win->gg.angle -= 360;
 		if (win->gg.angle < 0)
@@ -25,4 +27,6 @@ void	mouse_pos(t_main *win)
 		win->m.x = win->e.motion.x;
 		win->m.y = win->e.motion.y;
 	}
+	if (i <= 200 && i >= -100)
+		win->gg.up_down = i;
 }

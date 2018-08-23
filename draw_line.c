@@ -20,7 +20,7 @@ unsigned int	get_pixel(SDL_Surface *surface, int x, int y)
 	return (pixels[(y * surface->w) + x]);
 }
 
-void	draw_floor(int x, int y, t_main *win)
+void			draw_floor(int x, int y, t_main *win)
 {
 	float	dist;
 	int		nx;
@@ -28,35 +28,35 @@ void	draw_floor(int x, int y, t_main *win)
 
 	while (y < HEIGHT)
 	{
-		dist = (((float)win->gg.height / ((float)y - (float)CENTR_H - win->gg.up_down)) * win->gg.to_screen) / ft_cos(ft_abs(win->ray.angle - win->gg.angle));
-		ny = win->gg.p_y - (dist * ft_sin(win->ray.angle));
-		nx = win->gg.p_x + (dist * ft_cos(win->ray.angle));
-		win->buffer[y][x] = get_pixel(win->img.tex[6], nx % CUBE, ny % CUBE);
-		// win->buffer[HEIGHT - y][x] = get_pixel(win->img.tex[6], nx % CUBE, ny % CUBE);
-		if (win->hy && y == HEIGHT - 3)
-			printf("X:%d\nY:%d\n\nNX:%d\nNY:%d\n\n\n\n", x, y, nx % CUBE, ny % CUBE);
+		dist = (((float)win->gg.height / ((float)y - (float)CENTR_H -\
+		win->gg.up_down)) * win->gg.to_screen) / ft_cos(ft_abs(win->ray.angle -\
+		win->gg.angle));
+		ny = (int)(win->gg.p_y - (dist * ft_sin(win->ray.angle))) % CUBE;
+		nx = (int)(win->gg.p_x + (dist * ft_cos(win->ray.angle))) % CUBE;
+		win->buffer[y][x] = get_pixel(win->img.tex[6], nx, ny);
 		y++;
 	}
 }
 
-void	add_draw(t_main *win, int x, int y, int tex_x, int tex_y, int color)
+void			add_draw(t_main *win, int x, int y, int tex_y)
 {
-	if (color == 5)
+	if (win->arr == 5)
 	{
 		if (win->ray.angle >= 0 && win->ray.angle <= 180 && win->h_is)
-			win->buffer[y][x] = get_pixel(win->img.tex[5], tex_x, tex_y);
+			win->buffer[y][x] = get_pixel(win->img.tex[5], win->img.pos, tex_y);
 		else if (win->ray.angle >= 90 && win->ray.angle <= 270 && win->v_is)
-			win->buffer[y][x] = get_pixel(win->img.tex[6], tex_x, tex_y);
+			win->buffer[y][x] = get_pixel(win->img.tex[6], win->img.pos, tex_y);
 		else if (win->ray.angle >= 180 && win->ray.angle < 360 && win->h_is)
-			win->buffer[y][x] = get_pixel(win->img.tex[7], tex_x, tex_y);
+			win->buffer[y][x] = get_pixel(win->img.tex[7], win->img.pos, tex_y);
 		else if ((win->ray.angle > 270 || win->ray.angle < 90) && win->v_is)
-			win->buffer[y][x] = get_pixel(win->img.tex[8], tex_x, tex_y);
+			win->buffer[y][x] = get_pixel(win->img.tex[8], win->img.pos, tex_y);
 	}
 	else
-			win->buffer[y][x] = get_pixel(win->img.tex[color], tex_x, tex_y);
+		win->buffer[y][x] = get_pixel(win->img.tex[win->arr],\
+		win->img.pos, tex_y);
 }
 
-void	draw(int x, int y, t_main *win, int color)
+void			draw(int x, int y, t_main *win)
 {
 	int		i;
 	int		h;
@@ -76,14 +76,14 @@ void	draw(int x, int y, t_main *win, int color)
 	}
 	while (y < h)
 	{
-		add_draw(win, x, y, win->img.pos, tex, color);
+		add_draw(win, x, y, tex);
 		tex += tex_size;
 		y++;
 	}
 	draw_floor(x, y, win);
 }
 
-void	line_draw(t_main *win, int i, float h, int tex)
+void			line_draw(t_main *win, int i, float h, int tex)
 {
 	int wall_x;
 
@@ -92,5 +92,6 @@ void	line_draw(t_main *win, int i, float h, int tex)
 		win->img.pos = (int)win->ray.h_dot.pix_x % CUBE;
 	else if (win->v_is)
 		win->img.pos = (int)win->ray.v_dot.pix_y % CUBE;
-	draw(i, h, win, tex);
+	win->arr = tex;
+	draw(i, h, win);
 }

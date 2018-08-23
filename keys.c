@@ -71,9 +71,9 @@ void	event_callback(t_main *win)
 				else
 					SDL_SetRelativeMouseMode(SDL_TRUE);
 			}
-			if (win->e.key.keysym.sym  == SDLK_ESCAPE)
+			if (win->e.key.keysym.sym == SDLK_ESCAPE)
 				win->quit = 1;
-			key_press_add(win->e.key.keysym.sym, win);		
+			key_press_add(win->e.key.keysym.sym, win);
 		}
 		if (win->e.type == SDL_KEYUP)
 			key_release_add(win->e.key.keysym.sym, win);
