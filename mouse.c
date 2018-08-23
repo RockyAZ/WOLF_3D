@@ -16,6 +16,7 @@ void	mouse_pos(t_main *win)
 {
 	int i;
 
+	i = 0;
 	if (win->e.type == SDL_MOUSEMOTION)
 	{
 		win->gg.angle -= win->e.motion.xrel * 0.3;

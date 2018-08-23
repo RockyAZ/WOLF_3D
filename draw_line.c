@@ -58,7 +58,6 @@ void			add_draw(t_main *win, int x, int y, int tex_y)
 
 void			draw(int x, int y, t_main *win)
 {
-	int		i;
 	int		h;
 	float	tex;
 	float	tex_size;

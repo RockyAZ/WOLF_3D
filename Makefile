@@ -10,6 +10,8 @@
 #                                                                              #
 #******************************************************************************#
 
+NAME = wolf3d
+FLAGS = -Wall -Wextra -Werror
 SOURCE = main.c \
 			additional.c \
 			error.c \
@@ -22,81 +24,60 @@ SOURCE = main.c \
 			ray_simple.c \
 			keys.c \
 
-all:
-	gcc -o wolf3d $(SOURCE) libft/libft.a -I./libft/ -I./Frameworks/SDL2.framework/Headers\
-	 		   -I./Frameworks/SDL2_image.framework/Headers\
-				-rpath @loader_path/Frameworks -F./Frameworks/ -framework SDL2 -framework SDL2_image
+HEADER = wolf.h
+OBJECTS = $(addprefix $(OBJDIR),$(SOURCE:.c=.o))
+OBJDIR = ./obj/
 
-# NAME = wolf3d
-# FLAGS = -Wall -Wextra -Werror
-# SOURCE = main.c \
-# 			additional.c \
-# 			error.c \
-# 			reader.c \
-# 			prepare.c \
-# 			ray_casting.c \
-# 			draw_line.c \
-# 			action.c \
-# 			mouse.c \
-# 			ray_simple.c \
-# 			keys.c \
+SDL = -I./Frameworks/SDL2.framework/Headers -I./Frameworks/SDL2_image.framework/Headers -rpath @loader_path/Frameworks -F./Frameworks/ -framework SDL2 -framework SDL2_image
 
-# HEADER = wolf.h
-# OBJECTS = $(addprefix $(OBJDIR),$(SOURCE:.c=.o))
-# OBJDIR = ./obj/
+SDL_INC = -I./Frameworks/SDL2.framework/Headers -I./Frameworks/SDL2_image.framework/Headers
+SDL_LIB = -rpath @loader_path/Frameworks -F./Frameworks/ -framework SDL2 -framework SDL2_image
 
-# SDL = -I./Frameworks/SDL2.framework/Headers -I./Frameworks/SDL2_image.framework/Headers -rpath @loader_path/Frameworks -F./Frameworks/ -framework SDL2 -framework SDL2_image
+LIBFT_INC = -I ./libft/
+LIBFT = ./libft/libft.a
 
-# SOIL_INC = -I ./inclide/
-# SOIL_LIB = ./include/libSOIL.a
+all: obj $(LIBFT) $(NAME)
+	@printf "\033[0;31m\
+卐卐卐卐卐卐卐卐卐▄▄卐卐卐卐卐卐卐卐卐卐\n\
+卐卐卐卐卐卐卐▄▀卐卐▀▄卐卐卐卐卐卐卐卐卐\n\
+卐卐卐卐卐卐▄▀卐卐卐▄▀█卐卐卐卐卐卐卐卐卐\n\
+卐卐卐卐卐▄▀卐卐卐▄▀░▄▀░▄▀▄▄卐卐卐卐卐卐\n\
+卐卐卐卐▄▀卐卐卐▄▀░▄▀░▄▀卐卐▀▄卐卐卐卐卐\n\
+卐卐卐卐█▀▄卐卐卐▀█░▄▀卐卐卐卐▀▄卐卐卐卐\n\
+卐卐▄▀▄░▀▄░▀▄卐卐卐▀卐卐卐▄█▄卐卐▀▄卐卐\n\
+卐▄▀卐卐▀▄░▀▄░▀▄卐卐卐卐▄▀░█░▀▄卐卐▀▄卐\n\
+卐█▀▄卐卐卐▀▄░█▀卐卐卐卐▀█░▀▄░▀▄░▄▀█卐\n\
+卐▀▄░▀▄卐卐卐▀卐卐卐▄█▄卐卐卐▀▄░▀▄░█░▄▀\n\
+卐卐▀▄░▀▄卐卐卐卐▄▀░█░▀▄卐卐卐▀▄░▀█▀卐卐\n\
+卐卐卐▀▄░▀▄░▄▀░▄▀░█▀卐卐卐▄▀█卐卐卐卐卐\n\
+卐卐卐卐▀▄░█░▄▀░▄▀卐卐卐▄▀░▄▀卐卐卐卐卐\n\
+卐卐卐卐卐▀█▀░▄▀卐卐卐▄▀░▄▀卐卐卐卐卐卐\n\
+卐卐卐卐卐卐卐卐█▀▄░▄▀░▄▀卐卐卐卐卐卐卐\n\
+卐卐卐卐卐卐卐卐▀▄░█░▄▀卐卐卐卐卐卐卐卐\n\
+卐卐卐卐卐卐卐卐卐▀█▀卐卐卐卐卐卐卐卐卐\n"
 
-# LIBFT_INC = -I ./libft/
-# LIBFT = ./libft/libft.a
+obj:
+	@mkdir -p $(OBJDIR)
 
-# FRAMEWORKS = -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+$(OBJDIR)%.o: %.c $(HEADER)
+	@printf "\033[0;34m->    "
+	gcc $(FLAGS) $(SDL_INC) $(LIBFT_INC) -o $@ -c $<
+	@printf "\n"
 
-# all: obj $(LIBFT) $(NAME)
-# 	@printf "\033[0;31m\
-# 卐卐卐卐卐卐卐卐卐▄▄卐卐卐卐卐卐卐卐卐卐\n\
-# 卐卐卐卐卐卐卐▄▀卐卐▀▄卐卐卐卐卐卐卐卐卐\n\
-# 卐卐卐卐卐卐▄▀卐卐卐▄▀█卐卐卐卐卐卐卐卐卐\n\
-# 卐卐卐卐卐▄▀卐卐卐▄▀░▄▀░▄▀▄▄卐卐卐卐卐卐\n\
-# 卐卐卐卐▄▀卐卐卐▄▀░▄▀░▄▀卐卐▀▄卐卐卐卐卐\n\
-# 卐卐卐卐█▀▄卐卐卐▀█░▄▀卐卐卐卐▀▄卐卐卐卐\n\
-# 卐卐▄▀▄░▀▄░▀▄卐卐卐▀卐卐卐▄█▄卐卐▀▄卐卐\n\
-# 卐▄▀卐卐▀▄░▀▄░▀▄卐卐卐卐▄▀░█░▀▄卐卐▀▄卐\n\
-# 卐█▀▄卐卐卐▀▄░█▀卐卐卐卐▀█░▀▄░▀▄░▄▀█卐\n\
-# 卐▀▄░▀▄卐卐卐▀卐卐卐▄█▄卐卐卐▀▄░▀▄░█░▄▀\n\
-# 卐卐▀▄░▀▄卐卐卐卐▄▀░█░▀▄卐卐卐▀▄░▀█▀卐卐\n\
-# 卐卐卐▀▄░▀▄░▄▀░▄▀░█▀卐卐卐▄▀█卐卐卐卐卐\n\
-# 卐卐卐卐▀▄░█░▄▀░▄▀卐卐卐▄▀░▄▀卐卐卐卐卐\n\
-# 卐卐卐卐卐▀█▀░▄▀卐卐卐▄▀░▄▀卐卐卐卐卐卐\n\
-# 卐卐卐卐卐卐卐卐█▀▄░▄▀░▄▀卐卐卐卐卐卐卐\n\
-# 卐卐卐卐卐卐卐卐▀▄░█░▄▀卐卐卐卐卐卐卐卐\n\
-# 卐卐卐卐卐卐卐卐卐▀█▀卐卐卐卐卐卐卐卐卐\n"
+$(NAME): $(OBJECTS)
+	@gcc -o $(NAME) $(OBJECTS) $(SDL_INC) $(SDL_LIB) $(LIBFT) $(LIBFT_INC) $(SDL_LIB)
 
-# obj:
-# 	@mkdir -p $(OBJDIR)
+$(LIBFT):
+	@make -C ./libft/
+	@printf "\033[0;32m\n\n|||||||||||||||||||||\nSTART LOADING WOLF\n|||||||||||||||||||||\n\n\n\n"
 
-# $(OBJDIR)%.o: %.c $(HEADER)
-# 	@printf "\033[0;34m->    "
-# 	gcc $(FLAGS) $(LIBFT_INC) -o $@ -c $<
-# 	@printf "\n"
+clean:
+	@/bin/rm -f $(OBJECTS)
+	@/bin/rm -rf $(OBJDIR)
+	@make clean -C ./libft/
 
-# $(NAME): $(OBJECTS)
-# 	@gcc -o $(NAME) $(OBJECTS) $(SDL) $(SOIL_INC) $(SOIL_LIB) $(LIBFT) $(LIBFT_INC) $(FRAMEWORKS)
+fclean: clean
+	@make fclean -C ./libft/
+	@/bin/rm -f $(NAME)
 
-# $(LIBFT):
-# 	@make -C ./libft/
-# 	@printf "\033[0;32m\n\n|||||||||||||||||||||\nSTART LOADING WOLF\n|||||||||||||||||||||\n\n\n\n"
-
-# clean:
-# 	@/bin/rm -f $(OBJECTS)
-# 	@/bin/rm -rf $(OBJDIR)
-# 	@make clean -C ./libft/
-
-# fclean: clean
-# 	@make fclean -C ./libft/
-# 	@/bin/rm -f $(NAME)
-
-# re: fclean all
+re: fclean all
