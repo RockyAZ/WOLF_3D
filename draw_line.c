@@ -29,15 +29,23 @@ void	draw_floor(int x, int y, t_main *win)
 	while (y < HEIGHT)
 	{
 		dist = (((float)win->gg.height / ((float)y - (float)CENTR_H - win->gg.up_down)) * win->gg.to_screen) / ft_cos(ft_abs(win->ray.angle - win->gg.angle));
-		ny = win->gg.p_y - (dist * ft_sin(win->ray.angle));
-		nx = win->gg.p_x + (dist * ft_cos(win->ray.angle));
-		win->buffer[y][x] = get_pixel(win->img.tex[6], nx % CUBE, ny % CUBE);
-		// win->buffer[HEIGHT - y][x] = get_pixel(win->img.tex[6], nx % CUBE, ny % CUBE);
-		if (win->hy && y == HEIGHT - 3)
-			printf("X:%d\nY:%d\n\nNX:%d\nNY:%d\n\n\n\n", x, y, nx % CUBE, ny % CUBE);
+		ny = (int)(win->gg.p_y - (dist * ft_sin(win->ray.angle))) % CUBE;
+		nx = (int)(win->gg.p_x + (dist * ft_cos(win->ray.angle))) % CUBE;
+		win->buffer[y][x] = get_pixel(win->img.tex[6], nx, ny);
+		// win->buffer[HEIGHT - y][x] = get_pixel(win->img.tex[6], nx, ny);
+// if (win->hy && y == HEIGHT - 3)
+// printf("X:%d\nY:%d\n\nNX:%d\nNY:%d\n\n\n\n", x, y, nx, ny);
 		y++;
 	}
 }
+
+// unigned int a;
+
+// r 255 & a;
+// a >> 8;
+// g (255) & a;
+// a >> 8;
+// 255 & a;
 
 void	add_draw(t_main *win, int x, int y, int tex_x, int tex_y, int color)
 {

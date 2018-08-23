@@ -17,7 +17,7 @@ void	mouse_pos(t_main *win)
 	if (win->e.type == SDL_MOUSEMOTION)
 	{
 		win->gg.angle -= win->e.motion.xrel * 0.3;
-		win->gg.up_down += win->e.motion.yrel * 0.3;
+		win->gg.up_down -= win->e.motion.yrel * 0.3;
 		if (win->gg.angle >= 360)
 			win->gg.angle -= 360;
 		if (win->gg.angle < 0)
