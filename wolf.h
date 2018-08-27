@@ -127,6 +127,7 @@ typedef struct		s_main
 	int				v_is;
 	int				h_is;
 	float			rotate;
+	int				fps;
 }					t_main;
 
 /*
