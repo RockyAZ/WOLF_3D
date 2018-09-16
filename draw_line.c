@@ -26,13 +26,11 @@ void	draw_floor(int x, int y, t_main *win)
 
 	while (y < HEIGHT)
 	{
-		dist = (((float)win->gg.height / ((float)y - (float)CENTR_H)) *\
-		win->gg.to_screen) / ft_cos(ft_abs(win->ray.angle - win->gg.angle));
+		dist = (((float)win->gg.height / ((float)y - (float)CENTR_H)) * win->gg.to_screen) / ft_cos(ft_abs(win->ray.angle - win->gg.angle));
 		ny = win->gg.posY - (dist * ft_sin(win->ray.angle));
 		nx = win->gg.posX + (dist * ft_cos(win->ray.angle));
 		i = get_color(nx % CUBE, ny % CUBE);
-		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1],\
-		(int)win->img.tex[0][i + 2]);
+		glColor3ub((int)win->img.tex[0][i], (int)win->img.tex[0][i + 1], (int)win->img.tex[0][i + 2]);
 		glVertex2d(x, y);
 		glVertex2d(x, HEIGHT - y);
 		y++;

@@ -89,6 +89,6 @@ void	reader(t_data *data)
 		error("error 404: 'P' not found\n");
 	data->m_x = CUBE * data->col;
 	data->m_y = CUBE * data->line;
-	print_coord(data);
+	// print_coord(data);
 	close(data->fd);
 }
